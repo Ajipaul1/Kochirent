@@ -50,18 +50,27 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1.5rem;
 }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--accent-color);
-    letter-spacing: 1px;
+.brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.brand-logo {
+    display: block;
+    width: clamp(180px, 22vw, 260px);
+    height: auto;
 }
 
 .nav {
     display: flex;
     gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .nav-link {
@@ -82,6 +91,25 @@ body {
     color: var(--white);
     padding: 4rem 0;
     text-align: center;
+}
+
+.hero-brand {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 0.85rem 1.25rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(8px);
+}
+
+.hero-logo {
+    display: block;
+    width: min(100%, 360px);
+    height: auto;
 }
 
 .hero h1 {
@@ -534,6 +562,10 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+    }
+
     .hero h1 {
         font-size: 1.8rem;
     }
@@ -545,6 +577,7 @@ body {
     .nav {
         gap: 1rem;
         font-size: 0.9rem;
+        justify-content: center;
     }
 
     .search-box {
@@ -577,13 +610,22 @@ body {
 }
 
 @media (max-width: 480px) {
-    .logo {
-        font-size: 1.4rem;
+    .brand-logo {
+        width: min(100%, 210px);
     }
 
     .nav {
         flex-direction: column;
         gap: 0.5rem;
+    }
+
+    .hero-brand {
+        width: 100%;
+        padding: 0.75rem 1rem;
+    }
+
+    .hero-logo {
+        width: min(100%, 280px);
     }
 
     .hero h1 {
