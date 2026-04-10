@@ -2,385 +2,182 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KochiNest - Your One-Stop Nest for Kochi Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>KochiNest | Kochi Life, One Screen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">
-            <i class="fas fa-tree"></i> KochiNest
-        </div>
-        <div class="location">
-            <i class="fas fa-map-marker-alt"></i> Kochi, Kerala
-        </div>
-        <div class="language-toggle">
-            English/<span>മലയാളം</span>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-overlay">
-            <h1>Your One-Stop Nest for Kochi Life</h1>
-            <p>Homes • Rides • Shifting • Repairs</p>
-        </div>
-    </section>
-
-    <!-- Search Bar -->
-    <section class="search-section">
-        <div class="search-card">
-            <div class="tabs">
-                <button class="tab active" data-tab="stay">Stay</button>
-                <button class="tab" data-tab="move">Move</button>
-            </div>
-            <div class="tab-content active" id="stay">
-                <label>Area</label>
-                <div class="area-tags">
-                    <button class="tag">Kakkanad</button>
-                    <button class="tag">Aluva</button>
-                    <button class="tag">Edappally</button>
-                    <button class="tag">Kalamassery</button>
+    <main class="app-shell">
+        <section class="phone-frame">
+            <div class="phone-glow"></div>
+            <div class="screen">
+                <div class="status-bar">
+                    <span class="status-accent">#003087</span>
+                    <span class="status-time">02:07</span>
+                    <div class="status-icons" aria-hidden="true">
+                        <span>5G</span>
+                        <span class="battery"></span>
+                    </div>
                 </div>
-                <label>Property Type</label>
-                <div class="property-types">
-                    <button class="dropdown selected">2BHK</button>
-                    <button class="dropdown">Room</button>
-                    <button class="dropdown">Villa</button>
-                </div>
-                <button class="search-btn">Search Homes</button>
-            </div>
-            <div class="tab-content" id="move">
-                <label>Vehicle Type</label>
-                <div class="vehicle-types">
-                    <button class="dropdown selected">Scooter</button>
-                    <button class="dropdown">Car</button>
-                </div>
-                <label>Rental Duration</label>
-                <div class="durations">
-                    <button class="dropdown selected">1 Day</button>
-                    <button class="dropdown">1 Week</button>
-                    <button class="dropdown">1 Month</button>
-                </div>
-                <button class="search-btn">Search Rides</button>
-            </div>
-        </div>
-    </section>
 
-    <!-- Quick Services -->
-    <section class="services">
-        <h2>Quick Services</h2>
-        <div class="service-grid">
-            <div class="service-card">
-                <i class="fas fa-home"></i>
-                <span>Find a Home</span>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-car"></i>
-                <span>Rent a Ride</span>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-truck-moving"></i>
-                <span>Shift My Flat</span>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-tools"></i>
-                <span>Fix & Repair</span>
-            </div>
-        </div>
-    </section>
+                <header class="topbar">
+                    <div class="brand">
+                        <div class="brand-mark">
+                            <span class="palm-trunk"></span>
+                            <span class="palm-leaf palm-leaf-a"></span>
+                            <span class="palm-leaf palm-leaf-b"></span>
+                            <span class="nest-ring"></span>
+                        </div>
+                        <span>KochiNest</span>
+                    </div>
+                    <div class="topbar-location">Kochi, Kerala</div>
+                    <button class="lang-toggle" type="button" aria-label="Language toggle">
+                        <span>English</span>
+                        <span class="toggle-pill"><span class="toggle-knob"></span></span>
+                    </button>
+                </header>
 
-    <!-- Verified Listings -->
-    <section class="verified">
-        <h2>KochiNest Verified</h2>
-        <div class="verified-cards">
-            <div class="card">
-                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
-                <h3>1BHK Kakkanad</h3>
-                <p>₹13,500/month</p>
-                <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i></button>
-            </div>
-            <div class="card">
-                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
-                <h3>Scooter Aluva</h3>
-                <p>₹299/day</p>
-                <button class="book-btn">Book Now</button>
-                <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i></button>
-            </div>
-            <div class="card">
-                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
-                <h3>Room Edappally</h3>
-                <p>₹7,999/month</p>
-                <button class="book-btn">Book Now</button>
-                <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i></button>
-            </div>
-        </div>
-    </section>
+                <section class="hero">
+                    <div class="hero-art" aria-hidden="true">
+                        <span class="sun"></span>
+                        <span class="skyline skyline-a"></span>
+                        <span class="skyline skyline-b"></span>
+                        <span class="water"></span>
+                        <span class="palm palm-left"></span>
+                        <span class="palm palm-right"></span>
+                    </div>
+                    <div class="hero-copy">
+                        <h1>Your One-Stop Nest for Kochi Life</h1>
+                        <p>Homes • Rides • Shifting • Repairs</p>
+                    </div>
+                </section>
 
-    <!-- Deal of the Day -->
-    <section class="deals">
-        <h2>Deal of the Day <span class="limited">Limited Time!</span></h2>
-        <div class="deal-carousel">
-            <div class="deal-card">
-                <div class="scooter-icon"><i class="fas fa-motorcycle"></i></div>
-                <h3>Scooter ₹199/day Aluva</h3>
-            </div>
-            <div class="deal-card">
-                <div class="home-icon"><i class="fas fa-building"></i></div>
-                <h3>Urgent 2BHK Vacancy Kakkanad</h3>
-            </div>
-        </div>
-    </section>
+                <section class="search-card">
+                    <div class="tabs">
+                        <button class="tab active" type="button">Stay</button>
+                        <button class="tab" type="button">Move</button>
+                    </div>
+                    <div class="search-body">
+                        <div class="field">
+                            <span class="field-label">Area</span>
+                            <div class="chip-row">
+                                <span class="chip">Kakkanad</span>
+                                <span class="chip">Aluva</span>
+                                <span class="chip">Edappally</span>
+                                <span class="chip">Kalamassery</span>
+                            </div>
+                        </div>
+                        <div class="field compact">
+                            <span class="field-label">Property Type</span>
+                            <div class="dropdown-row">
+                                <span class="dropdown active">2BHK</span>
+                                <span class="dropdown">Room</span>
+                                <span class="dropdown">Villa</span>
+                            </div>
+                        </div>
+                        <button class="search-button" type="button">Search Homes</button>
+                    </div>
+                </section>
 
-    <!-- Trending Rentals in Kochi -->
-    <section class="trending-rentals">
-        <h2>Trending Rentals in Kochi</h2>
-        <p>Bike Rentals in Kochi • Self Drive Car Rental Kochi • More</p>
-        <div class="trending-cards">
-            <div class="trend-card">
-                <i class="fas fa-motorcycle"></i>
-                <h3>Bike Rentals in Kochi</h3>
-                <p>₹199/day</p>
-            </div>
-            <div class="trend-card">
-                <i class="fas fa-car"></i>
-                <h3>Self Drive Car Rental Kochi</h3>
-                <p>₹999/day</p>
-            </div>
-            <div class="trend-card">
-                <i class="fas fa-car-side"></i>
-                <h3>Car Rental with Driver Kochi</h3>
-                <p>₹1,299/day</p>
-            </div>
-            <div class="trend-card">
-                <i class="fas fa-motorcycle"></i>
-                <h3>Scooter Rental Kochi</h3>
-                <p>From ₹199/day</p>
-            </div>
-            <div class="trend-card">
-                <i class="fas fa-car"></i>
-                <h3>Luxury Car Rental Kochi</h3>
-                <p>From ₹2,499/day</p>
-            </div>
-        </div>
-    </section>
+                <section class="quick-services">
+                    <div class="section-head">
+                        <h2>Quick Services</h2>
+                    </div>
+                    <div class="service-grid">
+                        <article class="service-card">
+                            <span class="icon icon-home"></span>
+                            <strong>Find a Home</strong>
+                        </article>
+                        <article class="service-card">
+                            <span class="icon icon-car"></span>
+                            <strong>Rent a Ride</strong>
+                        </article>
+                        <article class="service-card">
+                            <span class="icon icon-truck"></span>
+                            <strong>Shift My Flat</strong>
+                        </article>
+                        <article class="service-card">
+                            <span class="icon icon-tools"></span>
+                            <strong>Fix &amp; Repair</strong>
+                        </article>
+                    </div>
+                </section>
 
-    <!-- Popular Bike Rentals in Kochi -->
-    <section class="popular-bikes">
-        <h2>Popular Bike Rentals in Kochi</h2>
-        <p>Targeting 12,100 volume keyword</p>
-        <div class="bike-grid">
-            <div class="bike-card">
-                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
-                <i class="fas fa-motorcycle"></i>
-                <h3>Scooter Aluva</h3>
-                <p>₹299/day</p>
-                <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i></button>
-            </div>
-            <div class="bike-card">
-                <i class="fas fa-motorcycle"></i>
-                <h3>Bike Kakkanad</h3>
-                <p>₹249/day</p>
-            </div>
-            <div class="bike-card">
-                <i class="fas fa-motorcycle"></i>
-                <h3>Royal Brothers style bike Fort Kochi</h3>
-                <p>₹349/day</p>
-            </div>
-            <div class="bike-card">
-                <div class="fomo-tag">FOMO</div>
-                <i class="fas fa-motorcycle"></i>
-                <h3>Scooty Edappally</h3>
-                <p>₹199/day</p>
-            </div>
-        </div>
-    </section>
+                <section class="verified-block">
+                    <div class="section-head dark">
+                        <h2>KochiNest Verified</h2>
+                    </div>
+                    <div class="verified-row">
+                        <article class="listing-card">
+                            <span class="badge">Verified</span>
+                            <h3>1BHK Kakkanad</h3>
+                            <p>₹13,500/month</p>
+                            <span class="mini-wa"></span>
+                        </article>
+                        <article class="listing-card">
+                            <span class="badge">Verified</span>
+                            <h3>Scooter Aluva</h3>
+                            <p>₹299/day</p>
+                            <div class="card-actions">
+                                <span class="mini-button">Book Now</span>
+                                <span class="mini-wa"></span>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <span class="badge">Verified</span>
+                            <h3>Room Edappally</h3>
+                            <p>₹7,999/month</p>
+                            <div class="card-actions">
+                                <span class="mini-button">Book Now</span>
+                                <span class="mini-wa"></span>
+                            </div>
+                        </article>
+                    </div>
+                </section>
 
-    <!-- Self Drive Car Rental Kochi -->
-    <section class="self-drive-banner">
-        <div class="banner-content">
-            <div class="text">
-                <h2>Self Drive Car Rental Kochi from ₹899/day</h2>
-                <div class="locations">
-                    <span>Kakkanad</span> • <span>Aluva</span> • <span>Edappally</span>
-                </div>
-                <button class="book-btn">Book Now <i class="fab fa-whatsapp"></i></button>
-            </div>
-            <div class="car-image">
-                <i class="fas fa-car"></i>
-            </div>
-        </div>
-    </section>
+                <section class="deals-block">
+                    <div class="deal-title">
+                        <h2>Deal of the Day</h2>
+                        <span>Limited Time!</span>
+                    </div>
+                    <div class="deal-row">
+                        <article class="deal-card">
+                            <span class="deal-icon scooter"></span>
+                            <strong>Scooter ₹199/day Aluva</strong>
+                        </article>
+                        <article class="deal-card">
+                            <span class="deal-icon home"></span>
+                            <strong>Urgent 2BHK Vacancy Kakkanad</strong>
+                        </article>
+                    </div>
+                </section>
 
-    <!-- More Rental Services -->
-    <section class="more-services">
-        <h2>More Rental Services</h2>
-        <div class="service-grid-4">
-            <div class="service-card">
-                <i class="fas fa-camera"></i>
-                <span>Camera Rental Kochi</span>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-couch"></i>
-                <span>Furniture Rental Kochi</span>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-plug"></i>
-                <span>Generator Rental Kochi</span>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-car"></i>
-                <span>Wedding Car Rental Kochi</span>
-            </div>
-        </div>
-    </section>
+                <section class="cta-banner">
+                    <div class="cta-copy">
+                        <h2>Business Owner in Kochi? List your Service for just ₹199</h2>
+                        <button type="button">Post Listing Now</button>
+                    </div>
+                    <div class="cta-steps">
+                        <span>1. Name</span>
+                        <span>2. Service</span>
+                        <span>3. Live in 60 sec</span>
+                    </div>
+                </section>
 
-    <!-- Rentals Near You -->
-    <section class="rentals-near">
-        <h2>Rentals Near You</h2>
-        <div class="location-chips">
-            <span>Kakkanad</span>
-            <span>Aluva</span>
-            <span>Edappally</span>
-            <span>Fort Kochi</span>
-            <span>Kalamassery</span>
-            <span>Airport</span>
-        </div>
-    </section>
+                <footer class="footer">
+                    <p class="footer-links">Kakkanad • Edappally • Aluva • Properties • Bike Rentals • Packers &amp; Movers</p>
+                    <p class="copyright">© 2026 KochiNest. All Rights Reserved.</p>
+                </footer>
 
-    <!-- Homes & Rooms for Rent in Kochi -->
-    <section class="homes-rent">
-        <h2>Homes & Rooms for Rent in Kochi</h2>
-        <p>1BHK • 2BHK • Monthly Rental Rooms in Kochi</p>
-        <div class="property-cards">
-            <div class="property-card">
-                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
-                <i class="fas fa-home"></i>
-                <h3>1BHK Kakkanad</h3>
-                <p>₹13,500/month</p>
+                <button class="whatsapp-float" type="button" aria-label="Chat instantly on WhatsApp">
+                    <span class="tooltip">Chat instantly on WhatsApp</span>
+                    <span class="wa-bubble"></span>
+                </button>
             </div>
-            <div class="property-card">
-                <i class="fas fa-bed"></i>
-                <h3>Room Edappally</h3>
-                <p>₹7,999/month</p>
-            </div>
-            <div class="property-card">
-                <i class="fas fa-home"></i>
-                <h3>2BHK Aluva</h3>
-                <p>₹18,999/month</p>
-            </div>
-            <div class="property-card">
-                <i class="fas fa-building"></i>
-                <h3>Studio Fort Kochi</h3>
-                <p>₹11,000/month</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Shift My Flat – Packers & Movers Kochi -->
-    <section class="shift-flat-banner">
-        <div class="banner-content">
-            <div class="text">
-                <h2>Shift My Flat – Packers & Movers Kochi</h2>
-                <p>Professional Shifting Services in Kochi</p>
-                <p>Starting ₹4,999 • Locations: Kakkanad, Aluva, Edappally</p>
-                <button class="book-btn">Book Packers Now</button>
-            </div>
-            <div class="truck-image">
-                <i class="fas fa-truck-moving"></i>
-            </div>
-        </div>
-    </section>
-
-    <!-- Fix & Repair Services in Kochi -->
-    <section class="fix-repair">
-        <h2>Fix & Repair Services in Kochi</h2>
-        <div class="service-grid-4">
-            <div class="service-card">
-                <i class="fas fa-wind"></i>
-                <span>AC Repair Kochi</span>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-wrench"></i>
-                <span>Plumbing Services</span>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-bolt"></i>
-                <span>Electrical Work</span>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-plug"></i>
-                <span>Generator Rental Kochi</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- KochiNest Verified Partners -->
-    <section class="verified-partners">
-        <h2>KochiNest Verified Partners</h2>
-        <div class="partner-cards">
-            <div class="partner-card">
-                <i class="fas fa-couch"></i>
-                <h3>Furniture Rental</h3>
-                <p>₹2,499/month</p>
-            </div>
-            <div class="partner-card">
-                <i class="fas fa-camera"></i>
-                <h3>Camera Rental</h3>
-                <p>₹799/day</p>
-            </div>
-            <div class="partner-card">
-                <i class="fas fa-car"></i>
-                <h3>Wedding Car Rental Kochi</h3>
-                <p>From ₹1,999</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Post & Earn -->
-    <section class="post-earn">
-        <div class="big-banner">
-            <h2>Are you a Business Owner in Kochi? List your Rental or Service for just ₹199</h2>
-            <button class="post-btn">Post Listing Now</button>
-            <div class="steps">
-                <div class="step">
-                    <i class="fas fa-user"></i>
-                    <span>1. Name</span>
-                </div>
-                <div class="step">
-                    <i class="fas fa-tools"></i>
-                    <span>2. Service</span>
-                </div>
-                <div class="step">
-                    <i class="fas fa-rocket"></i>
-                    <span>3. Live in 60 sec</span>
-                </div>
-            </div>
-            <i class="fab fa-whatsapp"></i>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="links">
-            <a href="#">Kakkanad</a> •
-            <a href="#">Edappally</a> •
-            <a href="#">Aluva</a> •
-            <a href="#">Properties</a> •
-            <a href="#">Bike Rentals</a> •
-            <a href="#">Packers & Movers</a>
-        </div>
-        <p>© 2026 KochiNest. All Rights Reserved.</p>
-    </footer>
-
-    <!-- Floating WhatsApp Button -->
-    <div class="whatsapp-float">
-        <div class="tooltip">Chat instantly on WhatsApp</div>
-        <button><i class="fab fa-whatsapp"></i></button>
-    </div>
-
-    <script src="assets/script.js"></script>
+        </section>
+    </main>
 </body>
 </html>
