@@ -24,16 +24,19 @@ body {
 }
 
 body {
+    margin: 0;
+    padding: 0;
     background:
         radial-gradient(circle at top, rgba(0, 191, 165, 0.12), transparent 24%),
         linear-gradient(180deg, #f7f8fb 0%, #e9edf3 100%);
     color: var(--ink);
     font-family: "Plus Jakarta Sans", sans-serif;
-    padding: 20px;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    min-height: 100vh;
+    overflow: hidden;
 }
 
 .app-shell {
@@ -63,7 +66,8 @@ body {
         250px
         200px
         150px
-        80px;
+        100px;
+    padding-bottom: 100px; /* Space for floating button */
 }
 
 .status-bar {
@@ -841,7 +845,7 @@ body {
 .whatsapp-float {
     position: fixed;
     right: 28px;
-    bottom: 84px;
+    bottom: 40px;
     border: 0;
     background: transparent;
     display: grid;

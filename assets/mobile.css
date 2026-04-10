@@ -22,31 +22,25 @@ body {
 }
 
 body {
-    display: grid;
-    place-items: center;
+    margin: 0;
+    padding: 0;
     background:
         radial-gradient(circle at top, rgba(0, 191, 165, 0.12), transparent 24%),
         linear-gradient(180deg, #f7f8fb 0%, #e9edf3 100%);
     color: var(--ink);
     font-family: "Plus Jakarta Sans", sans-serif;
-    padding: 18px;
-}
-
-.app-shell {
-    width: 100%;
-    display: grid;
-    place-items: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .screen {
-    width: min(100%, 390px);
+    width: 100vw;
     height: 100vh;
     background: #f8fbff;
     position: relative;
     display: grid;
     grid-template-rows:
-        24px
-        24px
         52px
         136px
         142px
@@ -63,9 +57,15 @@ body {
         140px
         120px
         100px
-        36px;
+        60px;
     overflow-y: auto;
     overflow-x: hidden;
+    padding-bottom: 80px; /* Space for floating button */
+}
+
+.status-bar,
+.browser-bar {
+    display: none;
 }
 
 .status-bar {
@@ -843,7 +843,7 @@ body {
 .whatsapp-float {
     position: fixed;
     right: 14px;
-    bottom: 42px;
+    bottom: 20px;
     border: 0;
     background: transparent;
     display: grid;
