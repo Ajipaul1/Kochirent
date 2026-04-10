@@ -315,6 +315,394 @@ body {
     font-size: 12px;
 }
 
+/* Trending Rentals */
+.trending-rentals {
+    padding: 20px 15px;
+}
+
+.trending-rentals h2 {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--deep-blue);
+}
+
+.trending-rentals p {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.trending-cards {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.trend-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.trend-card i {
+    font-size: 24px;
+    color: var(--deep-blue);
+    margin-bottom: 10px;
+}
+
+.trend-card h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.trend-card p {
+    font-weight: bold;
+}
+
+/* Popular Bikes */
+.popular-bikes {
+    padding: 20px 15px;
+}
+
+.popular-bikes h2 {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--deep-blue);
+}
+
+.popular-bikes p {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.bike-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.bike-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.bike-card i {
+    font-size: 24px;
+    color: var(--deep-blue);
+    margin-bottom: 10px;
+}
+
+.bike-card h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.bike-card p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.fomo-tag {
+    background: var(--soft-orange);
+    color: var(--white);
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Self Drive Banner */
+.self-drive-banner {
+    padding: 20px 15px;
+}
+
+.banner-content {
+    background: var(--teal);
+    color: var(--white);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.text h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.locations {
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.book-btn {
+    background: #4CAF50;
+    color: var(--white);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.car-image i {
+    font-size: 48px;
+    color: var(--white);
+}
+
+/* More Services */
+.more-services {
+    padding: 20px 15px;
+}
+
+.more-services h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: var(--deep-blue);
+}
+
+.service-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.service-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.service-card i {
+    font-size: 20px;
+    color: var(--deep-blue);
+    margin-bottom: 5px;
+}
+
+.service-card span {
+    font-size: 10px;
+}
+
+/* Rentals Near You */
+.rentals-near {
+    padding: 20px 15px;
+}
+
+.rentals-near h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: var(--deep-blue);
+}
+
+.location-chips {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.location-chips span {
+    background: var(--gray);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* Homes Rent */
+.homes-rent {
+    padding: 20px 15px;
+}
+
+.homes-rent h2 {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--deep-blue);
+}
+
+.homes-rent p {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.property-cards {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.property-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.property-card i {
+    font-size: 24px;
+    color: var(--deep-blue);
+    margin-bottom: 10px;
+}
+
+.property-card h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.property-card p {
+    font-weight: bold;
+}
+
+/* Shift Flat Banner */
+.shift-flat-banner {
+    padding: 20px 15px;
+}
+
+.shift-flat-banner .banner-content {
+    background: lightblue;
+    color: var(--deep-blue);
+}
+
+.shift-flat-banner .text h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.shift-flat-banner .text p {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.truck-image i {
+    font-size: 48px;
+    color: var(--deep-blue);
+}
+
+/* Fix Repair */
+.fix-repair {
+    padding: 20px 15px;
+}
+
+.fix-repair h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: var(--deep-blue);
+}
+
+/* Verified Partners */
+.verified-partners {
+    padding: 20px 15px;
+}
+
+.verified-partners h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: var(--deep-blue);
+}
+
+.partner-cards {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.partner-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.partner-card i {
+    font-size: 24px;
+    color: var(--deep-blue);
+    margin-bottom: 10px;
+}
+
+.partner-card h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.partner-card p {
+    font-weight: bold;
+}
+
+/* Updated Post Earn */
+.post-earn {
+    padding: 20px 15px;
+}
+
+.big-banner {
+    background: var(--deep-blue);
+    color: var(--white);
+    padding: 30px 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.big-banner h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.post-btn {
+    background: var(--white);
+    color: var(--deep-blue);
+    border: none;
+    padding: 15px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.steps {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.step {
+    text-align: center;
+}
+
+.step i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.step span {
+    font-size: 10px;
+}
+
+.big-banner .fa-whatsapp {
+    font-size: 24px;
+    color: #25D366;
+}
+
 /* Footer */
 .footer {
     padding: 20px 15px;
