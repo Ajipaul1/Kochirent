@@ -3,189 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KochiNest - Find affordable rentals in Kochi. Cars, bikes, properties, rooms & commercial spaces at best prices.">
-    <meta name="keywords" content="rentals Kochi, rent in Kochi, car rental, bike rental, property rent">
-    <meta name="author" content="KochiNest">
-    <title>KochiNest - Best Rentals in Kochi | Cars, Bikes, Properties & Rooms</title>
+    <meta name="description" content="Kochirent helps you find homes, rooms, bikes, cars and local moving support in Kochi with a mobile-first browsing experience.">
+    <meta name="keywords" content="Kochirent, rentals Kochi, rooms Kochi, bike rental Kochi, car rental Kochi, flats Kochi">
+    <meta name="author" content="Kochirent">
+    <meta name="theme-color" content="#0b4d78">
+    <title>Kochirent | Mobile-First Rentals and Services in Kochi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <a href="index.html" class="brand" aria-label="Kochirent home">
-                <img src="assets/kochirent-logo-onlyname-alt.svg" alt="Kochirent" class="brand-logo">
-            </a>
-            <nav class="nav">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="categories/car-rental.html" class="nav-link">Car Rental</a>
-                <a href="categories/property-rent.html" class="nav-link">Property Rent</a>
-                <a href="categories/bike-rental.html" class="nav-link">Bike Rental</a>
-                <a href="categories/room-rent.html" class="nav-link">Room Rent</a>
-            </nav>
-        </div>
-    </header>
+<body class="home-body">
+    <main class="home-stage">
+        <section class="hero-app">
+            <div class="hero-backdrop"></div>
+            <div class="skyline skyline-left"></div>
+            <div class="skyline skyline-right"></div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-brand">
-                <img src="assets/kochirent-logo-onlyname-alt.svg" alt="Kochirent logo" class="hero-logo">
-            </div>
-            <h1>Rentals in Kochi - Find the Best Deals Today</h1>
-            <p class="hero-subtitle">Affordable rental solutions for cars, bikes, properties, rooms & commercial spaces</p>
-            <div class="search-box">
-                <input type="text" placeholder="Search rentals in Kochi..." class="search-input">
-                <button class="btn-search">Search</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Categories -->
-    <section class="categories">
-        <div class="container">
-            <h2>Explore Rental Categories</h2>
-            <div class="category-grid">
-                <div class="category-card">
-                    <div class="card-icon">🚗</div>
-                    <h3>Car Rental in Kochi</h3>
-                    <p>Self-drive cars, cabs & chauffeur services at affordable rates</p>
-                    <a href="categories/car-rental.html" class="btn btn-primary">View Cars</a>
-                </div>
-
-                <div class="category-card">
-                    <div class="card-icon">🏠</div>
-                    <h3>Property Rent in Kochi</h3>
-                    <p>Apartments, flats, villas & commercial spaces for rent</p>
-                    <a href="categories/property-rent.html" class="btn btn-primary">View Properties</a>
-                </div>
-
-                <div class="category-card">
-                    <div class="card-icon">🏍️</div>
-                    <h3>Bike Rental in Kochi</h3>
-                    <p>Bikes, scooters & motorcycles on rent, daily & monthly</p>
-                    <a href="categories/bike-rental.html" class="btn btn-primary">View Bikes</a>
-                </div>
-
-                <div class="category-card">
-                    <div class="card-icon">🛏️</div>
-                    <h3>Room Rent in Kochi</h3>
-                    <p>Rooms, PG accommodation & shared spaces at best prices</p>
-                    <a href="categories/room-rent.html" class="btn btn-primary">View Rooms</a>
-                </div>
-
-                <div class="category-card">
-                    <div class="card-icon">🏢</div>
-                    <h3>Commercial Rent in Kochi</h3>
-                    <p>Office spaces, shops & warehouses for businesses</p>
-                    <a href="categories/commercial-rent.html" class="btn btn-primary">View Commercial</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Top Locations -->
-    <section class="locations">
-        <div class="container">
-            <h2>Popular Locations in Kochi</h2>
-            <div class="location-grid">
-                <a href="locations/kakkanad.html" class="location-card">
-                    <h3>Kakkanad</h3>
-                    <p>Tech hub with premium rentals</p>
+            <div class="hero-topbar">
+                <span class="hero-status">#003087</span>
+                <a href="index.html" class="hero-brand" aria-label="Kochirent home">
+                    <img src="assets/kochirent-logo-onlyname-alt.svg" alt="Kochirent" class="hero-logo">
                 </a>
-                <a href="locations/edappally.html" class="location-card">
-                    <h3>Edappally</h3>
-                    <p>Residential area with affordable options</p>
-                </a>
-                <a href="locations/vyttila.html" class="location-card">
-                    <h3>Vyttila</h3>
-                    <p>Central location with diverse rentals</p>
-                </a>
-                <a href="locations/fort-kochi.html" class="location-card">
-                    <h3>Fort Kochi</h3>
-                    <p>Tourist area with premium accommodations</p>
-                </a>
+                <div class="hero-meta">
+                    <span class="hero-location">Kochi, Kerala</span>
+                    <span class="hero-lang">English</span>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Why Choose KochiNest -->
-    <section class="why-choose">
-        <div class="container">
-            <h2>Why Choose KochiNest?</h2>
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">✓</div>
-                    <h3>Best Prices</h3>
-                    <p>Competitive rates for all rental categories</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">✓</div>
-                    <h3>Easy Booking</h3>
-                    <p>Simple and quick booking process</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">✓</div>
-                    <h3>24/7 Support</h3>
-                    <p>Round-the-clock customer support</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">✓</div>
-                    <h3>Verified Listings</h3>
-                    <p>All rentals are verified and authentic</p>
-                </div>
+            <div class="hero-copy">
+                <h1>Your One-Stop Rental Hub for Kochi Life</h1>
+                <p class="hero-services">Homes . Rides . Shifting . Repairs</p>
+                <p class="hero-summary">Built mobile-first for quick discovery, local trust, and instant contact.</p>
             </div>
-        </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Need Help Finding Your Rental?</h2>
-            <p>Contact us now for personalized assistance</p>
-            <div class="cta-buttons">
-                <a href="https://wa.me/919876543210" target="_blank" class="btn btn-whatsapp">Chat on WhatsApp</a>
-                <a href="tel:+919876543210" class="btn btn-call">Call Us</a>
-            </div>
-        </div>
-    </section>
+            <form class="search-panel" action="#verified-listings">
+                <div class="search-tabs" aria-label="Search mode">
+                    <button type="button" class="search-tab is-active">Stay</button>
+                    <button type="button" class="search-tab">Move</button>
+                </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h4>Categories</h4>
-                    <ul>
-                        <li><a href="categories/car-rental.html">Car Rental</a></li>
-                        <li><a href="categories/property-rent.html">Property Rent</a></li>
-                        <li><a href="categories/bike-rental.html">Bike Rental</a></li>
-                        <li><a href="categories/room-rent.html">Room Rent</a></li>
-                    </ul>
+                <div class="filter-block">
+                    <label for="area-select">Area</label>
+                    <div class="filter-row">
+                        <select id="area-select" name="area">
+                            <option>Kakkanad</option>
+                            <option>Aluva</option>
+                            <option>Edappally</option>
+                            <option>Kalamassery</option>
+                        </select>
+                        <select name="nearby">
+                            <option>Aluva</option>
+                            <option>Kakkanad</option>
+                            <option>Vyttila</option>
+                            <option>Fort Kochi</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="footer-column">
-                    <h4>Locations</h4>
-                    <ul>
-                        <li><a href="locations/kakkanad.html">Kakkanad</a></li>
-                        <li><a href="locations/edappally.html">Edappally</a></li>
-                        <li><a href="locations/vyttila.html">Vyttila</a></li>
-                        <li><a href="locations/fort-kochi.html">Fort Kochi</a></li>
-                    </ul>
+
+                <div class="filter-block">
+                    <label for="property-select">Property Type</label>
+                    <div class="filter-row">
+                        <select id="property-select" name="property">
+                            <option>2BHK</option>
+                            <option>1BHK</option>
+                            <option>3BHK</option>
+                            <option>Studio</option>
+                        </select>
+                        <select name="occupancy">
+                            <option>Room</option>
+                            <option>Shared</option>
+                            <option>Family</option>
+                            <option>Office</option>
+                        </select>
+                        <select name="style">
+                            <option>Villa</option>
+                            <option>Flat</option>
+                            <option>PG</option>
+                            <option>Commercial</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="footer-column">
-                    <h4>About</h4>
-                    <ul>
-                        <li><a href="#about">About KochiNest</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="#privacy">Privacy Policy</a></li>
-                        <li><a href="#terms">Terms & Conditions</a></li>
-                    </ul>
-                </div>
+
+                <button type="submit" class="search-submit">Search Homes</button>
+            </form>
+        </section>
+
+        <section class="content-section-mobile" id="services">
+            <div class="section-heading">
+                <h2>Quick Services</h2>
+                <p>Common actions people need fast on mobile.</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 KochiNest. All rights reserved. | Best Rentals in Kochi</p>
+
+            <div class="service-grid">
+                <a class="service-card" href="#verified-listings">
+                    <span class="service-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M4 10.5 12 4l8 6.5v8a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/>
+                        </svg>
+                    </span>
+                    <strong>Find a Home</strong>
+                    <span>Flats, rooms and family stays</span>
+                </a>
+
+                <a class="service-card" href="#verified-listings">
+                    <span class="service-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M5 15h14l-1.2-4.3A2 2 0 0 0 15.9 9H8.1a2 2 0 0 0-1.9 1.7z"/>
+                            <path d="M4 15v2a2 2 0 0 0 2 2h1v-2h10v2h1a2 2 0 0 0 2-2v-2"/>
+                            <circle cx="7.5" cy="16.5" r="1.2"/>
+                            <circle cx="16.5" cy="16.5" r="1.2"/>
+                        </svg>
+                    </span>
+                    <strong>Rent a Ride</strong>
+                    <span>Cars, scooters and daily rentals</span>
+                </a>
+
+                <a class="service-card" href="#post-earn">
+                    <span class="service-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M3 8h11v8H3z"/>
+                            <path d="M14 11h3l3 3v2h-6z"/>
+                            <circle cx="7" cy="18" r="1.4"/>
+                            <circle cx="17" cy="18" r="1.4"/>
+                        </svg>
+                    </span>
+                    <strong>Shift My Flat</strong>
+                    <span>Quick leads for movers and helpers</span>
+                </a>
+
+                <a class="service-card" href="https://wa.me/919876543210" target="_blank" rel="noreferrer">
+                    <span class="service-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M14.5 3.5 20 9l-3 3-2.5-2.5-6.1 6.1a2 2 0 0 1-1.4.6H4v-2.9a2 2 0 0 1 .6-1.4z"/>
+                            <path d="m12 6 6 6"/>
+                        </svg>
+                    </span>
+                    <strong>Fix and Repair</strong>
+                    <span>Talk on WhatsApp and get help fast</span>
+                </a>
             </div>
-        </div>
-    </footer>
+        </section>
+
+        <section class="content-section-mobile" id="verified-listings">
+            <div class="section-heading">
+                <h2>Kochirent Verified</h2>
+                <p>Shortlisted cards for mobile browsing and fast action.</p>
+            </div>
+
+            <div class="listing-rail">
+                <article class="listing-card-mobile">
+                    <span class="verified-badge">Verified</span>
+                    <h3>1BHK</h3>
+                    <p class="listing-place">Kakkanad</p>
+                    <div class="listing-footer-mobile">
+                        <strong>Rs13,500<span>/month</span></strong>
+                        <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" aria-label="Chat about 1BHK Kakkanad">Chat</a>
+                    </div>
+                </article>
+
+                <article class="listing-card-mobile">
+                    <span class="verified-badge">Verified</span>
+                    <h3>Scooter</h3>
+                    <p class="listing-place">Aluva</p>
+                    <div class="listing-footer-mobile">
+                        <strong>Rs299<span>/day</span></strong>
+                        <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" aria-label="Chat about Scooter Aluva">Book</a>
+                    </div>
+                </article>
+
+                <article class="listing-card-mobile">
+                    <span class="verified-badge">Verified</span>
+                    <h3>Room</h3>
+                    <p class="listing-place">Edappally</p>
+                    <div class="listing-footer-mobile">
+                        <strong>Rs7,999<span>/month</span></strong>
+                        <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" aria-label="Chat about Room Edappally">Chat</a>
+                    </div>
+                </article>
+
+                <article class="listing-card-mobile">
+                    <span class="verified-badge">Verified</span>
+                    <h3>Hatchback</h3>
+                    <p class="listing-place">Vyttila</p>
+                    <div class="listing-footer-mobile">
+                        <strong>Rs1,499<span>/day</span></strong>
+                        <a href="tel:+919876543210" aria-label="Call about Hatchback Vyttila">Call</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="promo-rail" aria-label="Featured offers">
+            <article class="promo-card promo-card-deal">
+                <span class="promo-label">Deal of the Day</span>
+                <strong>Scooter</strong>
+                <p>Rs199/day in Aluva</p>
+            </article>
+
+            <article class="promo-card">
+                <span class="promo-label promo-label-dark">Limited Time</span>
+                <strong>Urgent 2BHK Vacancy</strong>
+                <p>Kakkanad move-in this week</p>
+            </article>
+        </section>
+
+        <section class="post-earn" id="post-earn">
+            <div class="post-copy">
+                <h2>Post and Earn</h2>
+                <p>List your rental, service or vehicle and go live from mobile in under a minute.</p>
+            </div>
+            <div class="post-actions">
+                <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" class="post-button">Post Listing Now</a>
+                <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" class="chat-button">Chat instantly on WhatsApp</a>
+            </div>
+            <ol class="post-steps">
+                <li>1. Name</li>
+                <li>2. Service</li>
+                <li>3. Live in 60 sec</li>
+            </ol>
+        </section>
+
+        <section class="content-section-mobile extra-info">
+            <div class="section-heading">
+                <h2>Popular Mobile Searches</h2>
+                <p>Focus areas people usually open first in Kochi.</p>
+            </div>
+            <div class="chip-grid">
+                <a href="#verified-listings">Kakkanad Rentals</a>
+                <a href="#verified-listings">Edappally Rooms</a>
+                <a href="#verified-listings">Aluva Bikes</a>
+                <a href="#verified-listings">Vyttila Cars</a>
+                <a href="#post-earn">Post Your Listing</a>
+                <a href="tel:+919876543210">Call Support</a>
+            </div>
+        </section>
+
+        <footer class="mobile-footer">
+            <div>
+                <strong>Kochirent</strong>
+                <p>Mobile-first rental discovery for homes, rides and local moving support in Kochi.</p>
+            </div>
+            <div class="footer-actions">
+                <a href="tel:+919876543210">Call</a>
+                <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer">WhatsApp</a>
+            </div>
+        </footer>
+    </main>
 </body>
 </html>
