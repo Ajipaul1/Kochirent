@@ -3,237 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KochiNest is Kochi's mobile-first service aggregator for homes, rides, shifting and repairs.">
-    <meta name="keywords" content="KochiNest, Kochi rentals, Kochi services, rooms Kochi, bike rentals Kochi, packers movers Kochi">
-    <meta name="author" content="KochiNest">
-    <meta name="theme-color" content="#003087">
-    <title>KochiNest | Kochi's One-Stop Nest for Homes, Rides and Services</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>KochiNest - Your One-Stop Nest for Kochi Life</title>
     <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="landing-body">
-    <main class="device-stage">
-        <section class="phone-shell" aria-label="KochiNest mobile homepage preview">
-            <div class="device-edge"></div>
-            <div class="phone-screen">
-                <div class="dynamic-island" aria-hidden="true"></div>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-tree"></i> KochiNest
+        </div>
+        <div class="location">
+            <i class="fas fa-map-marker-alt"></i> Kochi, Kerala
+        </div>
+        <div class="language-toggle">
+            English/<span>മലയാളം</span>
+        </div>
+    </header>
 
-                <header class="status-bar">
-                    <div class="status-left">
-                        <span class="status-color">#003087</span>
-                        <span class="status-time">02:07 PM</span>
-                    </div>
-                    <div class="status-right" aria-label="Phone status">
-                        <span class="status-gps" aria-hidden="true">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 3v4"/>
-                                <path d="M12 17v4"/>
-                                <path d="M3 12h4"/>
-                                <path d="M17 12h4"/>
-                                <circle cx="12" cy="12" r="3.5"/>
-                            </svg>
-                        </span>
-                        <span>5G</span>
-                        <span class="signal-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-                        <span class="battery-pill"><b></b></span>
-                    </div>
-                </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay">
+            <h1>Your One-Stop Nest for Kochi Life</h1>
+            <p>Homes • Rides • Shifting • Repairs</p>
+        </div>
+    </section>
 
-                <div class="app-header">
-                    <a href="index.html" class="brand-lockup" aria-label="KochiNest home">
-                        <img src="assets/kochinest-wordmark.svg" alt="KochiNest" class="brand-wordmark">
-                    </a>
-                    <div class="header-location">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 21s-5.5-5.4-5.5-10A5.5 5.5 0 0 1 12 5.5 5.5 5.5 0 0 1 17.5 11c0 4.6-5.5 10-5.5 10Z"/>
-                            <circle cx="12" cy="11" r="2.2"/>
-                        </svg>
-                        <span>Kochi, Kerala</span>
-                    </div>
-                    <button type="button" class="language-toggle" aria-label="Language toggle">
-                        <span>English/</span>
-                        <span class="toggle-track"><span class="toggle-knob"></span></span>
-                    </button>
-                </div>
-
-                <section class="hero-section">
-                    <div class="hero-overlay"></div>
-                    <img src="assets/kochinest-hero-scene.svg" alt="" class="hero-art" aria-hidden="true">
-                    <div class="hero-copy">
-                        <h1>Your One-Stop Nest for Kochi Life</h1>
-                        <p>Homes &bull; Rides &bull; Shifting &bull; Repairs</p>
-                    </div>
-                </section>
-
-                <section class="search-card" aria-label="Search services">
-                    <div class="search-tabs">
-                        <button type="button" class="search-tab search-tab-active">Stay</button>
-                        <button type="button" class="search-tab">Move</button>
-                    </div>
-
-                    <div class="search-group">
-                        <span class="search-label">Area</span>
-                        <div class="chip-row">
-                            <button type="button" class="tag-chip">Kakkanad</button>
-                            <button type="button" class="tag-chip is-selected">Aluva</button>
-                            <button type="button" class="tag-chip">Edappally</button>
-                            <button type="button" class="tag-chip">Kalamassery</button>
-                        </div>
-                    </div>
-
-                    <div class="search-group">
-                        <span class="search-label">Property Type</span>
-                        <div class="chip-row chip-row-three">
-                            <button type="button" class="dropdown-chip is-selected">2BHK</button>
-                            <button type="button" class="dropdown-chip">Room</button>
-                            <button type="button" class="dropdown-chip">Villa</button>
-                        </div>
-                    </div>
-
-                    <a href="#verified" class="search-button">Search Homes</a>
-                </section>
-
-                <section class="content-section">
-                    <h2 class="section-title">Quick Services</h2>
-                    <div class="service-grid">
-                        <a href="#verified" class="service-card">
-                            <span class="service-icon service-icon-home" aria-hidden="true">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M3.5 11.2 12 4l8.5 7.2"/>
-                                    <path d="M5.5 10.5V20h13v-9.5"/>
-                                    <path d="M9.5 20v-5h5v5"/>
-                                </svg>
-                            </span>
-                            <strong>Find a Home</strong>
-                        </a>
-
-                        <a href="#verified" class="service-card">
-                            <span class="service-icon service-icon-ride" aria-hidden="true">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M5 14h14l-1.2-4a2 2 0 0 0-1.9-1.5H8.1A2 2 0 0 0 6.2 10z"/>
-                                    <path d="M4 14v3h2"/>
-                                    <path d="M18 17h2v-3"/>
-                                    <circle cx="7.5" cy="17.2" r="1.6"/>
-                                    <circle cx="16.5" cy="17.2" r="1.6"/>
-                                </svg>
-                            </span>
-                            <strong>Rent a Ride</strong>
-                        </a>
-
-                        <a href="#post-earn" class="service-card">
-                            <span class="service-icon service-icon-move" aria-hidden="true">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M3 8.5h10v7H3z"/>
-                                    <path d="M13 11h3.5l3 2.8v1.7H13z"/>
-                                    <circle cx="7" cy="18" r="1.5"/>
-                                    <circle cx="17" cy="18" r="1.5"/>
-                                </svg>
-                            </span>
-                            <strong>Shift My Flat</strong>
-                        </a>
-
-                        <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" class="service-card">
-                            <span class="service-icon service-icon-repair" aria-hidden="true">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="m14.6 4.5 4.9 4.9-1.8 1.8-4.9-4.9z"/>
-                                    <path d="m12.8 6.3-7.9 7.9a2.2 2.2 0 0 0-.6 1.5V19h3.3a2.2 2.2 0 0 0 1.5-.6l7.9-7.9"/>
-                                    <path d="m8.7 7.5 2.2 2.2"/>
-                                </svg>
-                            </span>
-                            <strong>Fix &amp; Repair</strong>
-                        </a>
-                    </div>
-                </section>
-
-                <section class="content-section" id="verified">
-                    <h2 class="section-title section-title-dark">KochiNest Verified</h2>
-                    <div class="listing-row">
-                        <article class="verified-card">
-                            <span class="verified-badge">Verified</span>
-                            <h3>1BHK Kakkanad</h3>
-                            <p class="listing-price">&#8377;13,500<span>/month</span></p>
-                            <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" class="listing-action">
-                                <span>WhatsApp</span>
-                            </a>
-                        </article>
-
-                        <article class="verified-card">
-                            <span class="verified-badge">Verified</span>
-                            <h3>Scooter Aluva</h3>
-                            <p class="listing-price">&#8377;299<span>/day</span></p>
-                            <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" class="listing-action">
-                                <span>Book Now</span>
-                            </a>
-                        </article>
-
-                        <article class="verified-card">
-                            <span class="verified-badge">Verified</span>
-                            <h3>Room Edappally</h3>
-                            <p class="listing-price">&#8377;7,999<span>/month</span></p>
-                            <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" class="listing-action">
-                                <span>Book Now</span>
-                            </a>
-                        </article>
-                    </div>
-                </section>
-
-                <section class="content-section content-section-tight">
-                    <div class="deal-head">
-                        <span class="deal-badge">Deal of the Day</span>
-                        <span class="deal-limit">Limited Time!</span>
-                    </div>
-                    <div class="deal-row">
-                        <article class="deal-card deal-card-scooter">
-                            <div class="deal-scooter-art" aria-hidden="true"></div>
-                            <div>
-                                <strong>Scooter</strong>
-                                <p>&#8377;199/day Aluva</p>
-                            </div>
-                        </article>
-                        <article class="deal-card">
-                            <div>
-                                <strong>Urgent 2BHK Vacancy</strong>
-                                <p>Kakkanad</p>
-                            </div>
-                        </article>
-                    </div>
-                </section>
-
-                <section class="post-banner" id="post-earn">
-                    <h2>Business Owner in Kochi? List your Service for just &#8377;199</h2>
-                    <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" class="post-button">Post Listing Now</a>
-                    <ol class="post-steps">
-                        <li>1. Name</li>
-                        <li>2. Service</li>
-                        <li>3. Live in 60 sec</li>
-                    </ol>
-                </section>
-
-                <footer class="page-footer">
-                    <nav class="footer-links" aria-label="Footer links">
-                        <a href="#verified">Kakkanad</a>
-                        <a href="#verified">Edappally</a>
-                        <a href="#verified">Aluva</a>
-                        <a href="#verified">Properties</a>
-                        <a href="#verified">Bike Rentals</a>
-                        <a href="#post-earn">Packers &amp; Movers</a>
-                    </nav>
-                    <p class="copyright">&copy; 2026 KochiNest. All Rights Reserved.</p>
-                </footer>
-
-                <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" class="whatsapp-float" aria-label="Chat instantly on WhatsApp">
-                    <span class="whatsapp-tooltip">Chat instantly on WhatsApp</span>
-                    <span class="whatsapp-ring">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M20 11.8A8 8 0 0 1 8.2 18.9L4 20l1.2-4A8 8 0 1 1 20 11.8Z"/>
-                            <path d="M9.3 8.8c.2-.4.4-.4.6-.4h.5c.2 0 .5 0 .6.4l.7 1.7c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3-.1.5.2.4.6 1 1.3 1.6.8.7 1.4 1 1.8 1.2.2.1.4 0 .5-.1l.6-.7c.2-.2.4-.2.7-.1l1.5.7c.3.1.4.4.3.7l-.3 1.1c-.1.4-.4.6-.8.7-.5.1-1.4.2-2.8-.4a9.5 9.5 0 0 1-4.7-4.5c-.7-1.4-.6-2.4-.5-2.9Z"/>
-                        </svg>
-                    </span>
-                </a>
+    <!-- Search Bar -->
+    <section class="search-section">
+        <div class="search-card">
+            <div class="tabs">
+                <button class="tab active" data-tab="stay">Stay</button>
+                <button class="tab" data-tab="move">Move</button>
             </div>
-        </section>
-    </main>
+            <div class="tab-content active" id="stay">
+                <label>Area</label>
+                <div class="area-tags">
+                    <button class="tag">Kakkanad</button>
+                    <button class="tag">Aluva</button>
+                    <button class="tag">Edappally</button>
+                    <button class="tag">Kalamassery</button>
+                </div>
+                <label>Property Type</label>
+                <div class="property-types">
+                    <button class="dropdown selected">2BHK</button>
+                    <button class="dropdown">Room</button>
+                    <button class="dropdown">Villa</button>
+                </div>
+                <button class="search-btn">Search Homes</button>
+            </div>
+            <div class="tab-content" id="move">
+                <label>Vehicle Type</label>
+                <div class="vehicle-types">
+                    <button class="dropdown selected">Scooter</button>
+                    <button class="dropdown">Car</button>
+                </div>
+                <label>Rental Duration</label>
+                <div class="durations">
+                    <button class="dropdown selected">1 Day</button>
+                    <button class="dropdown">1 Week</button>
+                    <button class="dropdown">1 Month</button>
+                </div>
+                <button class="search-btn">Search Rides</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Services -->
+    <section class="services">
+        <h2>Quick Services</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <i class="fas fa-home"></i>
+                <span>Find a Home</span>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-car"></i>
+                <span>Rent a Ride</span>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-truck-moving"></i>
+                <span>Shift My Flat</span>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-tools"></i>
+                <span>Fix & Repair</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verified Listings -->
+    <section class="verified">
+        <h2>KochiNest Verified</h2>
+        <div class="verified-cards">
+            <div class="card">
+                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
+                <h3>1BHK Kakkanad</h3>
+                <p>₹13,500/month</p>
+                <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i></button>
+            </div>
+            <div class="card">
+                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
+                <h3>Scooter Aluva</h3>
+                <p>₹299/day</p>
+                <button class="book-btn">Book Now</button>
+                <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i></button>
+            </div>
+            <div class="card">
+                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
+                <h3>Room Edappally</h3>
+                <p>₹7,999/month</p>
+                <button class="book-btn">Book Now</button>
+                <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deal of the Day -->
+    <section class="deals">
+        <h2>Deal of the Day <span class="limited">Limited Time!</span></h2>
+        <div class="deal-carousel">
+            <div class="deal-card">
+                <div class="scooter-icon"><i class="fas fa-motorcycle"></i></div>
+                <h3>Scooter ₹199/day Aluva</h3>
+            </div>
+            <div class="deal-card">
+                <div class="home-icon"><i class="fas fa-building"></i></div>
+                <h3>Urgent 2BHK Vacancy Kakkanad</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post & Earn -->
+    <section class="post-earn">
+        <div class="banner">
+            <h2>Business Owner in Kochi? List your Service for just ₹199</h2>
+            <button class="post-btn">Post Listing Now</button>
+            <div class="steps">
+                <span>1. Name</span>
+                <span>2. Service</span>
+                <span>3. Live in 60 sec</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="links">
+            <a href="#">Kakkanad</a> •
+            <a href="#">Edappally</a> •
+            <a href="#">Aluva</a> •
+            <a href="#">Properties</a> •
+            <a href="#">Bike Rentals</a> •
+            <a href="#">Packers & Movers</a>
+        </div>
+        <p>© 2026 KochiNest. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <div class="tooltip">Chat instantly on WhatsApp</div>
+        <button><i class="fab fa-whatsapp"></i></button>
+    </div>
+
+    <script src="assets/script.js"></script>
 </body>
 </html>
