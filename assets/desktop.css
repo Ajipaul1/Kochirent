@@ -46,6 +46,7 @@ body {
     display: grid;
     grid-template-rows:
         60px
+        40px
         120px
         320px
         340px
@@ -53,6 +54,15 @@ body {
         280px
         160px
         200px
+        200px
+        200px
+        250px
+        200px
+        150px
+        200px
+        250px
+        200px
+        150px
         80px;
 }
 
@@ -104,6 +114,34 @@ body {
     height: 6px;
     background: var(--deep-blue);
     border-radius: 0 3px 3px 0;
+}
+
+.browser-bar {
+    background: var(--white);
+    color: var(--deep-blue);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 28px 0;
+    font-size: 14px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(0, 48, 135, 0.1);
+}
+
+.browser-url {
+    font-size: 16px;
+    color: var(--deep-blue);
+}
+
+.browser-time {
+    font-size: 14px;
+}
+
+.browser-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
 }
 
 .topbar {
@@ -809,6 +847,7 @@ body {
     display: grid;
     justify-items: end;
     gap: 10px;
+    z-index: 1000;
 }
 
 .tooltip {
@@ -818,4 +857,374 @@ body {
     border-radius: 999px;
     font-size: 12px;
     font-weight: 700;
+}
+
+/* New sections styling */
+
+.trending-rentals,
+.popular-bikes,
+.more-services,
+.rentals-near-you,
+.homes-rooms,
+.fix-repair,
+.verified-partners {
+    padding-inline: 24px;
+}
+
+.section-subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.trending-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 16px 0;
+}
+
+.trending-card {
+    min-width: 200px;
+    background: var(--white);
+    border-radius: 20px;
+    padding: 18px 14px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.trending-card strong {
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.bike-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.bike-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 16px 16px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    position: relative;
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.bike-card h3 {
+    font-size: 14px;
+    line-height: 1.15;
+    margin-bottom: 4px;
+}
+
+.bike-card p {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--deep-blue);
+}
+
+.fomo-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--soft-orange);
+    color: var(--white);
+    border-radius: 999px;
+    padding: 4px 8px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.self-drive-banner {
+    background: var(--teal);
+    margin: 0 24px 20px;
+    border-radius: 24px;
+    color: var(--white);
+    padding: 24px;
+}
+
+.banner-content {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.banner-text {
+    flex: 1;
+}
+
+.banner-text h2 {
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.location-chips {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.location-chips .chip {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    border: none;
+}
+
+.book-now-btn {
+    background: var(--white);
+    color: var(--teal);
+    border: 0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.banner-image {
+    width: 120px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.location-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 16px 0;
+}
+
+.location-chip {
+    background: var(--bg);
+    color: var(--deep-blue);
+    border: 1px solid rgba(0, 48, 135, 0.1);
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.homes-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 16px 0;
+}
+
+.home-card {
+    min-width: 220px;
+    background: var(--white);
+    border-radius: 20px;
+    padding: 32px 16px 16px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    position: relative;
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.home-card h3 {
+    font-size: 14px;
+    line-height: 1.15;
+    margin-bottom: 4px;
+}
+
+.home-card p {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--deep-blue);
+}
+
+.shifting-banner {
+    background: #e3f2fd;
+    margin: 0 24px 20px;
+    border-radius: 24px;
+    padding: 24px;
+}
+
+.shifting-banner .banner-text h2 {
+    font-size: 20px;
+    color: var(--deep-blue);
+    margin-bottom: 8px;
+}
+
+.shifting-banner .banner-text p {
+    font-size: 16px;
+    color: var(--deep-blue);
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.shifting-banner .location-chips .chip {
+    background: rgba(0, 48, 135, 0.1);
+    color: var(--deep-blue);
+}
+
+.book-packers-btn {
+    background: var(--teal);
+    color: var(--white);
+    border: 0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.repair-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.repair-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 16px 12px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.repair-card strong {
+    font-size: 14px;
+    line-height: 1.1;
+}
+
+.partners-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.partner-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 20px 12px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+.partner-card strong {
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+/* Additional icons */
+.icon-camera::before {
+    width: 28px;
+    height: 20px;
+    background: #64748b;
+    border-radius: 3px;
+    top: 10px;
+    left: 6px;
+}
+
+.icon-camera::after {
+    width: 22px;
+    height: 16px;
+    background: #374151;
+    border-radius: 50% 50% 0 0;
+    top: 12px;
+    left: 9px;
+}
+
+.icon-furniture::before {
+    width: 26px;
+    height: 18px;
+    background: #92400e;
+    border-radius: 3px;
+    top: 12px;
+    left: 7px;
+}
+
+.icon-wedding-car::before {
+    width: 34px;
+    height: 14px;
+    background: #fbbf24;
+    border-radius: 8px;
+    top: 14px;
+    left: 4px;
+}
+
+.icon-ac::before {
+    width: 28px;
+    height: 16px;
+    background: #0ea5e9;
+    border-radius: 3px;
+    top: 12px;
+    left: 6px;
+}
+
+.icon-plumbing::before {
+    width: 22px;
+    height: 22px;
+    background: #059669;
+    border-radius: 50%;
+    top: 8px;
+    left: 9px;
+}
+
+.icon-electrical::before {
+    width: 26px;
+    height: 8px;
+    background: #f59e0b;
+    border-radius: 999px;
+    top: 16px;
+    left: 7px;
+}
+
+.icon-electrical::after {
+    width: 8px;
+    height: 8px;
+    background: #f59e0b;
+    border-radius: 50%;
+    top: 8px;
+    left: 15px;
+}
+
+.deal-icon.car::before {
+    width: 28px;
+    height: 14px;
+    background: #4aa7ff;
+    border-radius: 14px 14px 8px 8px;
+    bottom: 12px;
+    left: 4px;
+}
+
+.deal-icon.car::after {
+    width: 28px;
+    height: 10px;
+    border-bottom: 6px solid #1f4e8c;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    bottom: 0;
+    left: 4px;
+    box-shadow: -8px 0 0 -4px #1f4e8c, 8px 0 0 -4px #1f4e8c;
 }
