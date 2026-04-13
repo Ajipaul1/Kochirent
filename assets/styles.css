@@ -40,7 +40,7 @@ button {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: linear-gradient(135deg, #003087, #38bdf8);
+    background: radial-gradient(circle at center, #0A4A8A 0%, #003087 100%);
     border-bottom: 0;
     backdrop-filter: blur(12px);
 }
@@ -97,7 +97,7 @@ button {
 .language-toggle {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.12);
     padding: 3px;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
@@ -122,14 +122,14 @@ button {
 }
 
 .language-toggle__option.is-active {
-    background: #ffffff;
-    color: var(--primary);
+    background: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
 }
 
 @media (min-width: 768px) {
     .site-header {
         position: relative;
-        background: linear-gradient(135deg, #003087, #7dd3fc);
+        background: radial-gradient(circle at center, #0A4A8A 0%, #003087 100%);
         border-bottom: 0;
     }
 
@@ -152,7 +152,7 @@ button {
         padding: 10px 16px;
         border: 1px solid rgba(255, 255, 255, 0.24);
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.08);
         box-shadow: 0 10px 30px rgba(15, 23, 42, 0.14);
     }
 
@@ -167,7 +167,7 @@ button {
 
     .language-toggle {
         padding: 4px;
-        background: rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.08);
         box-shadow: 0 10px 30px rgba(15, 23, 42, 0.14);
     }
 
