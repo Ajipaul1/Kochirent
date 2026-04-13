@@ -3,392 +3,397 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>KochiNest | Kochi Life, One Screen</title>
+    <title>KochiNest | Homes, Rides, Shifting & Repairs in Kochi</title>
+    <meta name="description" content="KochiNest is Kochi's hyper-local marketplace for homes, rides, shifting, and repair services.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="assets/mobile.css" media="(max-width: 767px)">
-     <link rel="stylesheet" href="assets/desktop.css" media="(min-width: 768px)">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-    <main class="app-shell">
-        <section class="phone-frame">
-            <div class="phone-glow"></div>
-            <div class="screen">
-                <div class="status-bar">
-                    <span class="status-accent">#003087</span>
-                    <span class="status-time">02:07</span>
-                    <div class="status-icons" aria-hidden="true">
-                        <span>5G</span>
-                        <span class="battery"></span>
-                    </div>
-                </div>
-                <div class="browser-bar">
-                    <span class="browser-url">www.kochinest.com</span>
-                    <span class="browser-time">9:41</span>
-                    <div class="browser-icons" aria-hidden="true">
-                        <span>📶</span>
-                        <span>📶</span>
-                        <span>🔋</span>
-                    </div>
-                </div>
+    <svg aria-hidden="true" class="icon-sprite">
+        <symbol id="icon-palm" viewBox="0 0 24 24">
+            <path d="M11.5 6.5c-1.7-2.7-4.4-3.8-7-3.9 2.2 1.2 3.6 3.2 4.2 5.8-1.6-.5-3.8-.1-5.7 1.5 2.4-.2 4.3.4 5.8 1.8-1.9.4-3.5 1.8-4.4 4 2.1-1.3 4-1.7 5.7-1.1l-.7 5.8h2.5l.9-7.8c1.1-1.1 3-1.8 5.9-1.9-2.6-1.3-4.9-1.5-6.8-.9.8-2.5 2.6-4.4 5.2-5.7-3.2.3-5.5 1.4-6.8 3.4l-.1-1Z" fill="currentColor"/>
+            <path d="M12.6 11.8c1.2 0 3 .7 4.8 2.1-2.2 0-3.8.5-4.9 1.5l-.5 4.3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4"/>
+        </symbol>
+        <symbol id="icon-pin" viewBox="0 0 24 24">
+            <path d="M12 21s6-5.5 6-11a6 6 0 1 0-12 0c0 5.5 6 11 6 11Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+            <circle cx="12" cy="10" r="2.4" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-globe" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M3 12h18M12 3a14.5 14.5 0 0 1 0 18M12 3a14.5 14.5 0 0 0 0 18" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        </symbol>
+        <symbol id="icon-home" viewBox="0 0 24 24">
+            <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1v-9.5Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"/>
+        </symbol>
+        <symbol id="icon-car" viewBox="0 0 24 24">
+            <path d="M5 16h14l-1.4-5.2A2 2 0 0 0 15.7 9H8.3a2 2 0 0 0-1.9 1.5L5 16Zm1.5 0V18a1 1 0 0 0 1 1h1.2a1 1 0 0 0 1-1v-1.1m4.6 0V18a1 1 0 0 0 1 1h1.2a1 1 0 0 0 1-1v-1.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+            <circle cx="8.5" cy="16.5" r="1.4" fill="currentColor"/>
+            <circle cx="15.5" cy="16.5" r="1.4" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-scooter" viewBox="0 0 24 24">
+            <path d="M6 16a2 2 0 1 0 0 .1m11-6 1.2 3.5H13m4-3.5h-3.5l-1.3-3H9.5m8 3h-2.8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+            <circle cx="6" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="18.5" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        </symbol>
+        <symbol id="icon-truck" viewBox="0 0 24 24">
+            <path d="M3 7h11v8H3V7Zm11 3h3.4L20 12.7V15h-6V10Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"/>
+            <circle cx="7.5" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="17.5" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        </symbol>
+        <symbol id="icon-tools" viewBox="0 0 24 24">
+            <path d="m5 19 6.2-6.2m1.8-5.9A3.3 3.3 0 0 0 17.7 11l1.7 1.7a1.6 1.6 0 0 1 0 2.3l-2.3 2.3a1.6 1.6 0 0 1-2.3 0L13 15.6A3.3 3.3 0 0 0 8.9 10m4.1-3.1 4.4-4.4m-4.4 4.4L11 4.9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+        </symbol>
+        <symbol id="icon-camera" viewBox="0 0 24 24">
+            <path d="M4 8h3l1.2-2h7.6L17 8h3v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"/>
+            <circle cx="12" cy="13" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        </symbol>
+        <symbol id="icon-sofa" viewBox="0 0 24 24">
+            <path d="M5 12a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4H5v-4Zm1-2V8.5A2.5 2.5 0 0 1 8.5 6h1A2.5 2.5 0 0 1 12 8.5V10m0 0V8.5A2.5 2.5 0 0 1 14.5 6h1A2.5 2.5 0 0 1 18 8.5V10M6 16v2m12-2v2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+        </symbol>
+        <symbol id="icon-bolt" viewBox="0 0 24 24">
+            <path d="M13 2 5 13h5l-1 9 8-11h-5l1-9Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"/>
+        </symbol>
+        <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+            <path d="M12 21a8.8 8.8 0 0 1-4.2-1.1L3.5 21l1.2-4A8.9 8.9 0 1 1 12 21Z" fill="currentColor"/>
+            <path d="M15.7 13.5c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.5.7c-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.4-1.6-1.6-1.9-.2-.2 0-.4.1-.5l.3-.4.2-.4c.1-.2 0-.4 0-.5 0-.1-.6-1.3-.8-1.8-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.8 4.4 3.9.6.3 1.1.5 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.1-.1-.1-.3-.2-.5-.3Z" fill="#FFFFFF"/>
+        </symbol>
+    </svg>
 
+    <div class="site-shell">
+        <section class="landing">
+            <div class="container landing__container">
                 <header class="topbar">
-                    <div class="brand">
-                        <div class="brand-mark">
-                            <span class="palm-trunk"></span>
-                            <span class="palm-leaf palm-leaf-a"></span>
-                            <span class="palm-leaf palm-leaf-b"></span>
-                            <span class="nest-ring"></span>
+                    <a class="brand" href="#" aria-label="KochiNest home">
+                        <span class="brand__mark"><svg viewBox="0 0 24 24"><use href="#icon-palm"></use></svg></span>
+                        <span class="brand__text">KochiNest</span>
+                    </a>
+                    <div class="topbar__meta">
+                        <div class="location-pill">
+                            <svg viewBox="0 0 24 24"><use href="#icon-pin"></use></svg>
+                            <span>Kochi, Kerala</span>
                         </div>
-                        <span>KochiNest</span>
+                        <button class="language-toggle" type="button" aria-pressed="false" aria-label="Toggle language">
+                            <svg viewBox="0 0 24 24"><use href="#icon-globe"></use></svg>
+                            <span class="language-toggle__label">EN</span>
+                        </button>
                     </div>
-                    <div class="topbar-location">Kochi, Kerala</div>
-                    <button class="lang-toggle" type="button" aria-label="Language toggle">
-                        <span>English</span>
-                        <span class="toggle-pill"><span class="toggle-knob"></span></span>
-                    </button>
                 </header>
 
-                <section class="hero">
-                    <div class="hero-art" aria-hidden="true">
-                        <span class="sun"></span>
-                        <span class="skyline skyline-a"></span>
-                        <span class="skyline skyline-b"></span>
-                        <span class="water"></span>
-                        <span class="palm palm-left"></span>
-                        <span class="palm palm-right"></span>
-                    </div>
-                    <div class="hero-copy">
-                        <h1>Your One-Stop Nest for Kochi Life</h1>
-                        <p>Homes • Rides • Shifting • Repairs</p>
-                    </div>
-                </section>
-
-                <section class="search-card">
-                    <div class="tabs">
-                        <button class="tab active" type="button">Stay</button>
-                        <button class="tab" type="button">Move</button>
-                    </div>
-                    <div class="search-body">
-                        <div class="field">
-                            <span class="field-label">Area</span>
-                            <div class="chip-row">
-                                <span class="chip">Kakkanad</span>
-                                <span class="chip">Aluva</span>
-                                <span class="chip">Edappally</span>
-                                <span class="chip">Kalamassery</span>
+                <div class="landing__grid">
+                    <section class="hero-panel" aria-labelledby="hero-title">
+                        <div class="hero-panel__backdrop"></div>
+                        <div class="hero-panel__overlay"></div>
+                        <div class="hero-panel__content">
+                            <p class="eyebrow">Kochi relocation made simple</p>
+                            <h1 id="hero-title">Your One-Stop Nest for Kochi Life</h1>
+                            <p class="hero-panel__subtitle">Homes • Rides • Shifting • Repairs</p>
+                            <div class="hero-panel__desktop-strip">
+                                <div class="desktop-chip">
+                                    <span class="desktop-chip__label">Verified</span>
+                                    <strong>1BHK in Kakkanad</strong>
+                                </div>
+                                <div class="desktop-chip desktop-chip--warm">
+                                    <span class="desktop-chip__label">Today’s Deal</span>
+                                    <strong>Scooter from ₹199/day</strong>
+                                </div>
                             </div>
                         </div>
-                        <div class="field compact">
-                            <span class="field-label">Property Type</span>
-                            <div class="dropdown-row">
-                                <span class="dropdown active">2BHK</span>
-                                <span class="dropdown">Room</span>
-                                <span class="dropdown">Villa</span>
+                        <aside class="hero-insights" aria-label="Marketplace highlights">
+                            <article class="insight-card">
+                                <span class="pill pill--verified">KochiNest Verified</span>
+                                <strong>1BHK • Kakkanad</strong>
+                                <span>Ready to move in this week</span>
+                            </article>
+                            <article class="insight-card insight-card--accent">
+                                <span class="pill pill--deal">Deal of the Day</span>
+                                <strong>Scooter ₹199/day</strong>
+                                <span>Daily rides around Aluva and Edappally</span>
+                            </article>
+                            <article class="insight-card insight-card--dark">
+                                <strong>Post Listing for ₹199</strong>
+                                <span>Go live in 60 seconds with WhatsApp support</span>
+                            </article>
+                        </aside>
+                    </section>
+
+                    <div class="interaction-panel">
+                        <form class="search-card" aria-label="Search properties and rides">
+                            <div class="search-card__tabs" role="tablist" aria-label="Search mode">
+                                <button class="search-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="stay-panel" data-mode="stay">Stay</button>
+                                <button class="search-tab" type="button" role="tab" aria-selected="false" aria-controls="move-panel" data-mode="move">Move</button>
                             </div>
-                        </div>
-                        <button class="search-button" type="button">Search Homes</button>
-                    </div>
-                </section>
-
-                <section class="quick-services">
-                    <div class="section-head">
-                        <h2>Quick Services</h2>
-                    </div>
-                    <div class="service-grid">
-                        <article class="service-card">
-                            <span class="icon icon-home"></span>
-                            <strong>Find a Home</strong>
-                        </article>
-                        <article class="service-card">
-                            <span class="icon icon-car"></span>
-                            <strong>Rent a Ride</strong>
-                        </article>
-                        <article class="service-card">
-                            <span class="icon icon-truck"></span>
-                            <strong>Shift My Flat</strong>
-                        </article>
-                        <article class="service-card">
-                            <span class="icon icon-tools"></span>
-                            <strong>Fix &amp; Repair</strong>
-                        </article>
-                    </div>
-                </section>
-
-                <section class="verified-block">
-                    <div class="section-head dark">
-                        <h2>KochiNest Verified</h2>
-                    </div>
-                    <div class="verified-row">
-                        <article class="listing-card">
-                            <span class="badge">Verified</span>
-                            <h3>1BHK Kakkanad</h3>
-                            <p>₹13,500/month</p>
-                            <span class="mini-wa"></span>
-                        </article>
-                        <article class="listing-card">
-                            <span class="badge">Verified</span>
-                            <h3>Scooter Aluva</h3>
-                            <p>₹299/day</p>
-                            <div class="card-actions">
-                                <span class="mini-button">Book Now</span>
-                                <span class="mini-wa"></span>
+                            <div class="search-panel is-active" id="stay-panel" role="tabpanel" data-panel="stay">
+                                <div class="search-panel__row">
+                                    <div class="search-field">
+                                        <span class="search-field__label">Area</span>
+                                        <div class="chip-group">
+                                            <button class="chip is-selected" type="button" aria-pressed="true">Kakkanad</button>
+                                            <button class="chip" type="button" aria-pressed="false">Aluva</button>
+                                            <button class="chip" type="button" aria-pressed="false">Edappally</button>
+                                            <button class="chip" type="button" aria-pressed="false">Kalamassery</button>
+                                        </div>
+                                    </div>
+                                    <div class="search-field">
+                                        <span class="search-field__label">Property Type</span>
+                                        <div class="chip-group chip-group--compact">
+                                            <button class="chip is-selected" type="button" aria-pressed="true">2BHK</button>
+                                            <button class="chip" type="button" aria-pressed="false">1BHK</button>
+                                            <button class="chip" type="button" aria-pressed="false">Room</button>
+                                            <button class="chip" type="button" aria-pressed="false">House</button>
+                                            <button class="chip" type="button" aria-pressed="false">Villa</button>
+                                        </div>
+                                    </div>
+                                    <button class="button button--primary search-card__submit" type="submit">Search Homes</button>
+                                </div>
                             </div>
-                        </article>
-                        <article class="listing-card">
-                            <span class="badge">Verified</span>
-                            <h3>Room Edappally</h3>
-                            <p>₹7,999/month</p>
-                            <div class="card-actions">
-                                <span class="mini-button">Book Now</span>
-                                <span class="mini-wa"></span>
+                            <div class="search-panel" id="move-panel" role="tabpanel" data-panel="move" hidden>
+                                <div class="search-panel__row">
+                                    <div class="search-field">
+                                        <span class="search-field__label">Vehicle Type</span>
+                                        <div class="chip-group">
+                                            <button class="chip is-selected" type="button" aria-pressed="true">Scooter</button>
+                                            <button class="chip" type="button" aria-pressed="false">Bike</button>
+                                            <button class="chip" type="button" aria-pressed="false">Car</button>
+                                        </div>
+                                    </div>
+                                    <div class="search-field">
+                                        <span class="search-field__label">Rental Duration</span>
+                                        <div class="chip-group chip-group--compact">
+                                            <button class="chip is-selected" type="button" aria-pressed="true">Daily</button>
+                                            <button class="chip" type="button" aria-pressed="false">Hourly</button>
+                                            <button class="chip" type="button" aria-pressed="false">Weekly</button>
+                                            <button class="chip" type="button" aria-pressed="false">Monthly</button>
+                                        </div>
+                                    </div>
+                                    <button class="button button--primary search-card__submit" type="submit">Search Rides</button>
+                                </div>
                             </div>
-                        </article>
+                        </form>
+
+                        <section class="quick-services" aria-labelledby="quick-services-title">
+                            <div class="section-heading section-heading--compact">
+                                <h2 id="quick-services-title">Quick Services</h2>
+                            </div>
+                            <div class="quick-services__grid">
+                                <a class="service-tile" href="#"><span class="service-tile__icon"><svg viewBox="0 0 24 24"><use href="#icon-home"></use></svg></span><span>Find a Home</span></a>
+                                <a class="service-tile" href="#"><span class="service-tile__icon"><svg viewBox="0 0 24 24"><use href="#icon-car"></use></svg></span><span>Rent a Ride</span></a>
+                                <a class="service-tile" href="#"><span class="service-tile__icon"><svg viewBox="0 0 24 24"><use href="#icon-truck"></use></svg></span><span>Shift My Flat</span></a>
+                                <a class="service-tile" href="#"><span class="service-tile__icon"><svg viewBox="0 0 24 24"><use href="#icon-tools"></use></svg></span><span>Fix &amp; Repair</span></a>
+                            </div>
+                        </section>
+
+                        <section class="signals" aria-label="Trust and conversion signals">
+                            <article class="signal-card">
+                                <span class="pill pill--verified">Verified</span>
+                                <strong>Trusted homes &amp; rides</strong>
+                                <span>Handpicked local leads</span>
+                            </article>
+                            <article class="signal-card signal-card--warm">
+                                <span class="pill pill--deal">Deal of the Day</span>
+                                <strong>Scooter ₹199/day</strong>
+                                <span>Fast city rentals</span>
+                            </article>
+                            <article class="signal-card signal-card--dark">
+                                <strong>Post Listing for ₹199</strong>
+                                <span>1. Name  2. Service  3. Live</span>
+                            </article>
+                        </section>
                     </div>
-                </section>
-
-                <section class="deals-block">
-                    <div class="deal-title">
-                        <h2>Deal of the Day</h2>
-                        <span>Limited Time!</span>
-                    </div>
-                    <div class="deal-row">
-                        <article class="deal-card">
-                            <span class="deal-icon scooter"></span>
-                            <strong>Scooter ₹199/day Aluva</strong>
-                        </article>
-                        <article class="deal-card">
-                            <span class="deal-icon home"></span>
-                            <strong>Urgent 2BHK Vacancy Kakkanad</strong>
-                        </article>
-                    </div>
-                 </section>
-
-                 <section class="trending-rentals">
-                     <div class="section-head">
-                         <h2>Trending Rentals in Kochi</h2>
-                         <p class="section-subtitle">Bike Rentals in Kochi • Self Drive Car Rental Kochi • More</p>
-                     </div>
-                     <div class="trending-row">
-                         <article class="trending-card">
-                             <span class="deal-icon scooter"></span>
-                             <strong>Bike Rentals in Kochi ₹199/day</strong>
-                         </article>
-                         <article class="trending-card">
-                             <span class="deal-icon car"></span>
-                             <strong>Self Drive Car Rental Kochi ₹999/day</strong>
-                         </article>
-                         <article class="trending-card">
-                             <span class="deal-icon car"></span>
-                             <strong>Car Rental with Driver Kochi ₹1,299/day</strong>
-                         </article>
-                         <article class="trending-card">
-                             <span class="deal-icon scooter"></span>
-                             <strong>Scooter Rental Kochi</strong>
-                         </article>
-                         <article class="trending-card">
-                             <span class="deal-icon car"></span>
-                             <strong>Luxury Car Rental Kochi</strong>
-                         </article>
-                     </div>
-                 </section>
-
-                 <section class="popular-bikes">
-                     <div class="section-head">
-                         <h2>Popular Bike Rentals in Kochi</h2>
-                         <p class="section-subtitle">Target Targeting 12,100 volume keyword</p>
-                     </div>
-                     <div class="bike-grid">
-                         <article class="bike-card">
-                             <span class="badge">Verified</span>
-                             <h3>Scooter Aluva</h3>
-                             <p>₹299/day</p>
-                             <span class="mini-wa"></span>
-                         </article>
-                         <article class="bike-card">
-                             <h3>Bike Kakkanad</h3>
-                             <p>₹249/day</p>
-                         </article>
-                         <article class="bike-card">
-                             <h3>Royal Brothers style bike Fort Kochi</h3>
-                             <p>₹349/day</p>
-                         </article>
-                         <article class="bike-card">
-                             <span class="fomo-tag">FOMO</span>
-                             <h3>Scooty Edappally</h3>
-                             <p>₹199/day</p>
-                         </article>
-                     </div>
-                 </section>
-
-                 <section class="self-drive-banner">
-                     <div class="banner-content">
-                         <div class="banner-text">
-                             <h2>Self Drive Car Rental Kochi from ₹899/day</h2>
-                             <div class="location-chips">
-                                 <span class="chip">Kakkanad</span>
-                                 <span class="chip">Aluva</span>
-                                 <span class="chip">Edappally</span>
-                             </div>
-                             <button class="book-now-btn" type="button">
-                                 <span class="mini-wa"></span>
-                                 Book Now
-                             </button>
-                         </div>
-                         <div class="banner-image">
-                             <!-- Silver electric car image placeholder -->
-                         </div>
-                     </div>
-                 </section>
-
-                 <section class="more-services">
-                     <div class="section-head">
-                         <h2>More Rental Services</h2>
-                     </div>
-                     <div class="services-grid">
-                         <article class="service-card">
-                             <span class="icon icon-camera"></span>
-                             <strong>Camera Rental Kochi</strong>
-                         </article>
-                         <article class="service-card">
-                             <span class="icon icon-furniture"></span>
-                             <strong>Furniture Rental Kochi</strong>
-                         </article>
-                         <article class="service-card">
-                             <span class="icon icon-generator"></span>
-                             <strong>Generator Rental Kochi</strong>
-                         </article>
-                         <article class="service-card">
-                             <span class="icon icon-wedding-car"></span>
-                             <strong>Wedding Car Rental Kochi</strong>
-                         </article>
-                     </div>
-                 </section>
-
-                 <section class="rentals-near-you">
-                     <div class="section-head">
-                         <h2>Rentals Near You</h2>
-                     </div>
-                     <div class="location-row">
-                         <span class="location-chip">Kakkanad</span>
-                         <span class="location-chip">Aluva</span>
-                         <span class="location-chip">Edappally</span>
-                         <span class="location-chip">Fort Kochi</span>
-                         <span class="location-chip">Kalamassery</span>
-                         <span class="location-chip">Airport</span>
-                     </div>
-                 </section>
-
-                 <section class="homes-rooms">
-                     <div class="section-head">
-                         <h2>Homes & Rooms for Rent in Kochi</h2>
-                         <p class="section-subtitle">1BHK • 2BHK • Monthly Rental Rooms in Kochi</p>
-                     </div>
-                     <div class="homes-row">
-                         <article class="home-card">
-                             <span class="badge">Verified</span>
-                             <h3>1BHK Kakkanad</h3>
-                             <p>₹13,500/month</p>
-                             <span class="mini-wa"></span>
-                         </article>
-                         <article class="home-card">
-                             <h3>Room Edappally</h3>
-                             <p>₹7,999/month</p>
-                         </article>
-                         <article class="home-card">
-                             <h3>2BHK Aluva</h3>
-                             <p>₹18,999/month</p>
-                         </article>
-                         <article class="home-card">
-                             <h3>Studio Fort Kochi</h3>
-                             <p>₹11,000/month</p>
-                         </article>
-                     </div>
-                 </section>
-
-                 <section class="shifting-banner">
-                     <div class="banner-content">
-                         <div class="banner-text">
-                             <h2>Professional Shifting Services in Kochi</h2>
-                             <p>Starting ₹4,999</p>
-                             <div class="location-chips">
-                                 <span class="chip">Kakkanad</span>
-                                 <span class="chip">Aluva</span>
-                                 <span class="chip">Edappally</span>
-                             </div>
-                             <button class="book-packers-btn" type="button">Book Packers Now</button>
-                         </div>
-                         <div class="banner-image">
-                             <!-- Yellow moving truck image placeholder -->
-                         </div>
-                     </div>
-                 </section>
-
-                 <section class="fix-repair">
-                     <div class="section-head">
-                         <h2>Fix & Repair Services in Kochi</h2>
-                     </div>
-                     <div class="repair-grid">
-                         <article class="repair-card">
-                             <span class="icon icon-ac"></span>
-                             <strong>AC Repair Kochi</strong>
-                         </article>
-                         <article class="repair-card">
-                             <span class="icon icon-plumbing"></span>
-                             <strong>Plumbing Services</strong>
-                         </article>
-                         <article class="repair-card">
-                             <span class="icon icon-electrical"></span>
-                             <strong>Electrical Work</strong>
-                         </article>
-                         <article class="repair-card">
-                             <span class="icon icon-generator"></span>
-                             <strong>Generator Rental Kochi</strong>
-                         </article>
-                     </div>
-                 </section>
-
-                 <section class="verified-partners">
-                     <div class="section-head">
-                         <h2>KochiNest Verified Partners</h2>
-                     </div>
-                     <div class="partners-row">
-                         <article class="partner-card">
-                             <strong>Furniture Rental ₹2,499/month</strong>
-                         </article>
-                         <article class="partner-card">
-                             <strong>Camera Rental ₹799/day</strong>
-                         </article>
-                         <article class="partner-card">
-                             <strong>Wedding Car Rental Kochi</strong>
-                         </article>
-                     </div>
-                 </section>
-
-                 <section class="cta-banner">
-                    <div class="cta-copy">
-                        <h2>Business Owner in Kochi? List your Service for just ₹199</h2>
-                        <button type="button">Post Listing Now</button>
-                    </div>
-                    <div class="cta-steps">
-                        <span>1. Name</span>
-                        <span>2. Service</span>
-                        <span>3. Live in 60 sec</span>
-                    </div>
-                </section>
-
-                <footer class="footer">
-                    <p class="footer-links">Kakkanad • Edappally • Aluva • Properties • Bike Rentals • Packers &amp; Movers</p>
-                    <p class="copyright">© 2026 KochiNest. All Rights Reserved.</p>
-                </footer>
-
-                <button class="whatsapp-float" type="button" aria-label="Chat instantly on WhatsApp">
-                    <span class="tooltip">Chat instantly on WhatsApp</span>
-                    <span class="wa-bubble"></span>
-                </button>
+                </div>
             </div>
         </section>
-    </main>
+
+        <main>
+            <section class="content-section">
+                <div class="container">
+                    <div class="section-heading">
+                        <h2>Trending Rentals in Kochi</h2>
+                        <p>Bike Rentals in Kochi • Self Drive Car Rental Kochi • More</p>
+                    </div>
+                    <div class="scroller scroller--partners">
+                        <article class="mini-card"><span class="mini-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-scooter"></use></svg></span><strong>Bike Rentals in Kochi</strong><span>₹199/day</span></article>
+                        <article class="mini-card"><span class="mini-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-car"></use></svg></span><strong>Self Drive Car Rental Kochi</strong><span>₹999/day</span></article>
+                        <article class="mini-card"><span class="mini-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-car"></use></svg></span><strong>Car Rental with Driver Kochi</strong><span>₹1,299/day</span></article>
+                        <article class="mini-card"><span class="mini-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-scooter"></use></svg></span><strong>Scooter Rental Kochi</strong><span>Hourly and daily</span></article>
+                        <article class="mini-card"><span class="mini-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-car"></use></svg></span><strong>Luxury Car Rental Kochi</strong><span>Premium city drives</span></article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section content-section--tight">
+                <div class="container">
+                    <div class="section-heading">
+                        <h2>Popular Bike Rentals in Kochi</h2>
+                        <p>Targeting 12,100 volume keyword</p>
+                    </div>
+                    <div class="listing-grid">
+                        <article class="listing-card">
+                            <div class="listing-card__visual listing-card__visual--teal">
+                                <span class="pill pill--verified">Verified</span>
+                                <svg viewBox="0 0 24 24"><use href="#icon-scooter"></use></svg>
+                            </div>
+                            <div class="listing-card__body">
+                                <strong>Scooter</strong>
+                                <span>Aluva</span>
+                                <div class="listing-card__footer"><b>₹299/day</b><a class="icon-button" href="#" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24"><use href="#icon-whatsapp"></use></svg></a></div>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-card__visual listing-card__visual--blue"><svg viewBox="0 0 24 24"><use href="#icon-car"></use></svg></div>
+                            <div class="listing-card__body"><strong>Bike</strong><span>Kakkanad</span><div class="listing-card__footer"><b>₹249/day</b></div></div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-card__visual listing-card__visual--slate"><svg viewBox="0 0 24 24"><use href="#icon-car"></use></svg></div>
+                            <div class="listing-card__body"><strong>Royal Brothers Style Bike</strong><span>Fort Kochi</span><div class="listing-card__footer"><b>₹349/day</b></div></div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-card__visual listing-card__visual--warm">
+                                <span class="pill pill--fomo">FOMO</span>
+                                <svg viewBox="0 0 24 24"><use href="#icon-scooter"></use></svg>
+                            </div>
+                            <div class="listing-card__body"><strong>Scooty</strong><span>Edappally</span><div class="listing-card__footer"><b>₹199/day</b></div></div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section content-section--tight">
+                <div class="container">
+                    <article class="promo-banner promo-banner--teal">
+                        <div class="promo-banner__content">
+                            <span class="eyebrow eyebrow--light">Self drive special</span>
+                            <h2>Self Drive Car Rental Kochi</h2>
+                            <p>from ₹899/day</p>
+                            <div class="chip-row">
+                                <span class="location-chip">Kakkanad</span>
+                                <span class="location-chip">Aluva</span>
+                                <span class="location-chip">Edappally</span>
+                            </div>
+                            <a class="button button--light" href="#"><svg viewBox="0 0 24 24"><use href="#icon-whatsapp"></use></svg><span>Book Now</span></a>
+                        </div>
+                        <div class="promo-banner__visual" aria-hidden="true">
+                            <svg viewBox="0 0 220 120">
+                                <defs><linearGradient id="silverCar" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f8fafc"/><stop offset="100%" stop-color="#94a3b8"/></linearGradient></defs>
+                                <path d="M34 78h112l16-22c4-6 11-10 18-10h14c6 0 10 4 10 10v22h8v13h-11a13 13 0 0 1-25 0H79a13 13 0 0 1-25 0H34V78Z" fill="url(#silverCar)"/>
+                                <path d="M71 48h56c8 0 14 5 17 13l4 10H56l4-10c3-8 6-13 11-13Z" fill="#e2e8f0"/>
+                                <circle cx="66" cy="92" r="11" fill="#334155"/><circle cx="186" cy="92" r="11" fill="#334155"/><circle cx="66" cy="92" r="5" fill="#cbd5e1"/><circle cx="186" cy="92" r="5" fill="#cbd5e1"/>
+                            </svg>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="content-section content-section--tight">
+                <div class="container">
+                    <div class="section-heading"><h2>More Rental Services</h2></div>
+                    <div class="service-grid">
+                        <article class="square-card"><span class="square-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-camera"></use></svg></span><strong>Camera Rental Kochi</strong></article>
+                        <article class="square-card"><span class="square-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-sofa"></use></svg></span><strong>Furniture Rental Kochi</strong></article>
+                        <article class="square-card"><span class="square-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-bolt"></use></svg></span><strong>Generator Rental Kochi</strong></article>
+                        <article class="square-card"><span class="square-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-car"></use></svg></span><strong>Wedding Car Rental Kochi</strong></article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section content-section--tight">
+                <div class="container">
+                    <div class="section-heading"><h2>Rentals Near You</h2></div>
+                    <div class="scroller scroller--chips">
+                        <span class="location-chip">Kakkanad</span><span class="location-chip">Aluva</span><span class="location-chip">Edappally</span><span class="location-chip">Fort Kochi</span><span class="location-chip">Kalamassery</span><span class="location-chip">Airport</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="container">
+                    <div class="section-heading">
+                        <h2>Homes &amp; Rooms for Rent in Kochi</h2>
+                        <p>1BHK • 2BHK • Monthly Rental Rooms in Kochi</p>
+                    </div>
+                    <div class="scroller scroller--property">
+                        <article class="property-card"><span class="pill pill--verified">Verified</span><strong>1BHK</strong><span>Kakkanad</span><b>₹13,500/month</b></article>
+                        <article class="property-card"><strong>Room</strong><span>Edappally</span><b>₹7,999/month</b></article>
+                        <article class="property-card"><strong>2BHK</strong><span>Aluva</span><b>₹18,999/month</b></article>
+                        <article class="property-card"><strong>Studio</strong><span>Fort Kochi</span><b>₹11,000/month</b></article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section content-section--tight">
+                <div class="container">
+                    <article class="promo-banner promo-banner--sky">
+                        <div class="promo-banner__content">
+                            <span class="eyebrow">Move with pros</span>
+                            <h2>Professional Shifting Services in Kochi</h2>
+                            <p>Starting ₹4,999</p>
+                            <div class="chip-row">
+                                <span class="location-chip location-chip--soft">Kakkanad</span>
+                                <span class="location-chip location-chip--soft">Aluva</span>
+                                <span class="location-chip location-chip--soft">Edappally</span>
+                            </div>
+                            <a class="button button--primary" href="#">Book Packers Now</a>
+                        </div>
+                        <div class="promo-banner__visual" aria-hidden="true">
+                            <svg viewBox="0 0 220 120">
+                                <rect x="28" y="40" width="104" height="38" rx="8" fill="#f59e0b"/><rect x="132" y="50" width="42" height="28" rx="6" fill="#fde68a"/><rect x="168" y="58" width="20" height="20" rx="4" fill="#cbd5e1"/>
+                                <circle cx="64" cy="88" r="12" fill="#1e293b"/><circle cx="64" cy="88" r="5" fill="#cbd5e1"/><circle cx="162" cy="88" r="12" fill="#1e293b"/><circle cx="162" cy="88" r="5" fill="#cbd5e1"/>
+                                <rect x="48" y="26" width="34" height="18" rx="4" fill="#fdba74"/><path d="M54 50v-8m12 8v-8m12 8v-8" stroke="#fff7ed" stroke-linecap="round" stroke-width="4"/>
+                            </svg>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="content-section content-section--tight">
+                <div class="container">
+                    <div class="section-heading"><h2>Fix &amp; Repair Services in Kochi</h2></div>
+                    <div class="service-grid">
+                        <article class="square-card"><span class="square-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-tools"></use></svg></span><strong>AC Repair Kochi</strong></article>
+                        <article class="square-card"><span class="square-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-tools"></use></svg></span><strong>Plumbing Services</strong></article>
+                        <article class="square-card"><span class="square-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-bolt"></use></svg></span><strong>Electrical Work</strong></article>
+                        <article class="square-card"><span class="square-card__icon"><svg viewBox="0 0 24 24"><use href="#icon-bolt"></use></svg></span><strong>Generator Rental Kochi</strong></article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section content-section--tight">
+                <div class="container">
+                    <div class="section-heading"><h2>KochiNest Verified Partners</h2></div>
+                    <div class="scroller scroller--cards">
+                        <article class="partner-card"><span class="pill pill--verified">Verified</span><strong>Furniture Rental Kochi</strong><span>₹2,499/month</span></article>
+                        <article class="partner-card"><span class="pill pill--verified">Verified</span><strong>Camera Rental Kochi</strong><span>₹799/day</span></article>
+                        <article class="partner-card"><span class="pill pill--verified">Verified</span><strong>Wedding Car Rental Kochi</strong><span>Trusted local partner</span></article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="container container--narrow">
+                    <article class="post-banner">
+                        <div class="post-banner__copy">
+                            <span class="eyebrow eyebrow--light">For business owners</span>
+                            <h2>Are you a Business Owner in Kochi?<br>List your Rental or Service for just ₹199</h2>
+                            <a class="button button--secondary" href="#">Post Listing Now</a>
+                            <p>1. Name &nbsp;&nbsp; 2. Service &nbsp;&nbsp; 3. Live in 60 sec</p>
+                        </div>
+                        <a class="post-banner__support" href="#"><svg viewBox="0 0 24 24"><use href="#icon-whatsapp"></use></svg><span>WhatsApp support</span></a>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer-preview">
+            <div class="container footer-preview__inner">
+                <p>Kakkanad • Aluva • Edappally • Fort Kochi • Bike Rentals • Car Rentals • Homes • Packers &amp; Movers</p>
+                <small>More location guides and service pages continue below.</small>
+            </div>
+        </footer>
+
+        <a class="whatsapp-fab" href="#" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24"><use href="#icon-whatsapp"></use></svg></a>
+    </div>
+
+    <script src="assets/script.js"></script>
 </body>
 </html>
