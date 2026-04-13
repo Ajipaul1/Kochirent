@@ -40,8 +40,8 @@ button {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.96);
-    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, #003087, #38bdf8);
+    border-bottom: 0;
     backdrop-filter: blur(12px);
 }
 
@@ -62,18 +62,10 @@ button {
 }
 
 .brand__logo {
-    width: 34px;
-    height: 34px;
+    width: 52px;
+    height: 52px;
     object-fit: contain;
     flex: 0 0 auto;
-}
-
-.brand__name {
-    font-size: 0.98rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    color: var(--primary);
-    white-space: nowrap;
 }
 
 .header-location {
@@ -84,13 +76,13 @@ button {
     justify-content: center;
     gap: 5px;
     padding: 0 8px;
-    color: var(--muted);
+    color: #ffffff;
 }
 
 .header-location svg {
     width: 14px;
     height: 14px;
-    color: var(--primary);
+    color: #ffffff;
     flex: 0 0 auto;
 }
 
@@ -103,12 +95,12 @@ button {
 }
 
 .language-toggle {
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 999px;
-    background: #f8fafc;
+    background: rgba(255, 255, 255, 0.16);
     padding: 3px;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
 }
 
 .language-toggle__track {
@@ -126,20 +118,18 @@ button {
     place-items: center;
     font-size: 0.73rem;
     font-weight: 700;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.78);
 }
 
 .language-toggle__option.is-active {
-    background: var(--primary);
-    color: #ffffff;
+    background: #ffffff;
+    color: var(--primary);
 }
 
 @media (min-width: 768px) {
     .site-header {
         position: relative;
-        background:
-            linear-gradient(90deg, rgba(0, 48, 135, 0.04), rgba(0, 191, 165, 0.03)),
-            #ffffff;
+        background: linear-gradient(135deg, #003087, #7dd3fc);
         border-bottom: 0;
     }
 
@@ -148,30 +138,22 @@ button {
         margin: 0 auto;
         min-height: 92px;
         padding: 18px 24px;
-        grid-template-columns: minmax(220px, 280px) 1fr auto;
+        grid-template-columns: minmax(180px, 240px) 1fr auto;
         gap: 20px;
     }
 
-    .brand {
-        gap: 12px;
-    }
-
     .brand__logo {
-        width: 46px;
-        height: 46px;
-    }
-
-    .brand__name {
-        font-size: 1.25rem;
+        width: 72px;
+        height: 72px;
     }
 
     .header-location {
         justify-self: center;
         padding: 10px 16px;
-        border: 1px solid var(--border);
+        border: 1px solid rgba(255, 255, 255, 0.24);
         border-radius: 999px;
-        background: #ffffff;
-        box-shadow: var(--shadow);
+        background: rgba(255, 255, 255, 0.14);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.14);
     }
 
     .header-location svg {
@@ -185,8 +167,8 @@ button {
 
     .language-toggle {
         padding: 4px;
-        background: #ffffff;
-        box-shadow: var(--shadow);
+        background: rgba(255, 255, 255, 0.14);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.14);
     }
 
     .language-toggle__option {
@@ -198,6 +180,6 @@ button {
 
 @media (hover: hover) and (pointer: fine) {
     .language-toggle:hover {
-        border-color: #cbd5e1;
+        border-color: rgba(255, 255, 255, 0.45);
     }
 }
