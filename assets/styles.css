@@ -17,7 +17,7 @@
 body {
     margin: 0;
     min-height: 100vh;
-    background: var(--background);
+    background: radial-gradient(circle at center, #0A4A8A 0%, #003087 100%);
     color: var(--text);
     font-family: "Inter", sans-serif;
 }
@@ -52,6 +52,7 @@ button {
     gap: 8px;
     min-height: 60px;
     padding: 8px 12px;
+    background: transparent;
 }
 
 .brand {
@@ -62,8 +63,8 @@ button {
 }
 
 .brand__logo {
-    width: 52px;
-    height: 52px;
+    width: 68px;
+    height: 68px;
     object-fit: contain;
     flex: 0 0 auto;
 }
@@ -77,6 +78,7 @@ button {
     gap: 5px;
     padding: 0 8px;
     color: #ffffff;
+    background: transparent;
 }
 
 .header-location svg {
@@ -97,10 +99,10 @@ button {
 .language-toggle {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
+    background: transparent;
     padding: 3px;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+    box-shadow: none;
 }
 
 .language-toggle__track {
@@ -122,7 +124,7 @@ button {
 }
 
 .language-toggle__option.is-active {
-    background: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.16);
     color: #ffffff;
 }
 
@@ -136,15 +138,15 @@ button {
     .site-header__inner {
         width: min(100%, 1200px);
         margin: 0 auto;
-        min-height: 92px;
+        min-height: 110px;
         padding: 18px 24px;
         grid-template-columns: minmax(180px, 240px) 1fr auto;
         gap: 20px;
     }
 
     .brand__logo {
-        width: 72px;
-        height: 72px;
+        width: 104px;
+        height: 104px;
     }
 
     .header-location {
@@ -152,8 +154,8 @@ button {
         padding: 10px 16px;
         border: 1px solid rgba(255, 255, 255, 0.24);
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.14);
+        background: transparent;
+        box-shadow: none;
     }
 
     .header-location svg {
@@ -167,8 +169,8 @@ button {
 
     .language-toggle {
         padding: 4px;
-        background: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.14);
+        background: transparent;
+        box-shadow: none;
     }
 
     .language-toggle__option {
