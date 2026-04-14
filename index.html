@@ -6,7 +6,7 @@
     <title>KochiNest</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -32,6 +32,119 @@
             </button>
         </div>
     </header>
+
+    <main>
+        <section class="hero" aria-label="KochiRent search hero">
+            <div class="hero__shell">
+                <div class="hero__image-frame">
+                    <div class="hero__content">
+                        <div class="hero__story">
+                            <p class="hero__eyebrow">Rent, ride, move, and repair across Kochi</p>
+                            <h1 class="hero__title">your one-stop nest for kochi</h1>
+                            <p class="hero__subtitle">Home.Rides.Shifting.Repair</p>
+                            <div class="hero__tags" aria-label="Popular categories">
+                                <span>apartments</span>
+                                <span>hostels</span>
+                                <span>sharing rooms</span>
+                                <span>self-drive cars</span>
+                                <span>bikes</span>
+                                <span>repair</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-search">
+                            <div class="search-mode" aria-label="Search modes">
+                                <button class="search-mode__chip is-active" type="button">Homes</button>
+                                <button class="search-mode__chip" type="button">Rides</button>
+                                <button class="search-mode__chip" type="button">Services</button>
+                            </div>
+
+                            <form class="search-panel">
+                                <div class="search-panel__intro">
+                                    <p class="search-panel__kicker">Smart search across Kochi</p>
+                                    <h2>Find homes, vehicles, and local services from one search box</h2>
+                                </div>
+
+                                <label class="search-field search-field--primary">
+                                    <span>What are you looking for?</span>
+                                    <input
+                                        type="search"
+                                        name="query"
+                                        placeholder="Search homes, apartments, hostels, sharing rooms, cars, bikes, repair, shifting..."
+                                    >
+                                </label>
+
+                                <div class="search-grid">
+                                    <label class="search-field">
+                                        <span>Area near Kochi</span>
+                                        <input list="kochi-areas" name="area" placeholder="Kakkanad, Edappally, Fort Kochi...">
+                                    </label>
+
+                                    <label class="search-field">
+                                        <span>District</span>
+                                        <select name="district">
+                                            <option selected>Ernakulam</option>
+                                            <option>Thrissur</option>
+                                            <option>Alappuzha</option>
+                                            <option>Kottayam</option>
+                                            <option>Idukki</option>
+                                        </select>
+                                    </label>
+                                </div>
+
+                                <div class="search-picks">
+                                    <div class="search-picks__group">
+                                        <span class="search-picks__label">Homes</span>
+                                        <div class="search-picks__items">
+                                            <button type="button">Home for rent</button>
+                                            <button type="button">Apartment rental</button>
+                                            <button type="button">Hostels</button>
+                                            <button type="button">Sharing rooms</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="search-picks__group">
+                                        <span class="search-picks__label">Rides</span>
+                                        <div class="search-picks__items">
+                                            <button type="button">Car rental</button>
+                                            <button type="button">Self-drive cars</button>
+                                            <button type="button">Bike rental</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="search-picks__group">
+                                        <span class="search-picks__label">Services</span>
+                                        <div class="search-picks__items">
+                                            <button type="button">Repair service</button>
+                                            <button type="button">Shifting service</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="search-actions">
+                                    <button class="search-submit" type="submit">Search KochiRent</button>
+                                    <p class="search-note">Popular places: Kakkanad, Edappally, Kaloor, Palarivattom, Vyttila, Aluva, Fort Kochi.</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <datalist id="kochi-areas">
+                <option value="Kakkanad"></option>
+                <option value="Edappally"></option>
+                <option value="Palarivattom"></option>
+                <option value="Kaloor"></option>
+                <option value="Vyttila"></option>
+                <option value="Aluva"></option>
+                <option value="Fort Kochi"></option>
+                <option value="Marine Drive"></option>
+                <option value="Tripunithura"></option>
+                <option value="Thrippunithura"></option>
+            </datalist>
+        </section>
+    </main>
 
     <script src="assets/script.js"></script>
 </body>
