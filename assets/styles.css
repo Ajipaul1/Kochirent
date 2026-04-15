@@ -390,7 +390,7 @@ main {
 .search-submit {
     min-height: 58px;
     border-radius: 18px;
-    background: linear-gradient(135deg, var(--navy-900), var(--navy-700));
+    background: #2ebc68;
     color: var(--white);
     font-size: 1rem;
     font-weight: 800;
