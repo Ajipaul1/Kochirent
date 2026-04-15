@@ -13,136 +13,152 @@
     <header class="site-header">
         <div class="site-header__inner">
             <a class="brand" href="#" aria-label="KochiNest home">
-                <img class="brand__logo" src="assets/kochinest-elegant-logo.png" alt="KochiNest logo">
+                <img class="brand__logo" src="assets/kochinest-logo.png" alt="KochiNest logo">
             </a>
 
             <div class="header-location" aria-label="Current location">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 21s6-5.5 6-11a6 6 0 1 0-12 0c0 5.5 6 11 6 11Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
-                    <circle cx="12" cy="10" r="2.4" fill="currentColor"/>
+                <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
                 </svg>
                 <span class="header-location__text">Kochi, Kerala</span>
             </div>
 
-            <button class="language-toggle" type="button" aria-pressed="false" aria-label="Switch language between English and Malayalam">
-                <span class="language-toggle__track">
-                    <span class="language-toggle__option is-active">EN</span>
-                    <span class="language-toggle__option">ML</span>
-                </span>
-            </button>
+            <div class="header-actions">
+                <div class="language-dropdown">
+                    <button class="language-btn">
+                        <span>English</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <button class="login-btn">Login / Sign Up</button>
+            </div>
         </div>
     </header>
 
     <main>
-        <section class="hero" aria-label="KochiRent search hero">
-            <div class="hero__shell">
-                <div class="hero__image-frame">
-                    <div class="hero__content">
-                        <div class="hero__story">
-                            <p class="hero__eyebrow">Rent, ride, move, and repair across Kochi</p>
-                            <h1 class="hero__title">your one-stop nest for kochi</h1>
-                            <p class="hero__subtitle">Home.Rides.Shifting.Repair</p>
-                            <div class="hero__tags" aria-label="Popular categories">
-                                <span>apartments</span>
-                                <span>hostels</span>
-                                <span>sharing rooms</span>
-                                <span>self-drive cars</span>
-                                <span>bikes</span>
-                                <span>repair</span>
+        <section class="hero">
+            <div class="hero__overlay"></div>
+            <div class="hero__content">
+                <h1 class="hero__title">Your One-Stop Nest for Kochi Life</h1>
+                <div class="hero__services">
+                    <span>Homes</span>
+                    <span class="dot"></span>
+                    <span>Rides</span>
+                    <span class="dot"></span>
+                    <span>Shifting</span>
+                    <span class="dot"></span>
+                    <span>Repairs</span>
+                </div>
+
+                <div class="search-container">
+                    <div class="search-tabs">
+                        <button class="search-tab active">Stay</button>
+                        <button class="search-tab">Move</button>
+                    </div>
+                    <div class="search-box">
+                        <div class="search-field">
+                            <label>Area</label>
+                            <div class="select-wrapper">
+                                <select>
+                                    <option>Kakkanad</option>
+                                </select>
                             </div>
                         </div>
-
-                        <div class="hero-search">
-                            <div class="search-mode" aria-label="Search modes">
-                                <button class="search-mode__chip is-active" type="button">Homes</button>
-                                <button class="search-mode__chip" type="button">Rides</button>
-                                <button class="search-mode__chip" type="button">Services</button>
+                        <div class="search-field">
+                            <label>Property Type</label>
+                            <div class="select-wrapper">
+                                <select>
+                                    <option>2BHK</option>
+                                </select>
                             </div>
+                        </div>
+                        <div class="search-field">
+                            <label>Room</label>
+                            <div class="select-wrapper">
+                                <select>
+                                    <option>Room</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search-field">
+                            <label>Budget</label>
+                            <div class="select-wrapper">
+                                <select>
+                                    <option>Any Budget</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search-field">
+                            <label>Property For</label>
+                            <div class="select-wrapper">
+                                <select>
+                                    <option>Rent</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="search-btn">Search Homes</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                            <form class="search-panel">
-                                <div class="search-panel__intro">
-                                    <p class="search-panel__kicker">Smart search across Kochi</p>
-                                    <h2>Find homes, vehicles, and local services from one search box</h2>
-                                </div>
-
-                                <label class="search-field search-field--primary">
-                                    <span>What are you looking for?</span>
-                                    <input
-                                        type="search"
-                                        name="query"
-                                        placeholder="Search homes, apartments, hostels, sharing rooms, cars, bikes, repair, shifting..."
-                                    >
-                                </label>
-
-                                <div class="search-grid">
-                                    <label class="search-field">
-                                        <span>Area near Kochi</span>
-                                        <input list="kochi-areas" name="area" placeholder="Kakkanad, Edappally, Fort Kochi...">
-                                    </label>
-
-                                    <label class="search-field">
-                                        <span>District</span>
-                                        <select name="district">
-                                            <option selected>Ernakulam</option>
-                                            <option>Thrissur</option>
-                                            <option>Alappuzha</option>
-                                            <option>Kottayam</option>
-                                            <option>Idukki</option>
-                                        </select>
-                                    </label>
-                                </div>
-
-                                <div class="search-picks">
-                                    <div class="search-picks__group">
-                                        <span class="search-picks__label">Homes</span>
-                                        <div class="search-picks__items">
-                                            <button type="button">Home for rent</button>
-                                            <button type="button">Apartment rental</button>
-                                            <button type="button">Hostels</button>
-                                            <button type="button">Sharing rooms</button>
-                                        </div>
-                                    </div>
-
-                                    <div class="search-picks__group">
-                                        <span class="search-picks__label">Rides</span>
-                                        <div class="search-picks__items">
-                                            <button type="button">Car rental</button>
-                                            <button type="button">Self-drive cars</button>
-                                            <button type="button">Bike rental</button>
-                                        </div>
-                                    </div>
-
-                                    <div class="search-picks__group">
-                                        <span class="search-picks__label">Services</span>
-                                        <div class="search-picks__items">
-                                            <button type="button">Repair service</button>
-                                            <button type="button">Shifting service</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="search-actions">
-                                    <button class="search-submit" type="submit">Search KochiRent</button>
-                                    <p class="search-note">Popular places: Kakkanad, Edappally, Kaloor, Palarivattom, Vyttila, Aluva, Fort Kochi.</p>
-                                </div>
-                            </form>
+        <section class="quick-services">
+            <div class="container">
+                <h2 class="section-title">Quick Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        </div>
+                        <div class="service-info">
+                            <h3>Find a Home</h3>
+                            <p>Explore rental homes</p>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                        </div>
+                        <div class="service-info">
+                            <h3>Rent a Ride</h3>
+                            <p>Bikes, cars & more</p>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                        </div>
+                        <div class="service-info">
+                            <h3>Shift My Flat</h3>
+                            <p>Packers & movers</p>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                        </div>
+                        <div class="service-info">
+                            <h3>Fix & Repair</h3>
+                            <p>Home repair service</p>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <datalist id="kochi-areas">
-                <option value="Kakkanad"></option>
-                <option value="Edappally"></option>
-                <option value="Palarivattom"></option>
-                <option value="Kaloor"></option>
-                <option value="Vyttila"></option>
-                <option value="Aluva"></option>
-                <option value="Fort Kochi"></option>
-                <option value="Marine Drive"></option>
-                <option value="Tripunithura"></option>
-                <option value="Thrippunithura"></option>
-            </datalist>
         </section>
     </main>
 
