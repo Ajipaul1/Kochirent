@@ -79,110 +79,146 @@ body {
     display: none; /* Mobile first */
 }
 
-/* Unified Hero Section (Image 3 wording, but Image 1/2 structure) */
+/* Hero Section (Image 1 & 2 Background/Layout Logic) */
 .hero-section {
-    padding: 20px 16px;
-    max-width: 1400px;
-    margin: 0 auto;
+    position: relative;
+    padding: 40px 16px;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.hero-container {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+.hero-bg-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(15, 39, 64, 0.4), rgba(15, 39, 64, 0.7));
+}
+
+.hero-content-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1400px;
+    text-align: center;
+    color: #fff;
 }
 
 .hero-title {
     font-family: 'Sora', sans-serif;
     font-size: 28px;
     font-weight: 800;
-    line-height: 1.2;
     margin-bottom: 12px;
-    color: var(--navy-950);
+    line-height: 1.2;
 }
 
 .hero-title .highlight {
-    color: var(--primary-teal);
+    color: #3dc6bf;
 }
 
-.hero-subtitle {
-    font-size: 15px;
-    color: #555;
-    margin-bottom: 24px;
-}
-
-.hero-quick-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.quick-link {
+.hero-tags {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 700;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+    margin-bottom: 32px;
+}
+
+.hero-tags .dot {
+    font-size: 10px;
+    color: #3dc6bf;
+}
+
+/* Stay/Move Search Box (Image 1 & 2 Logic) */
+.search-box-container {
+    background: #fff;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
     color: var(--navy-950);
 }
 
-.quick-link svg {
-    color: var(--primary-teal);
-}
-
-.search-bar-unified {
-    background: #fff;
-    border: 1px solid var(--gray-200);
-    border-radius: 12px;
-    padding: 8px;
+.search-tabs {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    box-shadow: var(--shadow-md);
+    border-bottom: 1px solid #eee;
 }
 
-.search-cat, .search-loc {
+.search-tabs .tab {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    background: none;
+    font-weight: 700;
+    font-size: 16px;
+    color: #666;
+    cursor: pointer;
+}
+
+.search-tabs .tab.active {
+    color: var(--primary-teal);
+    border-bottom: 2px solid var(--primary-teal);
+}
+
+.search-panel {
+    padding: 16px;
+}
+
+.search-fields-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.search-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.field-select {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 600;
+    background: #f9f9f9;
 }
 
-.search-div {
-    height: 1px;
-    background: #eee;
-    margin: 0 8px;
-}
-
-.search-inp {
-    border: none;
-    outline: none;
-    padding: 8px;
-    font-size: 14px;
-}
-
-.search-btn-unified {
+.search-main-btn {
+    width: 100%;
     background: var(--primary-teal);
     color: #fff;
     border: none;
-    padding: 12px;
+    padding: 14px;
     border-radius: 8px;
     font-weight: 700;
-}
-
-.hero-visual {
-    border-radius: 16px;
-    overflow: hidden;
-    height: 200px;
-}
-
-.hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 /* Homepage Sections (Images 1 & 2) */
@@ -320,41 +356,23 @@ body {
 .search-pills { display: flex; flex-wrap: wrap; gap: 8px; }
 .search-pills span { padding: 6px 14px; background: #f0f4f5; border-radius: 20px; font-size: 12px; font-weight: 600; color: #555; }
 
-/* Desktop Styles (Image 2 logic) */
+/* Desktop Styles (Image 2 Logic) */
 @media (min-width: 992px) {
     .site-header__inner { padding: 0 40px; }
     .site-nav { display: flex; gap: 24px; }
     .login-btn { display: block; background: var(--primary-teal); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; }
     
-    .hero-section { padding: 40px; }
-    .hero-container { flex-direction: row; align-items: center; min-height: 500px; }
-    .hero-content { flex: 1; z-index: 2; }
-    .hero-title { font-size: 56px; margin-bottom: 20px; }
-    .hero-subtitle { font-size: 18px; margin-bottom: 40px; }
-    .hero-quick-links { gap: 24px; margin-bottom: 40px; }
+    .hero-section { min-height: 600px; padding: 60px 40px; }
+    .hero-title { font-size: 52px; margin-bottom: 20px; }
+    .hero-tags { font-size: 18px; margin-bottom: 40px; }
+    .hero-tags .dot { font-size: 14px; }
     
-    .search-bar-unified {
-        flex-direction: row;
-        border-radius: 12px;
-        padding: 10px;
-        max-width: 900px;
-    }
-    
-    .search-div { width: 1px; height: 32px; margin: 0 16px; }
-    .search-inp { flex: 1; }
-    .search-btn-unified { padding: 14px 32px; }
-
-    .hero-visual {
-        position: absolute;
-        right: 40px;
-        top: 40px;
-        bottom: 40px;
-        width: 50%;
-        height: auto;
-        border-radius: 24px;
-        z-index: 1;
-    }
-    .hero-img { height: 100%; border-radius: 24px; }
+    .search-box-container { max-width: 1000px; }
+    .search-fields-grid { grid-template-columns: repeat(5, 1fr); gap: 2px; background: #eee; border: 1px solid #eee; }
+    .search-panel { padding: 0; }
+    .search-field { background: #fff; padding: 12px 20px; }
+    .field-select { border: none; background: none; padding: 4px 0; }
+    .search-main-btn { border-radius: 0; padding: 18px; font-size: 18px; }
 
     .services-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
     .verified-slider { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; }
