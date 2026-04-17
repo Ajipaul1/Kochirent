@@ -8,404 +8,194 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
-    <header class="site-header">
-        <div class="site-header__inner">
+    <div class="mobile-container">
+        <header class="header">
             <div class="header-left">
-                <a class="brand" href="#" aria-label="KochiNest home">
-                    <img class="brand__logo" src="assets/kochinest-logo.png" alt="KochiNest logo">
-                </a>
-                <div class="header-location">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    <span class="loc-text">Kochi, Kerala</span>
-                </div>
+                <i class="fas fa-bars"></i>
             </div>
-
-            <nav class="site-nav">
-                <a href="#">Homes</a>
-                <a href="#">Rides</a>
-                <a href="#">Shifting</a>
-                <a href="#">Repairs</a>
-                <a href="#">Rentals</a>
-                <a href="#">New</a>
-                <div class="nav-dropdown">
-                    <span>More</span>
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
-            </nav>
-
-            <div class="header-actions">
-                <button class="lang-btn">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                    <span class="lang-text">English</span>
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
-                <button class="login-btn">Login / Sign Up</button>
+            <div class="header-center">
+                <img src="assets/kochinest-logo.png" alt="KochiNest Logo" class="logo">
+                <span class="logo-text">Everything You Need, In Kochi</span>
             </div>
+            <div class="header-right">
+                <i class="fas fa-bell"></i>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="hero-section-mobile">
+                <div class="hero-background">
+                    <img src="assets/kochinest-hero.jpeg" alt="Hero Background">
+                    <div class="hero-overlay-dark"></div>
+                </div>
+                <div class="hero-content-overlay">
+                    <div class="hero-text-block">
+                        <h1 class="hero-title-mobile">Find Your Perfect <br> Home in <span class="highlight-kochi">Kochi</span></h1>
+                        <h2 class="hero-subtitle-mobile">Rent a Ride, <br> Move <span class="highlight-freely">Freely</span></h2>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <section class="search-tabs-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="stay"><i class="fas fa-home"></i> Stay</button>
+                    <button class="tab-button" data-tab="move"><i class="fas fa-car"></i> Move</button>
+                </div>
+                <div class="tab-content active" id="stay">
+                    <div class="search-field">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" placeholder="Search by Area Kakkanad, Aluva, Edappally...">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="search-field">
+                        <i class="fas fa-building"></i>
+                        <input type="text" placeholder="Property Type House, 1BHK, Room, Villa...">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <button class="search-button"><i class="fas fa-search"></i> Search Properties</button>
+                </div>
+                <div class="tab-content" id="move">
+                    <div class="search-field">
+                        <i class="fas fa-motorcycle"></i>
+                        <input type="text" placeholder="Vehicle Type Bike, Car, Scooter...">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="search-field">
+                        <i class="fas fa-clock"></i>
+                        <input type="text" placeholder="Rental Duration Daily, Weekly, Monthly...">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <button class="search-button"><i class="fas fa-search"></i> Search Vehicles</button>
+                </div>
+            </section>
+
+            <section class="quick-services-mobile">
+                <div class="section-header">
+                    <h2>What are you looking for?</h2>
+                    <a href="#">View all <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="services-grid-mobile">
+                    <div class="service-card-mobile">
+                        <i class="fas fa-home"></i>
+                        <span>Find a Home</span>
+                        <p>Properties</p>
+                    </div>
+                    <div class="service-card-mobile">
+                        <i class="fas fa-motorcycle"></i>
+                        <span>Rent a Ride</span>
+                        <p>Bike / Car</p>
+                    </div>
+                    <div class="service-card-mobile">
+                        <i class="fas fa-truck"></i>
+                        <span>Shift My Flat</span>
+                        <p>Packers & Movers</p>
+                    </div>
+                    <div class="service-card-mobile">
+                        <i class="fas fa-wrench"></i>
+                        <span>Fix & Repair</span>
+                        <p>AC, Plumbing, Electrical</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="kochinest-verified">
+                <div class="section-header">
+                    <h2>KochiNest Verified <i class="fas fa-check-circle"></i></h2>
+                    <a href="#">View all <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="verified-cards-container">
+                    <div class="verified-card">
+                        <img src="https://via.placeholder.com/150" alt="1BHK Apartment">
+                        <div class="verified-badge">VERIFIED</div>
+                        <h3>1BHK Apartment</h3>
+                        <p>Kakkanad</p>
+                        <div class="price">₹12,000 <span>/month</span></div>
+                        <i class="far fa-heart"></i>
+                    </div>
+                    <div class="verified-card">
+                        <img src="https://via.placeholder.com/150" alt="Activa 6G">
+                        <div class="verified-badge">VERIFIED</div>
+                        <h3>Activa 6G</h3>
+                        <p>Kakkanad</p>
+                        <div class="price">₹499 <span>/day</span></div>
+                        <i class="far fa-heart"></i>
+                    </div>
+                    <div class="verified-card">
+                        <img src="https://via.placeholder.com/150" alt="Packers & Movers">
+                        <div class="verified-badge">VERIFIED</div>
+                        <h3>Packers & Movers</h3>
+                        <p>Edappally</p>
+                        <div class="price">₹1,999 <span>/shift</span></div>
+                        <i class="far fa-heart"></i>
+                    </div>
+                </div>
+            </section>
+
+            <section class="deal-of-the-day">
+                <div class="section-header">
+                    <h2><i class="fas fa-fire"></i> Deal of the Day</h2>
+                    <div class="timer">Ends in <span class="time">08 : 45 : 32</span></div>
+                </div>
+                <div class="deal-card">
+                    <img src="https://via.placeholder.com/100" alt="Honda Dio">
+                    <div class="deal-details">
+                        <h3>Honda Dio - Limited Offer!</h3>
+                        <p>Pickup: Kakkanad</p>
+                        <div class="price">₹399 <span>/day</span></div>
+                    </div>
+                    <button class="book-now-button">Book Now</button>
+                </div>
+            </section>
+
+            <section class="post-earn-cta">
+                <div class="post-earn-card">
+                    <div class="post-earn-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="post-earn-text">
+                        <p>Are you a Business Owner?</p>
+                        <h4>Post your service on KochiNest <br> and get more customers!</h4>
+                    </div>
+                    <div class="post-earn-action">
+                        <button>List for ₹199</button>
+                        <p>3 Simple Steps <i class="fas fa-arrow-right"></i></p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="whatsapp-float-button">
+            <i class="fab fa-whatsapp"></i>
         </div>
-    </header>
 
-    <main>
-        <section class="hero-section">
-            <div class="hero-bg-wrapper">
-                <img src="assets/kochinest-hero.jpeg" alt="Kochi Skyline" class="hero-bg-img">
-                <div class="hero-overlay"></div>
-            </div>
-            <div class="hero-content-wrapper">
-                <div class="hero-text-content">
-                    <h1 class="hero-title">Everything You Need,<br>Right Here in <span class="highlight">Kochi</span></h1>
-                    <div class="hero-tags">
-                        <span>Bike Rentals</span>
-                        <span class="dot">●</span>
-                        <span>Self Drive Cars</span>
-                        <span class="dot">●</span>
-                        <span>Homes</span>
-                        <span class="dot">●</span>
-                        <span>Shifting</span>
-                        <span class="dot">●</span>
-                        <span>Repairs</span>
-                    </div>
-                </div>
-
-                <div class="search-box-container">
-                    <div class="search-tabs">
-                        <button class="tab active">Stay</button>
-                        <button class="tab">Move</button>
-                    </div>
-                    <div class="search-panel">
-                        <div class="search-fields-grid">
-                            <div class="search-field">
-                                <label>Area</label>
-                                <div class="field-select">
-                                    <span>Kakkanad</span>
-                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                </div>
-                            </div>
-                            <div class="search-field">
-                                <label>Property Type</label>
-                                <div class="field-select">
-                                    <span>2BHK</span>
-                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                </div>
-                            </div>
-                            <div class="search-field">
-                                <label>Room</label>
-                                <div class="field-select">
-                                    <span>Room</span>
-                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                </div>
-                            </div>
-                            <div class="search-field">
-                                <label>Budget</label>
-                                <div class="field-select">
-                                    <span>Any Budget</span>
-                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                </div>
-                            </div>
-                            <div class="search-field">
-                                <label>Property For</label>
-                                <div class="field-select">
-                                    <span>Rent</span>
-                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="search-main-btn">Search Homes</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="quick-services">
-            <div class="container">
-                <h2 class="section-title">Quick Services</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
-                        <div class="service-info"><h3>Find a Home</h3><p>Explore rental homes</p></div>
-                        <div class="service-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
-                        <div class="service-info"><h3>Rent a Ride</h3><p>Bikes, cars & more</p></div>
-                        <div class="service-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
-                        <div class="service-info"><h3>Shift My Flat</h3><p>Packers & movers</p></div>
-                        <div class="service-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
-                        <div class="service-info"><h3>Fix & Repair</h3><p>Home repair service</p></div>
-                        <div class="service-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="verified-section">
-            <div class="container">
-                <h2 class="section-title">KochiNest Verified</h2>
-                <div class="verified-slider">
-                    <div class="verified-card">
-                        <div class="card-img-placeholder"></div>
-                        <div class="verified-badge">● Verified</div>
-                        <div class="card-details">
-                            <h3>1BHK Kakkanad</h3>
-                            <p>Fully Furnished</p>
-                            <div class="price">₹13,500<span>/month</span> <span class="whatsapp-small">●</span></div>
-                        </div>
-                    </div>
-                    <div class="verified-card">
-                        <div class="card-img-placeholder"></div>
-                        <div class="verified-badge">● Verified</div>
-                        <div class="card-details">
-                            <h3>Scooter Aluva</h3>
-                            <p>Well Maintained</p>
-                            <div class="price">₹299<span>/day</span> <button class="book-btn">Book Now</button> <span class="whatsapp-small">●</span></div>
-                        </div>
-                    </div>
-                    <div class="verified-card">
-                        <div class="card-img-placeholder"></div>
-                        <div class="verified-badge">● Verified</div>
-                        <div class="card-details">
-                            <h3>Room Edappally</h3>
-                            <p>Single Room</p>
-                            <div class="price">₹7,999<span>/month</span> <span class="whatsapp-small">●</span></div>
-                        </div>
-                    </div>
-                    <div class="verified-card deal-of-day">
-                        <div class="deal-badge">Deal of the Day</div>
-                        <div class="card-details">
-                            <h3>Scooter</h3>
-                            <p>Aluva</p>
-                            <div class="price">₹199<span>/day</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="post-earn">
-            <div class="container">
-                <div class="post-earn-card">
-                    <div class="post-earn-text">
-                        <h3>Post & Earn</h3>
-                        <p>Post your listing and start earning today!</p>
-                        <button class="post-now-btn">Post Listing Now</button>
-                        <div class="steps-row">
-                            <span>1. Name</span>
-                            <span>2. Service</span>
-                            <span>3. Live in 60 sec</span>
-                        </div>
-                    </div>
-                    <div class="whatsapp-cta">
-                        <div class="whatsapp-bubble">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="white"><path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.359 4.984l-1.422 5.188 5.313-1.391c1.469.813 3.125 1.234 4.719 1.234 5.516 0 9.969-4.453 9.969-9.969 0-5.516-4.453-9.969-9.969-9.969z"></path></svg>
-                        </div>
-                        <div class="whatsapp-text">
-                            <h4>Chat instantly on WhatsApp</h4>
-                            <p>Get quick support</p>
-                        </div>
-                        <div class="arrow-circle">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="popular-searches">
-            <div class="container">
-                <div class="search-pills">
-                    <span>Kakkanad</span>
-                    <span>Aluva</span>
-                    <span>Edappally</span>
-                    <span>Fort Kochi</span>
-                    <span>Kalamassery</span>
-                    <span>Airoor</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
-        <!-- Homepage Sections from Images 1 & 2 -->
-        <section class="quick-services">
-            <div class="container">
-                <h2 class="section-title">Quick Services</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
-                        <div class="service-info"><h3>Find a Home</h3><p>Explore rental homes</p></div>
-                        <div class="service-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
-                        <div class="service-info"><h3>Rent a Ride</h3><p>Bikes, cars & more</p></div>
-                        <div class="service-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
-                        <div class="service-info"><h3>Shift My Flat</h3><p>Packers & movers</p></div>
-                        <div class="service-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
-                        <div class="service-info"><h3>Fix & Repair</h3><p>Home repair service</p></div>
-                        <div class="service-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="verified-section">
-            <div class="container">
-                <h2 class="section-title">KochiNest Verified</h2>
-                <div class="verified-slider">
-                    <div class="verified-card">
-                        <div class="card-img-placeholder"></div>
-                        <div class="verified-badge">● Verified</div>
-                        <div class="card-details">
-                            <h3>1BHK Kakkanad</h3>
-                            <p>Fully Furnished</p>
-                            <div class="price">₹13,500<span>/month</span> <span class="whatsapp-small">●</span></div>
-                        </div>
-                    </div>
-                    <div class="verified-card">
-                        <div class="card-img-placeholder"></div>
-                        <div class="verified-badge">● Verified</div>
-                        <div class="card-details">
-                            <h3>Scooter Aluva</h3>
-                            <p>Well Maintained</p>
-                            <div class="price">₹299<span>/day</span> <button class="book-btn">Book Now</button> <span class="whatsapp-small">●</span></div>
-                        </div>
-                    </div>
-                    <div class="verified-card">
-                        <div class="card-img-placeholder"></div>
-                        <div class="verified-badge">● Verified</div>
-                        <div class="card-details">
-                            <h3>Room Edappally</h3>
-                            <p>Single Room</p>
-                            <div class="price">₹7,999<span>/month</span> <span class="whatsapp-small">●</span></div>
-                        </div>
-                    </div>
-                    <div class="verified-card deal-of-day">
-                        <div class="deal-badge">Deal of the Day</div>
-                        <div class="card-details">
-                            <h3>Scooter</h3>
-                            <p>Aluva</p>
-                            <div class="price">₹199<span>/day</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="post-earn">
-            <div class="container">
-                <div class="post-earn-card">
-                    <div class="post-earn-text">
-                        <h3>Post & Earn</h3>
-                        <p>Post your listing and start earning today!</p>
-                        <button class="post-now-btn">Post Listing Now</button>
-                        <div class="steps-row">
-                            <span>1. Name</span>
-                            <span>2. Service</span>
-                            <span>3. Live in 60 sec</span>
-                        </div>
-                    </div>
-                    <div class="whatsapp-cta">
-                        <div class="whatsapp-bubble">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="white"><path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.359 4.984l-1.422 5.188 5.313-1.391c1.469.813 3.125 1.234 4.719 1.234 5.516 0 9.969-4.453 9.969-9.969 0-5.516-4.453-9.969-9.969-9.969z"></path></svg>
-                        </div>
-                        <div class="whatsapp-text">
-                            <h4>Chat instantly on WhatsApp</h4>
-                            <p>Get quick support</p>
-                        </div>
-                        <div class="arrow-circle">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="popular-searches">
-            <div class="container">
-                <div class="search-pills">
-                    <span>Kakkanad</span>
-                    <span>Aluva</span>
-                    <span>Edappally</span>
-                    <span>Fort Kochi</span>
-                    <span>Kalamassery</span>
-                    <span>Airoor</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
-        <section class="quick-services">
-            <div class="container">
-                <h2 class="section-title">Quick Services</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                        </div>
-                        <div class="service-info">
-                            <h3>Find a Home</h3>
-                            <p>Explore rental homes</p>
-                        </div>
-                        <div class="service-arrow">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                        </div>
-                        <div class="service-info">
-                            <h3>Rent a Ride</h3>
-                            <p>Bikes, cars & more</p>
-                        </div>
-                        <div class="service-arrow">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                        </div>
-                        <div class="service-info">
-                            <h3>Shift My Flat</h3>
-                            <p>Packers & movers</p>
-                        </div>
-                        <div class="service-arrow">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-                        </div>
-                        <div class="service-info">
-                            <h3>Fix & Repair</h3>
-                            <p>Home repair service</p>
-                        </div>
-                        <div class="service-arrow">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
+        <footer class="bottom-navigation">
+            <a href="#" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-search"></i>
+                <span>Search</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-plus-circle"></i>
+                <span>Post</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-envelope"></i>
+                <span>Messages</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </footer>
+    </div>
     <script src="assets/script.js"></script>
 </body>
 </html>
