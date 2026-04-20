@@ -923,3 +923,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 */
+
+/* New Sections Added Styles */
+.homes-rooms-section, .packers-movers-section, .fix-repair-section, .partner-cards-section, .business-cta-section {
+    background-color: var(--white);
+}
+.fix-repair-section .services-grid-mobile {
+    grid-template-columns: repeat(2, 1fr);
+}
+.partner-cards-section .verified-cards-container {
+    gap: 10px;
+}
