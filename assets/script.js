@@ -34,4 +34,34 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // Accordion Logic
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('i');
+            
+            const isOpen = content.style.display === 'block';
+            
+            // Close all other items (optional, but usually better for mobile)
+            document.querySelectorAll('.accordion-content').forEach(c => c.style.display = 'none');
+            document.querySelectorAll('.accordion-header i').forEach(i => {
+                i.classList.remove('fa-minus');
+                i.classList.add('fa-plus');
+            });
+            
+            if (!isOpen) {
+                content.style.display = 'block';
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                content.style.display = 'none';
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        });
+    });
 });
