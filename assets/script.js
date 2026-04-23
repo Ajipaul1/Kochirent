@@ -163,9 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const deals = [
-        { title: 'Honda Dio - Limited Offer!', pickup: 'Pickup: Kakkanad', price: '₹399', image: 'https://via.placeholder.com/100' },
-        { title: 'Activa 6G - Daily Deal!', pickup: 'Pickup: Edappally', price: '₹449', image: 'https://via.placeholder.com/100/eeeeee/333?text=Activa' },
-        { title: 'Yamaha Fascino - Flash Deal!', pickup: 'Pickup: Aluva', price: '₹429', image: 'https://via.placeholder.com/100/e3f2fd/333?text=Yamaha' }
+        { title: 'Honda Dio - Limited Offer!', pickup: 'Pickup: Kakkanad', price: '₹399', image: 'assets/images/deal-honda-dio-kakkanad.svg' },
+        { title: 'Activa 6G - Daily Deal!', pickup: 'Pickup: Edappally', price: '₹449', image: 'assets/images/verified-activa-6g-kakkanad.svg' },
+        { title: 'Bike Rental - Flash Deal!', pickup: 'Pickup: Kakkanad', price: '₹429', image: 'assets/images/popular-bike-kakkanad.svg' }
     ];
 
     const dealTitle = document.getElementById('dealTitle');
