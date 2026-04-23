@@ -15,16 +15,20 @@
     <div class="mobile-container">
         <header class="header">
             <div class="header-left">
-                <i class="fas fa-bars"></i>
+                <i class="fas fa-bars" id="hamburgerMenuToggle"></i>
             </div>
             <div class="header-center">
                 <img src="assets/kochinest-logo.png" alt="KochiNest Logo" class="logo">
                 <span class="logo-text">Everything You Need, In Kochi</span>
             </div>
             <div class="header-right">
-                <i class="fas fa-bell"></i>
+                <i class="fas fa-bell" id="notificationToggle"></i>
             </div>
         </header>
+        <div id="notificationDropdown" style="display: none; position: fixed; top: 58px; right: 14px; z-index: 1200; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 10px; width: 160px;">
+            <p style="margin: 0 0 8px; font-size: 12px;">• New listings</p>
+            <p style="margin: 0; font-size: 12px;">• Deal of the day</p>
+        </div>
 
         <main class="main-content">
             <h1 class="sr-only">Rentals, Flats, Apartments, Car Rentals & Services in Kochi</h1>
@@ -59,7 +63,7 @@
                         <input type="text" placeholder="Property Type House, 1BHK, Room, Villa...">
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <button class="search-button"><i class="fas fa-search"></i> Search Properties</button>
+                    <button class="search-button" data-search-target="homes"><i class="fas fa-search"></i> Search Properties</button>
                 </div>
                 <div class="tab-content" id="move">
                     <div class="search-field">
@@ -72,32 +76,32 @@
                         <input type="text" placeholder="Rental Duration Daily, Weekly, Monthly...">
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <button class="search-button"><i class="fas fa-search"></i> Search Vehicles</button>
+                    <button class="search-button" data-search-target="trending"><i class="fas fa-search"></i> Search Vehicles</button>
                 </div>
             </section>
 
             <section class="quick-services-mobile">
                 <div class="section-header">
                     <h2>What are you looking for?</h2>
-                    <a href="#">View all <i class="fas fa-chevron-right"></i></a>
+                    <a href="#" data-scroll-target="more-services">View all <i class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="services-grid-mobile">
-                    <div class="service-card-mobile">
+                    <div class="service-card-mobile" data-scroll-target="homes">
                         <i class="fas fa-home"></i>
                         <span>Find a Home</span>
                         <p>Properties</p>
                     </div>
-                    <div class="service-card-mobile">
+                    <div class="service-card-mobile" data-scroll-target="trending">
                         <i class="fas fa-motorcycle"></i>
                         <span>Rent a Ride</span>
                         <p>Bike / Car</p>
                     </div>
-                    <div class="service-card-mobile">
+                    <div class="service-card-mobile" data-scroll-target="packers">
                         <i class="fas fa-truck"></i>
                         <span>Shift My Flat</span>
                         <p>Packers & Movers</p>
                     </div>
-                    <div class="service-card-mobile">
+                    <div class="service-card-mobile" data-scroll-target="repair">
                         <i class="fas fa-wrench"></i>
                         <span>Fix & Repair</span>
                         <p>AC, Plumbing, Electrical</p>
@@ -108,7 +112,7 @@
             <section class="kochinest-verified">
                 <div class="section-header">
                     <h2>KochiNest Verified <i class="fas fa-check-circle"></i></h2>
-                    <a href="#">View all <i class="fas fa-chevron-right"></i></a>
+                    <a href="#" data-scroll-target="homes">View all <i class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="verified-cards-container">
                     <div class="verified-card">
@@ -144,11 +148,11 @@
                     <div class="timer">Ends in <span class="time">08 : 45 : 32</span></div>
                 </div>
                 <div class="deal-card">
-                    <img src="https://via.placeholder.com/100" alt="Honda Dio">
+                    <img src="https://via.placeholder.com/100" alt="Honda Dio" id="dealImage">
                     <div class="deal-details">
-                        <h3>Honda Dio - Limited Offer!</h3>
-                        <p>Pickup: Kakkanad</p>
-                        <div class="price">₹399 <span>/day</span></div>
+                        <h3 id="dealTitle">Honda Dio - Limited Offer!</h3>
+                        <p id="dealPickup">Pickup: Kakkanad</p>
+                        <div class="price"><span id="dealPrice">₹399</span> <span>/day</span></div>
                     </div>
                     <button class="book-now-button">Book Now</button>
                 </div>
@@ -164,13 +168,13 @@
                         <h4>Post your service on KochiNest <br> and get more customers!</h4>
                     </div>
                     <div class="post-earn-action">
-                        <button>List for ₹199</button>
+                        <button>List for ₹499+</button>
                         <p>3 Simple Steps <i class="fas fa-arrow-right"></i></p>
                     </div>
                 </div>
             </section>
 
-            <section class="trending-rentals-section" style="padding: 15px;">
+            <section class="trending-rentals-section" id="trendingSection" style="padding: 15px;">
                 <div class="section-header">
                     <h2>Trending Rentals in Kochi</h2>
                 </div>
@@ -179,7 +183,7 @@
                     <div class="trending-card">
                         <img src="https://img.icons8.com/color/96/scooter.png" alt="Bike">
                         <p class="card-title">Bike Rentals <br> in Kochi</p>
-                        <p class="card-price">₹199/day</p>
+                        <p class="card-price">₹499+/day</p>
                     </div>
                     <div class="trending-card">
                         <img src="https://img.icons8.com/color/96/car--v1.png" alt="Car">
@@ -194,7 +198,7 @@
                     <div class="trending-card">
                         <img src="https://img.icons8.com/color/96/scooter.png" alt="Scooter">
                         <p class="card-title">Scooter <br> Rental</p>
-                        <p class="card-price">₹199/day</p>
+                        <p class="card-price">₹499+/day</p>
                     </div>
                 </div>
             </section>
@@ -242,7 +246,7 @@
                             <div class="card-title-row">
                                 <span>Edappally</span>
                             </div>
-                            <div class="card-price">₹199/day</div>
+                            <div class="card-price">₹499+/day</div>
                         </div>
                     </div>
                 </div>
@@ -264,7 +268,7 @@
                 </div>
             </section>
 
-            <section class="more-services-section" style="padding: 15px;">
+            <section class="more-services-section" id="moreServicesSection" style="padding: 15px;">
                 <div class="section-header">
                     <h2>More Rental Services</h2>
                 </div>
@@ -302,7 +306,7 @@
                 </div>
             </section>
 
-            <section class="homes-rooms-section" style="padding: 15px;">
+            <section class="homes-rooms-section" id="homesSection" style="padding: 15px;">
                 <div class="section-header">
                     <h2>Homes & Rooms for Rent in Kochi</h2>
                 </div>
@@ -334,7 +338,7 @@
                 </div>
             </section>
 
-            <section class="packers-movers-section" style="padding: 15px;">
+            <section class="packers-movers-section" id="packersSection" style="padding: 15px;">
                 <div class="section-header">
                     <h2>Shift My Flat - Packers & Movers Kochi</h2>
                 </div>
@@ -349,7 +353,7 @@
                 </div>
             </section>
 
-            <section class="fix-repair-section" style="padding: 15px;">
+            <section class="fix-repair-section" id="repairSection" style="padding: 15px;">
                 <div class="section-header">
                     <h2>Fix & Repair Services in Kochi</h2>
                 </div>
@@ -399,10 +403,10 @@
             <section class="business-cta-section" style="padding: 15px;">
                 <div class="post-earn-card" style="background-color: #004d40;">
                     <div class="post-earn-text">
-                        <h4 style="font-size: 13px; color: white;">Are you a Business Owner in Kochi? List your Rental or Service for just ₹199</h4>
+                        <h4 style="font-size: 13px; color: white;">Are you a Business Owner in Kochi? List your Rental or Service for just ₹499+</h4>
                         <div style="display: flex; gap: 10px; margin-top: 15px;">
-                            <button style="background-color: var(--white); color: #004d40; padding: 8px 12px; border-radius: 8px; font-weight: 700; font-size: 11px;">Post Listing Now</button>
-                            <button style="background-color: #25d366; color: var(--white); padding: 8px 12px; border-radius: 8px; font-weight: 700; font-size: 11px;"><i class="fab fa-whatsapp"></i></button>
+                            <button style="background-color: var(--white); color: #004d40; padding: 8px 12px; border-radius: 8px; font-weight: 700; font-size: 11px;" data-open-post="true">Post Listing Now</button>
+                            <button style="background-color: #25d366; color: var(--white); padding: 8px 12px; border-radius: 8px; font-weight: 700; font-size: 11px;" data-open-whatsapp="true"><i class="fab fa-whatsapp"></i></button>
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 9px; color: white; opacity: 0.8;">
                             <span>① Name</span>
@@ -453,7 +457,7 @@
                             <i class="fas fa-plus" style="font-size: 12px; color: var(--primary-blue);"></i>
                         </div>
                         <div class="accordion-content" style="padding: 0 15px 12px; display: none;">
-                            <p style="font-size: 12px; color: var(--dark-gray); line-height: 1.5; margin: 0;">Bike rentals in Kochi start from ₹199/day depending on location, vehicle type, and availability.</p>
+                            <p style="font-size: 12px; color: var(--dark-gray); line-height: 1.5; margin: 0;">Bike rentals in Kochi start from ₹499+/day depending on location, vehicle type, and availability.</p>
                         </div>
                     </div>
                     <div class="accordion-item" style="margin-bottom: 10px; background: white; border-radius: 10px; border: 1px solid #eee; overflow: hidden;">
@@ -540,30 +544,65 @@
                     </button>
                 </div>
             </footer>
-        </main>",old_string:
+        </main>
 
-        <div class="whatsapp-float-button">
+        <div id="mobileMenuOverlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1300;">
+            <div id="mobileDrawer" style="width: 78%; max-width: 290px; height: 100%; background: #fff; padding: 14px; overflow-y: auto;">
+                <p style="margin: 0 0 12px; font-weight: 700; font-size: 14px;">Menu</p>
+                <a href="#" data-menu-target="top" style="display: block; margin-bottom: 10px;">Home</a>
+                <a href="#" data-menu-target="trending" style="display: block; margin-bottom: 10px;">Rentals</a>
+                <a href="#" data-menu-target="homes" style="display: block; margin-bottom: 10px;">Homes & Flats</a>
+                <a href="#" data-menu-target="trending" style="display: block; margin-bottom: 10px;">Car Rentals</a>
+                <a href="#" data-menu-target="trending" style="display: block; margin-bottom: 10px;">Bike Rentals</a>
+                <a href="#" data-menu-target="packers" style="display: block; margin-bottom: 10px;">Packers & Movers</a>
+                <a href="#" data-menu-target="repair" style="display: block; margin-bottom: 10px;">Repair Services</a>
+                <a href="#" data-open-post="true" style="display: block; margin-bottom: 10px;">Post Listing (₹499+)</a>
+                <a href="#" data-open-whatsapp="true" style="display: block;">Contact / WhatsApp</a>
+            </div>
+        </div>
+
+        <div id="postModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1400; align-items: center; justify-content: center;">
+            <div style="background: #fff; width: 90%; max-width: 320px; border-radius: 10px; padding: 14px;">
+                <h3 style="margin: 0 0 10px; font-size: 15px;">Post Listing</h3>
+                <input type="text" placeholder="Name" style="width: 100%; margin-bottom: 8px; padding: 8px;">
+                <input type="tel" placeholder="Phone" style="width: 100%; margin-bottom: 8px; padding: 8px;">
+                <input type="text" placeholder="Service Type" style="width: 100%; margin-bottom: 8px; padding: 8px;">
+                <input type="text" placeholder="Location" style="width: 100%; margin-bottom: 10px; padding: 8px;">
+                <button id="closePostModal" style="padding: 8px 10px;">Close</button>
+            </div>
+        </div>
+
+        <div id="profileModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1400; align-items: center; justify-content: center;">
+            <div style="background: #fff; width: 90%; max-width: 320px; border-radius: 10px; padding: 14px;">
+                <h3 style="margin: 0 0 10px; font-size: 15px;">Login / Signup</h3>
+                <input type="tel" placeholder="Phone number" style="width: 100%; margin-bottom: 8px; padding: 8px;">
+                <input type="password" placeholder="Password" style="width: 100%; margin-bottom: 10px; padding: 8px;">
+                <button id="closeProfileModal" style="padding: 8px 10px;">Close</button>
+            </div>
+        </div>
+
+        <div class="whatsapp-float-button" data-open-whatsapp="true">
             <i class="fab fa-whatsapp"></i>
         </div>
 
         <footer class="bottom-navigation">
-            <a href="#" class="nav-item active">
+            <a href="#" class="nav-item active" data-nav-action="home">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-nav-action="search">
                 <i class="fas fa-search"></i>
                 <span>Search</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-nav-action="post">
                 <i class="fas fa-plus-circle"></i>
                 <span>Post</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-nav-action="messages">
                 <i class="fas fa-envelope"></i>
                 <span>Messages</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-nav-action="profile">
                 <i class="fas fa-user"></i>
                 <span>Profile</span>
             </a>
