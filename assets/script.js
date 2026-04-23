@@ -163,9 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const deals = [
-        { title: 'Honda Dio - Limited Offer!', pickup: 'Pickup: Kakkanad', price: '₹399', image: 'https://images.pexels.com/photos/163407/city-bike-road-163407.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop' },
-        { title: 'Activa 6G - Daily Deal!', pickup: 'Pickup: Edappally', price: '₹449', image: 'https://images.pexels.com/photos/481516/pexels-photo-481516.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop' },
-        { title: 'Bike Rental - Flash Deal!', pickup: 'Pickup: Kakkanad', price: '₹429', image: 'https://images.pexels.com/photos/207779/pexels-photo-207779.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop' }
+        { title: 'Honda Dio - Limited Offer!', pickup: 'Pickup: Kakkanad', price: '₹399', image: 'https://source.unsplash.com/900x600/?honda,dio,scooter,india,street' },
+        { title: 'Activa 6G - Daily Deal!', pickup: 'Pickup: Edappally', price: '₹449', image: 'https://source.unsplash.com/800x600/?honda,activa,6g,scooter,india' },
+        { title: 'Bike Rental - Flash Deal!', pickup: 'Pickup: Kakkanad', price: '₹429', image: 'https://source.unsplash.com/800x600/?hero,splendor,bike,india,street' }
     ];
 
     const dealTitle = document.getElementById('dealTitle');
