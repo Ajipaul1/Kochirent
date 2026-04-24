@@ -172,6 +172,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const dealPickup = document.getElementById('dealPickup');
     const dealPrice = document.getElementById('dealPrice');
     const dealImage = document.getElementById('dealImage');
+    if (dealImage) {
+        dealImage.addEventListener('error', () => {
+            console.error('Deal image failed to load:', dealImage.getAttribute('src'));
+        });
+    }
 
     const rotateDeal = () => {
         const deal = deals[Math.floor(Math.random() * deals.length)];
