@@ -1379,3 +1379,11 @@ document.addEventListener('DOMContentLoaded', () => {
         bottom: 26px;
     }
 }
+
+/* Final desktop override guard (kept at file end for cascade priority) */
+@media screen and (min-width: 1024px) {
+    .mobile-container {
+        max-width: 100%;
+        width: 100%;
+    }
+}
