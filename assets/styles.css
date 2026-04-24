@@ -1051,6 +1051,17 @@ document.addEventListener('DOMContentLoaded', () => {
         padding: 0 !important;
     }
 
+    .hero-background {
+        background-image: url('kochinest-hero.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .hero-background img {
+        display: none;
+    }
+
     .hero-overlay-dark {
         background: linear-gradient(90deg, rgba(15, 39, 64, 0.86) 0%, rgba(15, 39, 64, 0.78) 42%, rgba(15, 39, 64, 0.42) 78%, rgba(15, 39, 64, 0.24) 100%);
     }
@@ -1059,9 +1070,7 @@ document.addEventListener('DOMContentLoaded', () => {
         max-width: 1320px;
         margin: 0 auto;
         padding: 70px 32px 200px;
-        display: grid;
-        grid-template-columns: 1.08fr 0.92fr;
-        gap: 52px;
+        display: block;
         align-items: center;
     }
 
@@ -1106,9 +1115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     .hero-visual-desktop {
-        display: block;
-        justify-self: end;
-        width: min(560px, 100%);
+        display: none;
     }
 
     .hero-visual-desktop img {
