@@ -14,15 +14,15 @@
 <body>
     <div class="mobile-container">
         <header class="header">
-            <div class="header-left">
+            <div class="header-left mobile-only">
                 <i class="fas fa-bars" id="hamburgerMenuToggle"></i>
             </div>
             <div class="header-center">
                 <img src="assets/kochinest-logo.png" alt="KochiNest Logo" class="logo">
                 <span class="logo-text">Everything You Need, In Kochi</span>
-                <span class="desktop-location">Kochi, Kerala</span>
+                <span class="desktop-location desktop-only">Kochi, Kerala</span>
             </div>
-            <nav class="desktop-nav" aria-label="Primary">
+            <nav class="desktop-nav desktop-only" aria-label="Primary">
                 <a href="#">Homes</a>
                 <a href="#">Rides</a>
                 <a href="#">Shifting</a>
@@ -30,11 +30,11 @@
                 <a href="#">Rentals</a>
                 <a href="#">More</a>
             </nav>
-            <div class="desktop-header-actions">
+            <div class="desktop-header-actions desktop-only">
                 <button class="desktop-lang">EN <i class="fas fa-chevron-down"></i></button>
                 <button class="desktop-login" data-nav-action="profile">Login / Sign up</button>
             </div>
-            <div class="header-right">
+            <div class="header-right mobile-only">
                 <i class="fas fa-bell" id="notificationToggle"></i>
             </div>
         </header>
@@ -606,7 +606,7 @@
             <i class="fab fa-whatsapp"></i>
         </div>
 
-        <footer class="bottom-navigation">
+        <footer class="bottom-navigation mobile-only">
             <a href="#" class="nav-item active" data-nav-action="home">
                 <i class="fas fa-home"></i>
                 <span>Home</span>

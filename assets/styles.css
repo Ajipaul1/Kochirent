@@ -635,6 +635,11 @@ button {
     border: 0;
 }
 
+/* Visibility Utilities */
+.desktop-only {
+    display: none !important;
+}
+
 /* New Sections Styles */
 .section-subtitle {
     font-size: 11px;
@@ -842,7 +847,7 @@ button {
 }
 
 /* Mobile Compression Overrides */
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
     .header { padding: 6px 12px; }
     .header-center .logo { height: 24px; }
     .header-center .logo-text { font-size: 8px; }
@@ -956,7 +961,24 @@ document.addEventListener('DOMContentLoaded', () => {
     display: none;
 }
 
-@media (min-width: 1024px) {
+@media screen and (min-width: 1024px) {
+    .mobile-only {
+        display: none !important;
+    }
+
+    .desktop-only {
+        display: initial !important;
+    }
+
+    .desktop-location.desktop-only {
+        display: inline-block !important;
+    }
+
+    .desktop-nav.desktop-only,
+    .desktop-header-actions.desktop-only {
+        display: flex !important;
+    }
+
     body {
         background: #eef3f5;
     }
