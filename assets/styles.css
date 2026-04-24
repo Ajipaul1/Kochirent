@@ -960,7 +960,7 @@ document.addEventListener('DOMContentLoaded', () => {
     display: none;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 900px) {
     .mobile-only {
         display: none !important;
     }
@@ -1381,7 +1381,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 /* Final desktop override guard (kept at file end for cascade priority) */
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 900px) {
     .mobile-container {
         max-width: 100%;
         width: 100%;
