@@ -163,15 +163,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const deals = [
-        { title: 'Honda Dio - Limited Offer!', pickup: 'Pickup: Kakkanad', price: '₹399', image: 'https://source.unsplash.com/900x600/?honda,dio,scooter,india,street' },
-        { title: 'Activa 6G - Daily Deal!', pickup: 'Pickup: Edappally', price: '₹449', image: 'https://source.unsplash.com/800x600/?honda,activa,6g,scooter,india' },
-        { title: 'Bike Rental - Flash Deal!', pickup: 'Pickup: Kakkanad', price: '₹429', image: 'https://source.unsplash.com/800x600/?hero,splendor,bike,india,street' }
+        { title: 'Honda Dio - Limited Offer!', pickup: 'Pickup: Kakkanad', price: '₹399', image: 'assets/deal-bike-kochi.webp' },
+        { title: 'Activa 6G - Daily Deal!', pickup: 'Pickup: Edappally', price: '₹449', image: 'assets/deal-bike-kochi.webp' },
+        { title: 'Bike Rental - Flash Deal!', pickup: 'Pickup: Kakkanad', price: '₹429', image: 'assets/deal-bike-kochi.webp' }
     ];
 
     const dealTitle = document.getElementById('dealTitle');
     const dealPickup = document.getElementById('dealPickup');
     const dealPrice = document.getElementById('dealPrice');
     const dealImage = document.getElementById('dealImage');
+    if (dealImage) {
+        dealImage.addEventListener('error', () => {
+            console.error('Deal image failed to load:', dealImage.getAttribute('src'));
+        });
+    }
 
     const rotateDeal = () => {
         const deal = deals[Math.floor(Math.random() * deals.length)];
