@@ -97,13 +97,10 @@ button {
 /* Hero Section */
 .hero-section-mobile {
     position: relative;
-    height: auto;
-    max-height: 500px;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
+    display: block;
+    min-height: 50vh;
     color: var(--white);
-    overflow: visible;
+    overflow: hidden;
     padding: 50px 0 24px;
 }
 
@@ -203,11 +200,12 @@ button {
 /* Search Tabs Container */
 .search-tabs-container {
     background: var(--white);
-    margin: 24px 0 -50px;
+    margin: 24px 0 0;
     border-radius: 15px;
     box-shadow: var(--shadow-md);
     padding: 12px;
     position: relative;
+    display: block;
     z-index: 20;
     width: 100%;
 }
@@ -563,8 +561,10 @@ button {
 .hero-journey-section {
     padding: 0;
     background: transparent;
-    margin-top: 8px;
+    margin-top: 40px;
     width: 100%;
+    position: relative;
+    display: block;
 }
 
 .hero-journey-section .section-header h2 {
@@ -627,7 +627,10 @@ button {
 /* KochiNest Verified */
 .kochinest-verified {
     padding: 25px 15px;
+    margin-top: 60px;
     background-color: var(--white);
+    position: relative;
+    display: block;
 }
 
 .kochinest-verified .section-header h2 i {
@@ -1336,6 +1339,7 @@ button {
 @media screen and (max-width: 899px) {
     .intent-silos-grid {
         display: flex;
+        flex-wrap: nowrap;
         gap: 10px;
         overflow-x: auto;
         padding-bottom: 8px;
@@ -1354,7 +1358,7 @@ button {
     .header-left i, .header-right i { font-size: 18px; }
 
     .hero-section-mobile {
-        max-height: 500px;
+        min-height: 50vh;
         padding-top: 50px;
     }
     .hero-text-block { margin-top: 0; }
@@ -1366,7 +1370,7 @@ button {
     .hero-subtitle-mobile { font-size: 15px; }
 
     .search-tabs-container {
-        margin: 18px 0 -50px;
+        margin: 18px 0 0;
         padding: 8px;
         border-radius: 12px;
     }
@@ -1383,7 +1387,7 @@ button {
     .search-field i { font-size: 14px; margin-right: 8px; }
     .search-field input { font-size: 12px; }
     .search-button { padding: 10px; margin-top: 6px; margin-bottom: 0; font-size: 14px; }
-    .hero-journey-section { margin-top: 2px; }
+    .hero-journey-section { margin-top: 40px; }
 
     .quick-services-mobile,
     .kochinest-verified,
@@ -1394,6 +1398,7 @@ button {
 
     .intent-silos-grid {
         display: flex;
+        flex-wrap: nowrap;
         gap: 8px;
         overflow-x: auto;
     }
@@ -1589,8 +1594,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     .hero-section-mobile {
-        height: auto;
-        max-height: 600px;
+        min-height: 60vh;
         align-items: stretch;
         border-radius: 0;
         max-width: 100% !important;
@@ -1670,7 +1674,7 @@ document.addEventListener('DOMContentLoaded', () => {
         padding: 22px;
         border-radius: 22px;
         box-shadow: 0 20px 55px rgba(11, 30, 47, 0.22);
-        margin: 24px 0 -50px;
+        margin: 24px 0 0;
     }
 
     .search-tabs-container p {
