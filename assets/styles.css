@@ -254,6 +254,79 @@ button {
     margin-top: 15px;
 }
 
+
+.intent-silos-section {
+    padding-top: 14px;
+}
+
+.intent-silos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 4px;
+}
+
+.intent-silo-card {
+    min-width: 180px;
+    background: #ffffff;
+    border: 1px solid #d9e4ec;
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    scroll-snap-align: start;
+}
+
+.intent-silo-card i {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e8f0f7;
+    color: var(--primary-blue);
+}
+
+.intent-silo-card span { font-weight: 800; font-size: 14px; }
+.intent-silo-card p { margin: 0; font-size: 11px; color: var(--dark-gray); }
+
+.service-verified-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #0f7a41;
+    background: #e7f7ef;
+    border: 1px solid #bce8cd;
+    border-radius: 999px;
+    padding: 4px 8px;
+    vertical-align: middle;
+}
+
+.repair-cta-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.service-book-btn {
+    background: var(--accent-teal);
+    color: var(--white);
+    padding: 9px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.service-book-btn.whatsapp {
+    background: #25d366;
+}
+
 /* Quick Services */
 .quick-services-mobile {
     padding: 25px 15px;
@@ -870,11 +943,20 @@ button {
     .search-field input { font-size: 12px; }
     .search-button { padding: 10px; margin-top: 8px; font-size: 14px; }
 
-    .quick-services-mobile, 
-    .kochinest-verified, 
-    .deal-of-the-day, 
-    .post-earn-cta { 
-        padding: 12px 12px; 
+    .quick-services-mobile,
+    .kochinest-verified,
+    .deal-of-the-day,
+    .post-earn-cta {
+        padding: 12px 12px;
+    }
+
+    .intent-silos-grid {
+        display: flex;
+        gap: 8px;
+    }
+
+    .intent-silo-card {
+        min-width: 220px;
     }
 
     .section-header { margin-bottom: 8px; }
@@ -909,7 +991,7 @@ button {
     .post-earn-text h4 { font-size: 12px; }
     .post-earn-text p { font-size: 10px; }
     .post-earn-action button { padding: 6px 10px; font-size: 11px; }
-    
+
     .bottom-navigation { padding: 2px 0; height: 55px; }
     .bottom-navigation .nav-item { font-size: 9px; }
     .bottom-navigation .nav-item i { font-size: 18px; }
@@ -1150,7 +1232,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     .tab-buttons {
-        width: 260px;
+        width: min(100%, 420px);
         margin-bottom: 18px;
     }
 
@@ -1172,6 +1254,15 @@ document.addEventListener('DOMContentLoaded', () => {
         min-width: 220px;
         padding: 14px 24px;
         height: 50px;
+    }
+
+    .intent-silos-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        overflow: visible;
+    }
+
+    .intent-silo-card {
+        min-width: 0;
     }
 
     .quick-services-mobile .services-grid-mobile,
