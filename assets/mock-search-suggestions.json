@@ -1,0 +1,21 @@
+{
+  "query": "kak",
+  "type": "stay",
+  "suggestions": [
+    {
+      "label": "Kakkanad (Ernakulam)",
+      "value": "Kakkanad",
+      "propertyTypes": ["1BHK", "2BHK", "Flats", "Room", "Villa", "Plot"]
+    },
+    {
+      "label": "Kakkanad Flats",
+      "value": "Kakkanad Flats",
+      "propertyTypes": ["1BHK", "2BHK", "Flats", "Room"]
+    },
+    {
+      "label": "Kakkanad Rooms",
+      "value": "Kakkanad Rooms",
+      "propertyTypes": ["Room", "1BHK"]
+    }
+  ]
+}
