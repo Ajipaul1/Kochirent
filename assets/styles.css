@@ -98,13 +98,13 @@ button {
 .hero-section-mobile {
     position: relative;
     height: auto;
-    min-height: 90vh;
+    max-height: 500px;
     display: flex;
     align-items: stretch;
     justify-content: center;
     color: var(--white);
     overflow: visible;
-    padding: 100px 0 48px;
+    padding: 50px 0 24px;
 }
 
 .hero-section-mobile::before,
@@ -203,10 +203,10 @@ button {
 /* Search Tabs Container */
 .search-tabs-container {
     background: var(--white);
-    margin: 40px 0 0;
+    margin: 24px 0 -50px;
     border-radius: 15px;
     box-shadow: var(--shadow-md);
-    padding: 15px;
+    padding: 12px;
     position: relative;
     z-index: 20;
     width: 100%;
@@ -1354,24 +1354,36 @@ button {
     .header-left i, .header-right i { font-size: 18px; }
 
     .hero-section-mobile {
-        min-height: 90vh;
-        padding-top: 100px;
+        max-height: 500px;
+        padding-top: 50px;
     }
     .hero-text-block { margin-top: 0; }
-    .hero-title-mobile { font-size: 18px; }
+    .hero-title-mobile {
+        font-size: 1.9rem;
+        line-height: 1.2;
+        margin-bottom: 6px;
+    }
     .hero-subtitle-mobile { font-size: 15px; }
 
     .search-tabs-container {
-        margin: 40px 0 0;
-        padding: 10px;
+        margin: 18px 0 -50px;
+        padding: 8px;
         border-radius: 12px;
     }
+    .search-tabs-description {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 6px;
+    }
     .tab-buttons { margin-bottom: 8px; padding: 3px; }
-    .tab-button { padding: 6px 0; font-size: 12px; gap: 5px; }
+    .tab-button { padding: 5px 0; font-size: 11px; gap: 4px; }
     .search-field { padding: 8px 10px; margin-bottom: 6px; font-size: 12px; }
     .search-field i { font-size: 14px; margin-right: 8px; }
     .search-field input { font-size: 12px; }
-    .search-button { padding: 10px; margin-top: 8px; font-size: 14px; }
+    .search-button { padding: 10px; margin-top: 6px; margin-bottom: 0; font-size: 14px; }
+    .hero-journey-section { margin-top: 2px; }
 
     .quick-services-mobile,
     .kochinest-verified,
@@ -1578,7 +1590,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     .hero-section-mobile {
         height: auto;
-        min-height: 90vh;
+        max-height: 600px;
         align-items: stretch;
         border-radius: 0;
         max-width: 100% !important;
@@ -1599,7 +1611,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .hero-content-overlay {
         max-width: 1320px;
         margin: 0 auto;
-        padding: 70px 32px 60px;
+        padding: 35px 32px 30px;
         display: flex;
         flex-direction: column;
         gap: 2rem;
@@ -1619,9 +1631,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     .hero-title-mobile {
-        font-size: 56px;
+        font-size: 3rem;
         line-height: 1.1;
-        margin-bottom: 14px;
+        margin-bottom: 8px;
     }
 
     .hero-subtitle-mobile {
@@ -1655,10 +1667,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     .search-tabs-container {
         max-width: 100%;
-        padding: 28px;
+        padding: 22px;
         border-radius: 22px;
         box-shadow: 0 20px 55px rgba(11, 30, 47, 0.22);
-        margin-top: 40px;
+        margin: 24px 0 -50px;
     }
 
     .search-tabs-container p {
