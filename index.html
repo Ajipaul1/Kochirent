@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-maps-api-key" content="">
     <title>The Kochi Local Hub: Rentals, Home Repairs & Shifting Services | KochiNest</title>
     <meta name="description" content="Find flats, apartments, bike rentals, self-drive cars, camera rentals, AC repair, shifting services and more trusted local services in Kochi. Search rentals across Kakkanad, Edappally, Aluva, Fort Kochi and Kochi Airport.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 <body>
@@ -117,6 +119,26 @@
                                 <button class="search-button" data-search-target="repair"><i class="fas fa-search"></i> Search Services</button>
                             </div>
                             <div id="search-suggestions" class="search-suggestions" hidden aria-live="polite"></div>
+                        </section>
+                        <section id="noResultsFound" class="no-results-found" hidden aria-live="polite">
+                            <h2>Looking for rentals in Kochi?</h2>
+                            <div class="smart-lead-card">
+                                <p id="noResultsMessage" class="smart-lead-message">We are currently updating our listings for your search. Want us to find this for you?</p>
+                                <form id="smartLeadForm" class="smart-lead-form">
+                                    <label for="leadPhone" class="sr-only">Phone Number</label>
+                                    <input type="tel" id="leadPhone" name="leadPhone" placeholder="Phone Number" required>
+                                    <label class="lead-whatsapp-toggle">
+                                        <input type="checkbox" id="leadWhatsapp" checked>
+                                        <span>Reach me on WhatsApp</span>
+                                    </label>
+                                    <button type="submit" class="lead-submit-btn">Request Callback</button>
+                                </form>
+                                <div class="nearby-alternatives">
+                                    <h3>Nearby Alternatives</h3>
+                                    <div id="nearbyAlternativesList" class="nearby-alternatives-list"></div>
+                                </div>
+                                <button id="customRepairRedirect" class="custom-repair-btn" hidden>Contact Er. Aji Paul for Custom Repair Requests</button>
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -653,37 +675,46 @@
 
         <div id="mobileMenuOverlay" class="mobile-menu-overlay">
             <div id="mobileDrawer" class="mobile-drawer" role="navigation" aria-label="Premium service directory">
-                <div class="drawer-welcome">
-                    <div class="drawer-profile-avatar"><i class="far fa-user"></i></div>
+                <div class="drawer-welcome premium-identity-header">
+                    <div class="drawer-profile-avatar" aria-hidden="true"></div>
                     <div>
-                        <p class="drawer-welcome-title">Welcome to KochiNest</p>
-                        <p class="drawer-location"><i class="fas fa-location-dot"></i> Kochi, Kerala</p>
+                        <p class="drawer-welcome-title">KochiNest User</p>
+                        <p class="drawer-location">Login for Premium Features</p>
                     </div>
                 </div>
 
                 <div class="drawer-meta-row">
-                    <a href="#" class="drawer-meta-link" data-nav-action="profile"><i class="far fa-heart"></i> Saved / Wishlist</a>
+                    <a href="#" class="drawer-meta-link" data-nav-action="profile"><i data-lucide="heart" class="sidebar-icon neutral-icon"></i> Saved / Wishlist</a>
                     <button class="language-toggle" aria-pressed="false" aria-label="Switch language">
                         <span class="language-toggle__option is-active">EN</span>
                         <span class="language-toggle__option">ML</span>
                     </button>
                 </div>
 
+                <section class="drawer-section trust-section">
+                    <p class="drawer-section-title">VERIFIED TRUST</p>
+                    <ul class="trust-pillars">
+                        <li><i data-lucide="badge-check" class="sidebar-icon rentals-icon"></i> Verified Owners</li>
+                        <li><i data-lucide="shield-check" class="sidebar-icon services-icon"></i> Professional Engineers</li>
+                        <li><i data-lucide="truck" class="sidebar-icon services-icon"></i> Reliable Movers</li>
+                    </ul>
+                </section>
+
                 <section class="drawer-section">
                     <p class="drawer-section-title">RENTALS</p>
                     <div class="drawer-rental-grid">
-                        <a href="#" data-menu-target="homes"><i class="far fa-building"></i> Flat for Rent in Kochi</a>
-                        <a href="#" data-menu-target="trending"><i class="far fa-car"></i> Monthly Car Rental</a>
-                        <a href="#" data-menu-target="trending"><i class="fas fa-motorcycle"></i> Bike Rental Kochi</a>
-                        <a href="#" data-menu-target="homes"><i class="fas fa-users"></i> PG/Sharing</a>
+                        <a href="#" data-menu-target="homes"><i data-lucide="building-2" class="sidebar-icon rentals-icon"></i> Flat for Rent in Kochi</a>
+                        <a href="#" data-menu-target="trending"><i data-lucide="car-front" class="sidebar-icon rentals-icon"></i> Monthly Car Rental</a>
+                        <a href="#" data-menu-target="trending"><i data-lucide="bike" class="sidebar-icon rentals-icon"></i> Bike Rental Kochi</a>
+                        <a href="#" data-menu-target="homes"><i data-lucide="users" class="sidebar-icon rentals-icon"></i> PG/Sharing</a>
                     </div>
                 </section>
 
                 <section class="drawer-section">
                     <p class="drawer-section-title">SERVICES</p>
                     <div class="drawer-service-list">
-                        <a href="#" data-menu-target="repair"><i class="fas fa-screwdriver-wrench"></i> AC Repair Services</a>
-                        <a href="#" data-menu-target="packers"><i class="fas fa-truck-fast"></i> Shifting Services</a>
+                        <a href="#" data-menu-target="repair"><i data-lucide="wrench" class="sidebar-icon services-icon"></i> AC Repair Services</a>
+                        <a href="#" data-menu-target="packers"><i data-lucide="package-check" class="sidebar-icon services-icon"></i> Shifting Services</a>
                     </div>
                 </section>
 
@@ -693,10 +724,11 @@
                 </section>
 
                 <div class="drawer-footer-trending">
-                    <p>Trending in Kochi</p>
+                    <p>Trending Now</p>
                     <div>
-                        <a href="/1-bhk-flat-for-rent-in-kochi/">1 BHK Kakkanad</a>
-                        <a href="/car-rental-kochi-airport/">Monthly Car Rental</a>
+                        <a href="/flats-for-rent-in-kakkanad/">Flats near Infopark</a>
+                        <a href="/ac-repair-kochi/">AC Repairing Deals</a>
+                        <a href="/self-drive-car-rental-kochi/">Self-Drive Cars</a>
                     </div>
                 </div>
             </div>
@@ -750,7 +782,7 @@
         </footer>
     </div>
     <script src="assets/script.js?v=2"></script>
-    <script src="assets/searchManager.js?v=1"></script>
+    <script src="assets/searchManager.js?v=2"></script>
 
 
     <script type="application/ld+json">
