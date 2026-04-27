@@ -52,63 +52,73 @@
                     <div class="hero-overlay-dark"></div>
                 </div>
                 <div class="hero-content-overlay">
-                    <div class="hero-text-block">
-                        <h1 class="hero-title-mobile">The Kochi Local Hub: Rentals, Home Repairs &amp; Shifting Services</h1>
-                        <p class="hero-intro">Find 1 BHK and 2 BHK flats, self-drive cars, and Best Bike Rentals in Kochi. Instantly book AC & Washing Machine Repair Kochi services and packers movers support across Kakkanad, Edappally, Aluva, Fort Kochi and Kochi Airport.</p>
-                        <div class="hero-tags">
-                            <span>Verified Homes</span>
-                            <span>Self-drive Rides</span>
-                            <span>Fast Local Services</span>
+                    <div class="hero-stack">
+                        <div class="hero-text-block">
+                            <h1 class="hero-title-mobile">The Kochi Local Hub: Rentals, Home Repairs &amp; Shifting Services</h1>
+                            <p class="hero-intro">Find 1 BHK and 2 BHK flats, self-drive cars, and Best Bike Rentals in Kochi. Instantly book AC & Washing Machine Repair Kochi services and packers movers support across Kakkanad, Edappally, Aluva, Fort Kochi and Kochi Airport.</p>
+                            <div class="hero-tags">
+                                <span>Verified Homes</span>
+                                <span>Self-drive Rides</span>
+                                <span>Fast Local Services</span>
+                            </div>
                         </div>
+                        <section class="search-tabs-container">
+                            <p class="search-tabs-description">Find the best rentals in Kochi including flats, apartments, homes, bike rentals, car rentals, packers and movers, flat shifting, and repair services. KochiNest offers reliable rental and service solutions across Kakkanad, Edappally, Aluva, Fort Kochi and nearby areas at affordable prices.</p>
+                            <div class="tab-buttons">
+                                <button class="tab-button active" data-tab="stay"><i class="fas fa-home"></i> Stay</button>
+                                <button class="tab-button" data-tab="move"><i class="fas fa-car"></i> Move</button>
+                                <button class="tab-button" data-tab="service"><i class="fas fa-screwdriver-wrench"></i> Service</button>
+                            </div>
+                            <div class="tab-content active" id="stay">
+                                <div class="search-field">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <input type="text" id="stay-location" data-search-input data-tab-type="stay" placeholder="Search by Area Kakkanad, Aluva, Edappally..." autocomplete="off">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="search-field">
+                                    <i class="fas fa-building"></i>
+                                    <select id="stay-property-type" aria-label="Property Type">
+                                        <option value="">Property Type</option>
+                                        <option value="1BHK">1BHK</option>
+                                        <option value="2BHK">2BHK</option>
+                                        <option value="Flats">Flats</option>
+                                        <option value="Room">Room</option>
+                                        <option value="Villa">Villa</option>
+                                        <option value="Plot">Plot</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <button class="search-button" data-search-target="homes"><i class="fas fa-search"></i> Search Properties</button>
+                            </div>
+                            <div class="tab-content" id="move">
+                                <div class="search-field">
+                                    <i class="fas fa-location-dot"></i>
+                                    <input type="text" id="move-from" data-search-input data-tab-type="move" data-location-role="from" placeholder="From location (Aluva, Palarivattom...)" autocomplete="off">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="search-field">
+                                    <i class="fas fa-location-arrow"></i>
+                                    <input type="text" id="move-to" data-search-input data-tab-type="move" data-location-role="to" placeholder="To location (Kakkanad, Edappally...)" autocomplete="off">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <button class="search-button" data-search-target="trending"><i class="fas fa-search"></i> Search Move Options</button>
+                            </div>
+                            <div class="tab-content" id="service">
+                                <div class="search-field">
+                                    <i class="fas fa-tools"></i>
+                                    <input type="text" id="service-type" data-search-input data-tab-type="service" placeholder="Service Type AC, Washing Machine, Plumbing..." autocomplete="off">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="search-field">
+                                    <i class="fas fa-location-dot"></i>
+                                    <input type="text" id="service-area" data-search-input data-tab-type="service" placeholder="Area Kakkanad, Edappally, Aluva..." autocomplete="off">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <button class="search-button" data-search-target="repair"><i class="fas fa-search"></i> Search Services</button>
+                            </div>
+                            <div id="search-suggestions" class="search-suggestions" hidden aria-live="polite"></div>
+                        </section>
                     </div>
-                </div>
-            </section>
-
-            <section class="search-tabs-container">
-                <p style="font-size: 11px; color: var(--dark-gray); line-height: 1.4; margin-bottom: 10px;">Find the best rentals in Kochi including flats, apartments, homes, bike rentals, car rentals, packers and movers, flat shifting, and repair services. KochiNest offers reliable rental and service solutions across Kakkanad, Edappally, Aluva, Fort Kochi and nearby areas at affordable prices.</p>
-                <div class="tab-buttons">
-                    <button class="tab-button active" data-tab="stay"><i class="fas fa-home"></i> Stay</button>
-                    <button class="tab-button" data-tab="move"><i class="fas fa-car"></i> Move</button>
-                    <button class="tab-button" data-tab="service"><i class="fas fa-screwdriver-wrench"></i> Service</button>
-                </div>
-                <div class="tab-content active" id="stay">
-                    <div class="search-field">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" placeholder="Search by Area Kakkanad, Aluva, Edappally...">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="search-field">
-                        <i class="fas fa-building"></i>
-                        <input type="text" placeholder="Property Type House, 1BHK, Room, Villa...">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <button class="search-button" data-search-target="homes"><i class="fas fa-search"></i> Search Properties</button>
-                </div>
-                <div class="tab-content" id="move">
-                    <div class="search-field">
-                        <i class="fas fa-motorcycle"></i>
-                        <input type="text" placeholder="Vehicle Type Bike, Car, Scooter...">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="search-field">
-                        <i class="fas fa-clock"></i>
-                        <input type="text" placeholder="Rental Duration Daily, Weekly, Monthly...">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <button class="search-button" data-search-target="trending"><i class="fas fa-search"></i> Search Vehicles</button>
-                </div>
-                <div class="tab-content" id="service">
-                    <div class="search-field">
-                        <i class="fas fa-tools"></i>
-                        <input type="text" placeholder="Service Type AC, Washing Machine, Plumbing...">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="search-field">
-                        <i class="fas fa-location-dot"></i>
-                        <input type="text" placeholder="Area Kakkanad, Edappally, Aluva...">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <button class="search-button" data-search-target="repair"><i class="fas fa-search"></i> Search Services</button>
                 </div>
             </section>
 
@@ -680,6 +690,7 @@
         </footer>
     </div>
     <script src="assets/script.js?v=2"></script>
+    <script src="assets/searchManager.js?v=1"></script>
 
 
     <script type="application/ld+json">
