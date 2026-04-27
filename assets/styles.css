@@ -98,13 +98,13 @@ button {
 .hero-section-mobile {
     position: relative;
     height: auto;
-    min-height: 80vh;
+    min-height: 90vh;
     display: flex;
     align-items: stretch;
     justify-content: center;
     color: var(--white);
     overflow: visible;
-    padding: 90px 0 40px;
+    padding: 100px 0 48px;
 }
 
 .hero-section-mobile::before,
@@ -125,7 +125,7 @@ button {
 }
 
 .hero-section-mobile::after {
-    background: linear-gradient(to top, rgba(15, 39, 64, 0.6) 0%, rgba(15, 39, 64, 0.4) 100%);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
@@ -157,18 +157,24 @@ button {
     padding: 0 20px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     gap: 2rem;
 }
 
 .hero-stack {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 2rem;
+    width: min(100%, 1120px);
 }
 
 .hero-text-block {
     margin-top: 0;
     line-height: 1.2;
+    width: 100%;
+    max-width: 760px;
 }
 
 .hero-title-mobile {
@@ -197,12 +203,13 @@ button {
 /* Search Tabs Container */
 .search-tabs-container {
     background: var(--white);
-    margin: 0;
+    margin: 40px 0 0;
     border-radius: 15px;
     box-shadow: var(--shadow-md);
     padding: 15px;
     position: relative;
     z-index: 20;
+    width: 100%;
 }
 
 .search-tabs-description {
@@ -389,7 +396,7 @@ button {
     }
 
     .hero-section-mobile {
-        padding-top: 120px;
+        padding-top: 100px;
         padding-bottom: 50px;
     }
 }
@@ -556,6 +563,8 @@ button {
 .hero-journey-section {
     padding: 0;
     background: transparent;
+    margin-top: 8px;
+    width: 100%;
 }
 
 .hero-journey-section .section-header h2 {
@@ -1324,6 +1333,19 @@ button {
     border: 1px solid #B2DFDB;
 }
 
+@media screen and (max-width: 899px) {
+    .intent-silos-grid {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .intent-silo-card {
+        min-width: 220px;
+    }
+}
+
 /* Mobile Compression Overrides */
 @media screen and (max-width: 480px) {
     .header { padding: 6px 12px; }
@@ -1332,14 +1354,15 @@ button {
     .header-left i, .header-right i { font-size: 18px; }
 
     .hero-section-mobile {
-        min-height: 80vh;
+        min-height: 90vh;
+        padding-top: 100px;
     }
     .hero-text-block { margin-top: 0; }
     .hero-title-mobile { font-size: 18px; }
     .hero-subtitle-mobile { font-size: 15px; }
 
     .search-tabs-container {
-        margin: -45px 12px 0;
+        margin: 40px 0 0;
         padding: 10px;
         border-radius: 12px;
     }
@@ -1360,6 +1383,7 @@ button {
     .intent-silos-grid {
         display: flex;
         gap: 8px;
+        overflow-x: auto;
     }
 
     .intent-silo-card {
@@ -1554,7 +1578,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     .hero-section-mobile {
         height: auto;
-        min-height: 80vh;
+        min-height: 90vh;
         align-items: stretch;
         border-radius: 0;
         max-width: 100% !important;
@@ -1569,7 +1593,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     .hero-section-mobile::after {
-        background: linear-gradient(90deg, rgba(15, 39, 64, 0.86) 0%, rgba(15, 39, 64, 0.78) 42%, rgba(15, 39, 64, 0.42) 78%, rgba(15, 39, 64, 0.24) 100%);
+        background: rgba(0, 0, 0, 0.5);
     }
 
     .hero-content-overlay {
@@ -1580,10 +1604,13 @@ document.addEventListener('DOMContentLoaded', () => {
         flex-direction: column;
         gap: 2rem;
         align-items: center;
+        justify-content: flex-start;
     }
 
     .hero-stack {
         gap: 2rem;
+        width: 100%;
+        align-items: flex-start;
     }
 
     .hero-text-block {
@@ -1631,6 +1658,7 @@ document.addEventListener('DOMContentLoaded', () => {
         padding: 28px;
         border-radius: 22px;
         box-shadow: 0 20px 55px rgba(11, 30, 47, 0.22);
+        margin-top: 40px;
     }
 
     .search-tabs-container p {
