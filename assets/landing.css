@@ -17,3 +17,6 @@ table{width:100%;border-collapse:collapse}th,td{border:1px solid #e5e7eb;padding
 ul{padding-left:18px}a{color:#0f5c93}
 .faq-item{padding:10px;border:1px solid #e5e7eb;border-radius:10px;margin-bottom:8px}
 @media (max-width:640px){.container{padding:10px}.section,.hero{padding:12px}.topbar{padding:10px}}
+
+.prose p{line-height:1.7;margin:0 0 10px}.prose h3{margin:8px 0;color:var(--primary-blue)}
+.map-embed{width:100%;min-height:260px;border:0;border-radius:10px}
