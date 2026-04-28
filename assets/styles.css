@@ -544,7 +544,7 @@ button {
 
 .service-book-btn {
     background: var(--accent-teal);
-    color: var(--white);
+    color: #0f3d24;
     padding: 9px 14px;
     border-radius: 8px;
     font-size: 12px;
@@ -670,7 +670,7 @@ button {
     top: 10px;
     left: 10px;
     background-color: var(--accent-teal);
-    color: var(--white);
+    color: #0f3d24;
     font-size: 8px;
     font-weight: 700;
     padding: 3px 6px;
@@ -718,6 +718,19 @@ button {
 .deal-of-the-day {
     padding: 25px 15px;
     background-color: var(--light-gray);
+}
+
+.deal-of-the-day-container {
+    min-height: 220px;
+}
+
+.deal-of-the-day .timer {
+    min-width: 132px;
+    display: inline-block;
+}
+
+.deal-card {
+    min-height: 112px;
 }
 
 .deal-of-the-day .section-header h2 i {
@@ -784,7 +797,7 @@ button {
 
 .book-now-button {
     background-color: var(--accent-teal);
-    color: var(--white);
+    color: #0f3d24;
     padding: 8px 15px;
     border-radius: 8px;
     font-size: 12px;
@@ -1213,6 +1226,21 @@ button {
 }
 .popular-card .badge-verified { background-color: #4CAF50; }
 .popular-card .badge-fomo { background-color: #F44336; }
+.badge-host { background-color: #4CAF50; color: #fff; }
+.badge-in-house { background-color: #0f2740; color: #fff; }
+
+.card-marketplace {
+    background: #ffffff;
+    border: 1px solid #d7e0e8;
+    box-shadow: var(--shadow-sm);
+}
+
+.card-direct-service {
+    background: #f4f9f9;
+    border: 2px solid #b9ced6;
+    box-shadow: var(--shadow-sm);
+}
+
 
 .popular-card .card-info {
     padding: 0 10px;
@@ -1228,6 +1256,27 @@ button {
 .popular-card .card-price {
     font-size: 12px;
     font-weight: 700;
+}
+
+.card-cta {
+    margin-top: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 6px;
+    padding: 7px 10px;
+    display: inline-flex;
+}
+
+.btn-outline {
+    border: 1px solid #0f2740;
+    color: #0f2740;
+    background: #fff;
+}
+
+.btn-primary {
+    border: 1px solid #0f2740;
+    color: #fff;
+    background: #0f2740;
 }
 
 .car-promo-banner {
@@ -1337,6 +1386,52 @@ button {
     font-size: 10px;
     font-weight: 700;
     border: 1px solid #B2DFDB;
+}
+
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.review-card {
+    background: #fff;
+    border: 1px solid #dbe5eb;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.review-card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+}
+
+.review-card p {
+    margin: 0 0 6px;
+    font-size: 11px;
+    color: var(--dark-gray);
+}
+
+.review-card span {
+    font-size: 10px;
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+.footer-nap p {
+    margin: 0 0 6px;
+    font-size: 10px;
+    opacity: 0.86;
+    line-height: 1.4;
+}
+
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding-block: 12px;
+    width: 100%;
 }
 
 @media screen and (max-width: 899px) {
