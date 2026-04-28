@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const apiKey = window.KOCHINEST_GOOGLE_MAPS_API_KEY || document.querySelector('meta[name="google-maps-api-key"]')?.content;
-        if (!apiKey) {
+        if (!apiKey || apiKey === 'YOUR_GOOGLE_MAPS_API_KEY') {
             console.warn('Google Maps API key missing. Kochi location fields are using local fallback suggestions.');
             return;
         }
