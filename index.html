@@ -828,147 +828,101 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "What rentals are available on KochiNest?", "acceptedAnswer": {"@type": "Answer", "text": "KochiNest includes flats, apartments, bike rentals, self-drive cars, camera rentals and local home services in Kochi."}},
-        {"@type": "Question", "name": "How much does bike rental in Kochi cost?", "acceptedAnswer": {"@type": "Answer", "text": "Bike rentals in Kochi usually start from around ₹299 to ₹499 per day depending on model and duration."}},
-        {"@type": "Question", "name": "Can I find flats and apartments for rent in Kochi?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, you can find flats and apartments for rent across major Kochi areas."}},
-        {"@type": "Question", "name": "Is self-drive car rental available near Kochi Airport?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, self-drive car rental options are available near Kochi Airport and nearby locations."}},
-        {"@type": "Question", "name": "Do you offer AC repair and washing machine repair in Kochi?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, KochiNest includes AC repair and washing machine repair services in Kochi."}},
-        {"@type": "Question", "name": "How can business owners list services on KochiNest?", "acceptedAnswer": {"@type": "Answer", "text": "Business owners can use the Post Listing flow to submit services and reach customers in Kochi."}}
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://kochinest.com/"}
-      ]
-    }
-    </script>
-
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "name": "KochiNest business pillars",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "url": "https://kochinest.com/rentals", "name": "Rental Marketplace"},
-        {"@type": "ListItem", "position": 2, "url": "https://kochinest.com/repair-services", "name": "Home Repair Services"},
-        {"@type": "ListItem", "position": 3, "url": "https://kochinest.com/packers-movers", "name": "Packers and Movers Services"}
-      ]
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://kochinest.com/#organization",
+          "@type": "LocalBusiness",
+          "@id": "https://kochinest.com/#localbusiness",
           "name": "KochiNest",
+          "image": "https://kochinest.com/assets/logo/logo-kochinest-transperent.svg",
           "url": "https://kochinest.com/",
           "telephone": "+91-6282520339",
+          "priceRange": "₹-₹",
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Thripunithara",
+            "streetAddress": "Thripunithara",
+            "addressLocality": "Kochi",
             "addressRegion": "Kerala",
             "postalCode": "682306",
             "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 9.9515,
+            "longitude": 76.3411
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Thripunithara" },
+            { "@type": "City", "name": "Kakkanad" },
+            { "@type": "City", "name": "Edappally" },
+            { "@type": "City", "name": "Aluva" },
+            { "@type": "City", "name": "Fort Kochi" },
+            { "@type": "City", "name": "Marine Drive" },
+            { "@type": "City", "name": "Kalamassery" }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "KochiNest Service Catalog",
+            "itemListElement": [
+              {
+                "@type": "OfferCatalog",
+                "name": "Residential Rentals",
+                "itemListElement": [
+                  { "@type": "Service", "name": "1 BHK Flat for Rent", "url": "https://kochinest.com/1-bhk-flat-for-rent-in-kochi" },
+                  { "@type": "Service", "name": "2 BHK Flat for Rent", "url": "https://kochinest.com/2-bhk-flat-for-rent-in-kochi" },
+                  { "@type": "Service", "name": "Studio Apartment Kochi", "url": "https://kochinest.com/studio-apartment-for-rent-in-kochi" },
+                  { "@type": "Service", "name": "Service Apartments Daily/Monthly", "url": "https://kochinest.com/service-apartments-in-kochi-for-daily-rent" }
+                ]
+              },
+              {
+                "@type": "OfferCatalog",
+                "name": "Vehicle Rentals",
+                "itemListElement": [
+                  { "@type": "Service", "name": "Self Drive Car Rental", "url": "https://kochinest.com/self-drive-car-rental-kochi" },
+                  { "@type": "Service", "name": "Bike & Scooter Rentals", "url": "https://kochinest.com/bike-rentals-in-kochi" },
+                  { "@type": "Service", "name": "Luxury & Wedding Car Rental", "url": "https://kochinest.com/luxury-car-rental-kochi" },
+                  { "@type": "Service", "name": "Cycle Rental", "url": "https://kochinest.com/cycle-rental-kochi" }
+                ]
+              },
+              {
+                "@type": "OfferCatalog",
+                "name": "Home & Device Repairs",
+                "itemListElement": [
+                  { "@type": "Service", "name": "AC Repair Kochi", "url": "https://kochinest.com/ac-repair-kochi" },
+                  { "@type": "Service", "name": "Washing Machine Repair", "url": "https://kochinest.com/washing-machine-repair-in-kochi" },
+                  { "@type": "Service", "name": "Fridge & TV Repair", "url": "https://kochinest.com/fridge-repair-kochi" },
+                  { "@type": "Service", "name": "iPhone Repair Kochi", "url": "https://kochinest.com/iphone-repair-kochi" }
+                ]
+              },
+              {
+                "@type": "OfferCatalog",
+                "name": "Equipment & Furniture Rentals",
+                "itemListElement": [
+                  { "@type": "Service", "name": "Camera Rental Kochi", "url": "https://kochinest.com/camera-rental-kochi" },
+                  { "@type": "Service", "name": "Furniture Rental", "url": "https://kochinest.com/furniture-rental-kochi" },
+                  { "@type": "Service", "name": "Generator Rental", "url": "https://kochinest.com/generator-rental-kochi" }
+                ]
+              }
+            ]
           }
         },
         {
-          "@type": "WebSite",
-          "@id": "https://kochinest.com/#website",
-          "url": "https://kochinest.com/",
-          "name": "KochiNest",
-          "publisher": { "@id": "https://kochinest.com/#organization" },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://kochinest.com/?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
+          "@type": "FAQPage",
+          "mainEntity": [
+            {"@type": "Question", "name": "What rentals are available on KochiNest?", "acceptedAnswer": {"@type": "Answer", "text": "KochiNest includes flats, apartments, bike rentals, self-drive cars, camera rentals and local home services in Kochi."}},
+            {"@type": "Question", "name": "How much does bike rental in Kochi cost?", "acceptedAnswer": {"@type": "Answer", "text": "Bike rentals in Kochi usually start from around ₹299 to ₹499 per day depending on model and duration."}},
+            {"@type": "Question", "name": "Can I find flats and apartments for rent in Kochi?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, you can find flats and apartments for rent across major Kochi areas."}},
+            {"@type": "Question", "name": "Is self-drive car rental available near Kochi Airport?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, self-drive car rental options are available near Kochi Airport and nearby locations."}},
+            {"@type": "Question", "name": "Do you offer AC repair and washing machine repair in Kochi?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, KochiNest includes AC repair and washing machine repair services in Kochi."}},
+            {"@type": "Question", "name": "How can business owners list services on KochiNest?", "acceptedAnswer": {"@type": "Answer", "text": "Business owners can use the Post Listing flow to submit services and reach customers in Kochi."}}
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://kochinest.com/"}
+          ]
         }
       ]
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HomeAndConstructionBusiness",
-      "@id": "https://kochinest.com/repair-services#localbusiness",
-      "name": "KochiNest Direct Services",
-      "url": "https://kochinest.com/repair-services",
-      "telephone": "+91-6282520339",
-      "areaServed": [
-        {"@type": "City", "name": "Kakkanad"},
-        {"@type": "City", "name": "Aluva"},
-        {"@type": "City", "name": "Edappally"}
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "In-house services",
-        "itemListElement": [
-          {
-            "@type": "Service",
-            "name": "KochiNest Home Shifting",
-            "serviceType": "House Shifting",
-            "provider": { "@id": "https://kochinest.com/repair-services#localbusiness" }
-          },
-          {
-            "@type": "Service",
-            "name": "KochiNest AC Repair",
-            "serviceType": "AC Repair",
-            "provider": { "@id": "https://kochinest.com/repair-services#localbusiness" }
-          }
-        ]
-      }
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "@id": "https://kochinest.com/bike-rentals-in-kochi/#collection",
-      "name": "Bike Rentals in Kochi",
-      "url": "https://kochinest.com/bike-rentals-in-kochi/",
-      "about": "Third-party bike rental listings from verified hosts",
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "item": {
-              "@type": "Offer",
-              "name": "Activa 6G Daily Rental",
-              "priceCurrency": "INR",
-              "price": "499",
-              "availability": "https://schema.org/InStock"
-            }
-          }
-        ]
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "AggregateRating",
-      "itemReviewed": {
-        "@type": "Organization",
-        "name": "KochiNest"
-      },
-      "ratingValue": "4.8",
-      "reviewCount": "216",
-      "bestRating": "5",
-      "worstRating": "1"
     }
     </script>
 
