@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-maps-api-key" content="">
+    <meta name="google-maps-api-key" content="AIzaSyAG2IbWwxYRTttpd2H4nlmJBfeZd2qvHs8">
     <title>The Kochi Local Hub: Rentals, Home Repairs & Shifting Services | KochiNest</title>
     <meta name="description" content="Find flats, apartments, bike rentals, self-drive cars, camera rentals, AC repair, shifting services and more trusted local services in Kochi. Search rentals across Kakkanad, Edappally, Aluva, Fort Kochi and Kochi Airport.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
                 <i class="fas fa-bars" id="hamburgerMenuToggle"></i>
             </div>
             <div class="header-center">
-                <img src="assets/kochinest-logo.png" alt="KochiNest Logo" class="logo">
+                <img src="assets/logo/logo-kochinest-transperent.svg" alt="KochiNest Logo" class="logo">
                 <span class="logo-text">Everything You Need, In Kochi</span>
                 <span class="desktop-location desktop-only">Kochi, Kerala</span>
             </div>
@@ -57,7 +57,6 @@
                     <div class="hero-stack">
                         <div class="hero-text-block">
                             <h1 class="hero-title-mobile">The Kochi Local Hub: Rentals, Home Repairs &amp; Shifting Services</h1>
-                            <p class="hero-intro">Find 1 BHK and 2 BHK flats, self-drive cars, and Best Bike Rentals in Kochi. Instantly book AC & Washing Machine Repair Kochi services and packers movers support across Kakkanad, Edappally, Aluva, Fort Kochi and Kochi Airport.</p>
                             <div class="hero-tags">
                                 <span>Verified Homes</span>
                                 <span>Self-drive Rides</span>
@@ -125,13 +124,17 @@
                             <div class="smart-lead-card">
                                 <p id="noResultsMessage" class="smart-lead-message">We are currently updating our listings for your search. Want us to find this for you?</p>
                                 <form id="smartLeadForm" class="smart-lead-form">
+                                    <label for="leadName" class="sr-only">Name</label>
+                                    <input type="text" id="leadName" name="leadName" placeholder="Name" required>
+                                    <label for="leadService" class="sr-only">Service</label>
+                                    <input type="text" id="leadService" name="leadService" placeholder="Service" required>
                                     <label for="leadPhone" class="sr-only">Phone Number</label>
                                     <input type="tel" id="leadPhone" name="leadPhone" placeholder="Phone Number" required>
                                     <label class="lead-whatsapp-toggle">
                                         <input type="checkbox" id="leadWhatsapp" checked>
                                         <span>Reach me on WhatsApp</span>
                                     </label>
-                                    <button type="submit" class="lead-submit-btn">Request Callback</button>
+                                    <button type="submit" class="lead-submit-btn">Send to WhatsApp</button>
                                 </form>
                                 <div class="nearby-alternatives">
                                     <h3>Nearby Alternatives</h3>
@@ -146,16 +149,19 @@
                             </div>
                             <div class="intent-silos-grid" aria-label="Primary categories">
                                 <a class="intent-silo-card" href="/rentals" data-scroll-target="homes">
+                                    <h3>Rental Listings</h3>
                                     <i class="fas fa-house"></i>
                                     <span>Find a Rental</span>
                                     <p>Flats, 1 BHK, 2 BHK, self-drive cars</p>
                                 </a>
                                 <a class="intent-silo-card" href="/repair-services" data-scroll-target="repair">
+                                    <h3>Repair Services</h3>
                                     <i class="fas fa-screwdriver-wrench"></i>
                                     <span>Book a Repair</span>
                                     <p>AC &amp; Washing Machine Repair Kochi</p>
                                 </a>
                                 <a class="intent-silo-card" href="/packers-movers" data-scroll-target="packers">
+                                    <h3>Packers &amp; Movers</h3>
                                     <i class="fas fa-truck-fast"></i>
                                     <span>Plan a Move</span>
                                     <p>Packers &amp; Movers in Kochi</p>
@@ -620,12 +626,13 @@
             <footer class="site-footer" style="background-color: var(--primary-blue); color: var(--white); padding: 30px 15px 15px; border-radius: 20px 20px 0 0; margin-top: 20px;">
                 <div style="display: flex; flex-direction: column; gap: 25px; margin-bottom: 25px;">
                     <div class="footer-brand">
-                        <img src="assets/kochinest-logo.png" alt="KochiNest Logo" style="height: 30px; margin-bottom: 8px;">
+                        <img src="assets/logo/logo-kochinest-transperent.svg" alt="KochiNest Logo" style="height: 30px; margin-bottom: 8px;">
                         <p style="font-size: 11px; opacity: 0.8; margin-bottom: 15px;">Everything you need, right here in Kochi</p>
                         <div class="footer-socials" style="display: flex; gap: 10px;">
-                            <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;"><i class="fab fa-whatsapp" style="font-size: 16px;"></i></div>
-                            <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;"><i class="fab fa-instagram" style="font-size: 16px;"></i></div>
-                            <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;"><i class="fab fa-facebook-f" style="font-size: 16px;"></i></div>
+                            <a href="https://www.facebook.com/profile.php?id=61570998384008" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;"><i class="fab fa-facebook-f" style="font-size: 16px;"></i></a>
+                            <a href="https://www.instagram.com/kerala_jobhub/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;"><i class="fab fa-instagram" style="font-size: 16px;"></i></a>
+                            <a href="https://www.linkedin.com/company/keralajobhub/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;"><i class="fab fa-linkedin-in" style="font-size: 16px;"></i></a>
+                            <a href="https://www.youtube.com/@keralajobhub" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;"><i class="fab fa-youtube" style="font-size: 16px;"></i></a>
                         </div>
                     </div>
 
@@ -736,11 +743,14 @@
         <div id="postModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1400; align-items: center; justify-content: center;">
             <div style="background: #fff; width: 90%; max-width: 320px; border-radius: 10px; padding: 14px;">
                 <h3 style="margin: 0 0 10px; font-size: 15px;">Post Listing</h3>
-                <input type="text" placeholder="Name" style="width: 100%; margin-bottom: 8px; padding: 8px;">
-                <input type="tel" placeholder="Phone" style="width: 100%; margin-bottom: 8px; padding: 8px;">
-                <input type="text" placeholder="Service Type" style="width: 100%; margin-bottom: 8px; padding: 8px;">
-                <input type="text" placeholder="Location" style="width: 100%; margin-bottom: 10px; padding: 8px;">
-                <button id="closePostModal" style="padding: 8px 10px;">Close</button>
+                <form id="postLeadForm">
+                    <input type="text" id="postLeadName" name="name" placeholder="Name" style="width: 100%; margin-bottom: 8px; padding: 8px;" required>
+                    <input type="tel" placeholder="Phone" style="width: 100%; margin-bottom: 8px; padding: 8px;">
+                    <input type="text" id="postLeadService" name="service" placeholder="Service Type" style="width: 100%; margin-bottom: 8px; padding: 8px;" required>
+                    <input type="text" placeholder="Location" style="width: 100%; margin-bottom: 10px; padding: 8px;">
+                    <button type="submit" class="lead-submit-btn" style="margin-bottom: 8px;">Send to WhatsApp</button>
+                    <button type="button" id="closePostModal" style="padding: 8px 10px;">Close</button>
+                </form>
             </div>
         </div>
 
@@ -782,6 +792,11 @@
     </div>
     <script src="assets/script.js?v=2"></script>
     <script src="assets/searchManager.js?v=2"></script>
+    <script>
+        window.KOCHINEST_GOOGLE_MAPS_API_KEY = "AIzaSyAG2IbWwxYRTttpd2H4nlmJBfeZd2qvHs8";
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG2IbWwxYRTttpd2H4nlmJBfeZd2qvHs8&libraries=places&callback=initKochiNestMapSearch"></script>
+
 
 
     <script type="application/ld+json">

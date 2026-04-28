@@ -1,3 +1,5 @@
+window.initKochiNestMapSearch = () => {};
+
 document.addEventListener('DOMContentLoaded', () => {
     const suggestionBox = document.getElementById('search-suggestions');
     const searchContainer = document.querySelector('.search-tabs-container');
@@ -285,10 +287,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        if (document.querySelector('script[data-google-maps-loader="kochinest"]')) {
+            return;
+        }
+
         const script = document.createElement('script');
         script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&libraries=places`;
         script.async = true;
         script.defer = true;
+        script.dataset.googleMapsLoader = 'kochinest';
         script.onload = () => targets.forEach(bindPlacesAutocomplete);
         script.onerror = () => console.error('Failed to load Google Maps Places library.');
         document.head.appendChild(script);
@@ -367,11 +374,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     smartLeadForm?.addEventListener('submit', (event) => {
         event.preventDefault();
+        const name = document.getElementById('leadName')?.value.trim();
+        const service = document.getElementById('leadService')?.value.trim();
         const phone = document.getElementById('leadPhone')?.value.trim();
         const whatsappAllowed = document.getElementById('leadWhatsapp')?.checked;
-        if (!phone) return;
+        if (!name || !service || !phone) return;
 
         const leadPayload = {
+            name,
+            service,
             phone,
             whatsappAllowed,
             searchContext: {
@@ -382,10 +393,18 @@ document.addEventListener('DOMContentLoaded', () => {
             submittedAt: new Date().toISOString()
         };
 
+        if (whatsappAllowed) {
+            const whatsappPhoneNumber = 'YOUR_PHONE_NUMBER';
+            const message = `Interested in ${service} for ${name}`;
+            const whatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
         localStorage.setItem('kochinestSmartLead', JSON.stringify(leadPayload));
         noResultsMessage.textContent = 'Thanks! Our team will contact you with curated options shortly.';
         smartLeadForm.reset();
     });
 
+    window.initKochiNestMapSearch = initializeGooglePlaces;
     initializeGooglePlaces();
 });
