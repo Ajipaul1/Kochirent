@@ -16,7 +16,8 @@ if (languageToggle) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const whatsappUrl = "https://wa.me/916282520339?text=Hi%20KochiNest%2C%20I'm%20interested%20in%20your%20service";
+    const whatsappPhoneNumber = "YOUR_PHONE_NUMBER";
+    const defaultWhatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent("Hi KochiNest, I'm interested in your service")}`;
     const scrollMap = {
         top: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
         hero: () => document.querySelector('.hero-section-mobile')?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
@@ -32,7 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (handler) handler();
     };
 
-    const openWhatsapp = () => window.open(whatsappUrl, '_blank');
+    const buildLeadWhatsappUrl = (name, service) => {
+        const message = `Interested in ${service} for ${name}`;
+        return `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(message)}`;
+    };
+
+    const openWhatsapp = () => window.open(defaultWhatsappUrl, '_blank');
 
     const postModal = document.getElementById('postModal');
     const profileModal = document.getElementById('profileModal');
@@ -164,6 +170,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (notificationDropdown && notificationToggle && !notificationDropdown.contains(event.target) && event.target !== notificationToggle) {
             notificationDropdown.style.display = 'none';
         }
+    });
+
+    const redirectLeadToWhatsapp = (name, service) => {
+        const normalizedName = (name || '').trim();
+        const normalizedService = (service || '').trim();
+        if (!normalizedName || !normalizedService) return;
+        window.open(buildLeadWhatsappUrl(normalizedName, normalizedService), '_blank');
+    };
+
+    const postLeadForm = document.getElementById('postLeadForm');
+    postLeadForm?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const name = document.getElementById('postLeadName')?.value;
+        const service = document.getElementById('postLeadService')?.value;
+        redirectLeadToWhatsapp(name, service);
     });
 
     const deals = [
