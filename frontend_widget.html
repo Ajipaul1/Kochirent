@@ -1,0 +1,165 @@
+<!-- KochiNest AI Assistant Widget -->
+<!-- Copy and paste this code snippet right before the closing </body> tag of your HTML pages -->
+<style>
+  #kochinest-chat-widget {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 320px;
+    max-height: 400px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    z-index: 9999;
+    font-family: 'Manrope', sans-serif;
+    border: 1px solid #eaeaea;
+  }
+  #kochinest-chat-header {
+    background: #004d40;
+    color: white;
+    padding: 12px;
+    border-radius: 12px 12px 0 0;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #kochinest-chat-header span { font-size: 14px; }
+  #kochinest-chat-close { cursor: pointer; font-size: 18px; }
+  #kochinest-chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 250px;
+  }
+  .kochinest-msg { max-width: 85%; padding: 8px 12px; border-radius: 16px; line-height: 1.4; }
+  .kochinest-msg.user { background: #e0f7fa; color: #004d40; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .kochinest-msg.bot { background: #f1f1f1; color: #333; align-self: flex-start; border-bottom-left-radius: 4px; }
+  #kochinest-chat-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eaeaea;
+  }
+  #kochinest-chat-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    font-size: 13px;
+  }
+  #kochinest-chat-send {
+    background: #004d40;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    margin-left: 8px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  #kochinest-chat-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #004d40;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 9999;
+  }
+</style>
+
+<div id="kochinest-chat-widget">
+  <div id="kochinest-chat-header">
+    <span>KochiNest Assistant</span>
+    <span id="kochinest-chat-close">&times;</span>
+  </div>
+  <div id="kochinest-chat-messages">
+    <div class="kochinest-msg bot">Hi! I'm your KochiNest assistant. What are you looking for in Kochi today?</div>
+  </div>
+  <div id="kochinest-chat-input-area">
+    <input type="text" id="kochinest-chat-input" placeholder="Ask about flats, bikes, repairs..." />
+    <button id="kochinest-chat-send">Send</button>
+  </div>
+</div>
+
+<div id="kochinest-chat-toggle">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+</div>
+
+<script>
+  // CHANGE THIS TO YOUR GOOGLE CLOUD RUN URL ONCE DEPLOYED
+  const KOCHINEST_API_URL = "https://kochinest-ai-assistant-your-url.a.run.app/api/chat";
+
+  const chatWidget = document.getElementById('kochinest-chat-widget');
+  const chatToggle = document.getElementById('kochinest-chat-toggle');
+  const chatClose = document.getElementById('kochinest-chat-close');
+  const chatInput = document.getElementById('kochinest-chat-input');
+  const chatSend = document.getElementById('kochinest-chat-send');
+  const chatMessages = document.getElementById('kochinest-chat-messages');
+
+  chatToggle.addEventListener('click', () => {
+    chatWidget.style.display = chatWidget.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  chatClose.addEventListener('click', () => {
+    chatWidget.style.display = 'none';
+  });
+
+  function addMessage(text, sender) {
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('kochinest-msg', sender);
+    msgDiv.textContent = text;
+    chatMessages.appendChild(msgDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  async function sendMessage() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+
+    addMessage(text, 'user');
+    chatInput.value = '';
+
+    // Show typing indicator
+    const typingDiv = document.createElement('div');
+    typingDiv.classList.add('kochinest-msg', 'bot');
+    typingDiv.textContent = '...';
+    typingDiv.id = 'typing-indicator';
+    chatMessages.appendChild(typingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    try {
+      const response = await fetch(KOCHINEST_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      });
+      const data = await response.json();
+      
+      document.getElementById('typing-indicator').remove();
+      addMessage(data.response || "Sorry, I couldn't process that.", 'bot');
+    } catch (err) {
+      document.getElementById('typing-indicator').remove();
+      addMessage("Connection error. Please try again or use WhatsApp.", 'bot');
+    }
+  }
+
+  chatSend.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
+</script>
