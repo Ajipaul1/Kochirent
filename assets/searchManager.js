@@ -214,9 +214,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const normalizedTerm = term.toLowerCase();
-        const resultCount = searchableInventory[tabType].reduce((count, keyword) => (
+        let resultCount = searchableInventory[tabType].reduce((count, keyword) => (
             normalizedTerm.includes(keyword) ? count + 1 : count
         ), 0);
+
+        if (resultCount === 0 && normalizedTerm) {
+            let isGooglePlace = false;
+            if (tabType === 'stay' && searchState.stay.place_id) isGooglePlace = true;
+            if (tabType === 'move' && (searchState.move.from.place_id || searchState.move.to.place_id)) isGooglePlace = true;
+            
+            if (isGooglePlace) {
+                resultCount = 1;
+            }
+        }
 
         if (resultCount === 0 && normalizedTerm) {
             showNoResults(term, tabType);
@@ -291,12 +301,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        window.__kochiNestMapCallback = () => {
+            targets.forEach(bindPlacesAutocomplete);
+        };
+
         const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&libraries=places&callback=__kochiNestMapCallback`;
         script.async = true;
         script.defer = true;
         script.dataset.googleMapsLoader = 'kochinest';
-        script.onload = () => targets.forEach(bindPlacesAutocomplete);
         script.onerror = () => console.error('Failed to load Google Maps Places library.');
         document.head.appendChild(script);
     };
