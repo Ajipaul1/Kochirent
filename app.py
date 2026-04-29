@@ -1,15 +1,22 @@
 import os
 from flask import Flask, request, jsonify
-from twilio.twiml.messaging_response import MessagingResponse
 from google import genai
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for the web widget
 
-# Initialize Gemini API using Application Default Credentials (ADC)
-# This requires NO explicit API key if running on GCP with a service account
-client = genai.Client()
+# Use GEMINI_API_KEY from environment variables
+api_key = os.environ.get("GEMINI_API_KEY")
+if api_key:
+    client = genai.Client(api_key=api_key)
+else:
+    # If no key, it might use ADC but requires proper setup. We try default.
+    try:
+        client = genai.Client()
+    except Exception as e:
+        client = None
+        print(f"Warning: Gemini Client not initialized. Error: {e}")
 
 # Core context for the AI Assistant based on the KochiNest site structure
 SYSTEM_PROMPT = """
@@ -17,7 +24,9 @@ You are the official AI Assistant for KochiNest, the Kochi Local Hub for Rentals
 Your tone should be helpful, professional, local to Kochi, and concise.
 
 Core Information:
-1. Contact: For urgent requests, users can call or WhatsApp +91 6282520339.
+1. Contact Options: Provide these options for booking or urgent requests:
+   - WhatsApp: <a href="https://wa.me/916282520339" target="_blank" style="color: #10b981; text-decoration: underline;">Chat on WhatsApp (+91 6282520339)</a>
+   - Email: <a href="mailto:info@kochirent.com" style="color: #10b981; text-decoration: underline;">info@kochirent.com</a>
 2. Locations Served: Kakkanad, Edappally, Aluva, Fort Kochi, Kalamassery, Airport, Marine Drive, Kadavanthra, MG Road, Palarivattom.
 3. Services Offered:
    - Rentals (Stay): 1 BHK, 2 BHK, Studio Apartments, Flats, Rooms, Luxury Villas, PG/Sharing, Service Apartments.
@@ -27,28 +36,44 @@ Core Information:
    - Logistics: Packers and Movers, House Shifting.
 
 Instructions:
-- When a user asks about a service we provide, confirm we have it and ask for their specific location in Kochi.
-- If they want to book or need urgent help, advise them to use the "Book Now" WhatsApp button on the site or contact +91 6282520339.
+- When a user asks about a service we provide, confirm we have it, ask for their specific location in Kochi, and provide the WhatsApp and Email links so they can send their details to book.
 - If asked about something we don't provide, politely decline.
+- Format your response using basic HTML tags (like <br> for line breaks and <strong> for bold) because the chat widget renders HTML.
 """
 
 def generate_gemini_response(user_message: str) -> str:
-    """Helper function to call Gemini with the system context using ADC."""
+    """Helper function to call Gemini with the system context."""
+    if not client:
+        return "System configuration error: Gemini API key is missing. Please contact the administrator."
     try:
         # Prepend the system prompt to guide the model's behavior for this turn
         prompt = f"{SYSTEM_PROMPT}\n\nUser: {user_message}\nAssistant:"
         
-        # Use the specific 3.1 Pro Preview model as requested
+        # Use gemini-2.5-flash as default, it's fast and reliable
         response = client.models.generate_content(
-            model='gemini-3.1-pro-preview',
+            model='gemini-2.5-flash',
             contents=prompt,
         )
-        return response.text.strip()
+        # Convert simple markdown to HTML (simple bold and linebreaks)
+        text = response.text.strip()
+        text = text.replace('**', '<strong>').replace('\n', '<br>')
+        # fix mismatched strongs (hacky but mostly fine for simple md)
+        count = 0
+        fixed = []
+        for word in text.split('<strong>'):
+            if count % 2 == 1:
+                fixed.append('</strong>' + word)
+            else:
+                fixed.append(word)
+            count += 1
+        text = '<strong>'.join(fixed)
+        return text
     except Exception as e:
         print(f"Gemini API Error: {e}")
-        return "I'm having trouble connecting right now. Please reach out to us directly on WhatsApp at +91 6282520339."
+        return "I'm having trouble connecting right now. Please <a href='https://wa.me/916282520339' target='_blank' style='color: #10b981; text-decoration: underline;'>click here to reach out on WhatsApp</a> or email <a href='mailto:info@kochirent.com' style='color: #10b981; text-decoration: underline;'>info@kochirent.com</a>."
 
 @app.route('/api/chat', methods=['POST'])
+@app.route('/chat', methods=['POST'])  # Support both paths
 def web_chat():
     """Endpoint for the frontend web widget."""
     data = request.get_json()
@@ -59,25 +84,6 @@ def web_chat():
         
     ai_response = generate_gemini_response(user_message)
     return jsonify({'response': ai_response})
-
-@app.route('/webhook/whatsapp', methods=['POST'])
-def whatsapp_webhook():
-    """Endpoint for Twilio WhatsApp Webhook."""
-    # Twilio sends data as form-urlencoded
-    incoming_msg = request.values.get('Body', '').strip()
-    sender = request.values.get('From', '')
-    
-    print(f"Received WhatsApp message from {sender}: {incoming_msg}")
-    
-    # Get response from Gemini
-    ai_response = generate_gemini_response(incoming_msg)
-    
-    # Create Twilio XML response
-    twiml_response = MessagingResponse()
-    msg = twiml_response.message()
-    msg.body(ai_response)
-    
-    return str(twiml_response), 200, {'Content-Type': 'application/xml'}
 
 @app.route('/health', methods=['GET'])
 def health_check():

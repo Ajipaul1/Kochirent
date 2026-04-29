@@ -1050,7 +1050,7 @@
   function addMessage(text, sender) {
     const msgDiv = document.createElement('div');
     msgDiv.classList.add('kochinest-msg', sender);
-    msgDiv.textContent = text;
+    msgDiv.innerHTML = text;
     chatMessages.appendChild(msgDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
@@ -1082,7 +1082,7 @@
       addMessage(data.response || "Sorry, I couldn't process that.", 'bot');
     } catch (err) {
       document.getElementById('typing-indicator').remove();
-      addMessage("Connection error. Please try again or use WhatsApp.", 'bot');
+      addMessage("I'm currently undergoing maintenance, but you can still book or ask questions by <a href='https://wa.me/916282520339' target='_blank' style='color: #10b981; text-decoration: underline;'>chatting on WhatsApp</a> or emailing <a href='mailto:info@kochirent.com' style='color: #10b981; text-decoration: underline;'>info@kochirent.com</a>.", 'bot');
     }
   }
 
