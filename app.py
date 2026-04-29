@@ -1,18 +1,15 @@
 import os
 from flask import Flask, request, jsonify
 from twilio.twiml.messaging_response import MessagingResponse
-import google.generativeai as genai
+from google import genai
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for the web widget
 
-# Initialize Gemini API
-# Make sure to set GEMINI_API_KEY in your environment variables
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-
-# Use the recommended model
-model = genai.GenerativeModel('gemini-2.5-flash')
+# Initialize Gemini API using Application Default Credentials (ADC)
+# This requires NO explicit API key if running on GCP with a service account
+client = genai.Client()
 
 # Core context for the AI Assistant based on the KochiNest site structure
 SYSTEM_PROMPT = """
@@ -21,19 +18,13 @@ Your tone should be helpful, professional, local to Kochi, and concise.
 
 Core Information:
 1. Contact: For urgent requests, users can call or WhatsApp +91 6282520339.
-2. Locations Served: Kakkanad, Edappally, Aluva, Fort Kochi, Kalamassery, Airport, Marine Drive, Ernakulam.
+2. Locations Served: Kakkanad, Edappally, Aluva, Fort Kochi, Kalamassery, Airport, Marine Drive, Kadavanthra, MG Road, Palarivattom.
 3. Services Offered:
-   - Rentals (Stay): 1 BHK, 2 BHK, Studio Apartments, Flats, Rooms, Luxury Villas, PG/Sharing.
+   - Rentals (Stay): 1 BHK, 2 BHK, Studio Apartments, Flats, Rooms, Luxury Villas, PG/Sharing, Service Apartments.
    - Rentals (Move): Bike rentals (Scooters, Royal Enfield, Activa, Honda Dio), Self-drive cars, Cars with driver, Luxury/Wedding cars, Cycle rentals.
    - Equipment Rentals: Cameras, Furniture, Generators.
    - Home Services (Repair): AC Repair, Washing Machine Repair, Fridge Repair, TV Repair, iPhone Repair, Plumbing, Electrical.
    - Logistics: Packers and Movers, House Shifting.
-4. Pricing hints (approximate):
-   - Bike rentals start from ₹299 - ₹499/day.
-   - Self-drive cars start from ₹899/day.
-   - 1 BHK flats typically ₹12,000 - ₹13,500/month.
-   - Professional Shifting services start at ₹4,999.
-5. Business Owners: Can list their service on KochiNest for ₹499+.
 
 Instructions:
 - When a user asks about a service we provide, confirm we have it and ask for their specific location in Kochi.
@@ -42,11 +33,16 @@ Instructions:
 """
 
 def generate_gemini_response(user_message: str) -> str:
-    """Helper function to call Gemini with the system context."""
+    """Helper function to call Gemini with the system context using ADC."""
     try:
         # Prepend the system prompt to guide the model's behavior for this turn
         prompt = f"{SYSTEM_PROMPT}\n\nUser: {user_message}\nAssistant:"
-        response = model.generate_content(prompt)
+        
+        # Use the specific 3.1 Pro Preview model as requested
+        response = client.models.generate_content(
+            model='gemini-3.1-pro-preview',
+            contents=prompt,
+        )
         return response.text.strip()
     except Exception as e:
         print(f"Gemini API Error: {e}")

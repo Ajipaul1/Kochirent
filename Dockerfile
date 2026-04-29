@@ -1,21 +1,26 @@
-# Use the official Python image
+# Use the official lightweight Python image.
+# https://hub.docker.com/_/python
 FROM python:3.11-slim
 
-# Set environment variables
+# Allow statements and log messages to immediately appear in the Knative logs
 ENV PYTHONUNBUFFERED=1
 ENV PORT=8080
 
-# Create and set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy the requirements file into the container
+# Copy the requirements file to the container
 COPY requirements.txt .
 
-# Install dependencies
+# Install application dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code
+# Copy the local code to the container
 COPY . .
 
-# Run the application using Gunicorn (production WSGI server)
+# Run the web service on container startup. Here we use the gunicorn
+# webserver, with one worker process and 8 threads.
+# For environments with multiple CPU cores, increase the number of workers
+# to be equal to the cores available.
+# Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
 CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
