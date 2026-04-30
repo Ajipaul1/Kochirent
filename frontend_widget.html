@@ -100,9 +100,39 @@
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
 </div>
 
-<script>
-  // Tell the website to talk to your Cloud Run backend
-  const KOCHINEST_API_URL = "https://kochinest-backend-1068269839614.asia-south1.run.app/chat";
+<script type="importmap">
+  {
+    "imports": {
+      "@google/generative-ai": "https://esm.run/@google/generative-ai"
+    }
+  }
+</script>
+<script type="module">
+  import { GoogleGenerativeAI } from "@google/generative-ai";
+
+  const API_KEY = "AIzaSyCN2gvj8VMtwMGpjpqPcNZn41HWXm0c9OY";
+  const genAI = new GoogleGenerativeAI(API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+  const SYSTEM_PROMPT = `You are the official AI Assistant for KochiNest, the Kochi Local Hub for Rentals, Home Repairs, and Shifting Services.
+Your tone should be helpful, professional, local to Kochi, and concise.
+
+Core Information:
+1. Contact Options: Provide these options for booking or urgent requests:
+   - WhatsApp: <a href="https://wa.me/916282520339" target="_blank" style="color: #10b981; text-decoration: underline;">Chat on WhatsApp (+91 6282520339)</a>
+   - Email: <a href="mailto:info@kochirent.com" style="color: #10b981; text-decoration: underline;">info@kochirent.com</a>
+2. Locations Served: Kakkanad, Edappally, Aluva, Fort Kochi, Kalamassery, Airport, Marine Drive, Kadavanthra, MG Road, Palarivattom.
+3. Services Offered:
+   - Rentals (Stay): 1 BHK, 2 BHK, Studio Apartments, Flats, Rooms, Luxury Villas, PG/Sharing, Service Apartments.
+   - Rentals (Move): Bike rentals (Scooters, Royal Enfield, Activa, Honda Dio), Self-drive cars, Cars with driver, Luxury/Wedding cars, Cycle rentals.
+   - Equipment Rentals: Cameras, Furniture, Generators.
+   - Home Services (Repair): AC Repair, Washing Machine Repair, Fridge Repair, TV Repair, iPhone Repair, Plumbing, Electrical.
+   - Logistics: Packers and Movers, House Shifting.
+
+Instructions:
+- When a user asks about a service we provide, confirm we have it, ask for their specific location in Kochi, and provide the WhatsApp and Email links so they can send their details to book.
+- If asked about something we don't provide, politely decline.
+- Format your response using basic HTML tags (like <br> for line breaks and <strong> for bold) because the chat widget renders HTML.`;
 
   const chatWidget = document.getElementById('kochinest-chat-widget');
   const chatToggle = document.getElementById('kochinest-chat-toggle');
@@ -143,18 +173,20 @@
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
     try {
-      const response = await fetch(KOCHINEST_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text })
-      });
-      const data = await response.json();
+      const prompt = `${SYSTEM_PROMPT}\n\nUser: ${text}\nAssistant:`;
+      const result = await model.generateContent(prompt);
+      let responseText = result.response.text();
       
+      // Convert basic markdown to HTML
+      responseText = responseText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      responseText = responseText.replace(/\n/g, '<br>');
+
       document.getElementById('typing-indicator').remove();
-      addMessage(data.response || "Sorry, I couldn't process that.", 'bot');
+      addMessage(responseText, 'bot');
     } catch (err) {
+      console.error("Gemini API Error:", err);
       document.getElementById('typing-indicator').remove();
-      addMessage("I'm currently undergoing maintenance, but you can still book or ask questions by <a href='https://wa.me/916282520339' target='_blank' style='color: #10b981; text-decoration: underline;'>chatting on WhatsApp</a> or emailing <a href='mailto:info@kochirent.com' style='color: #10b981; text-decoration: underline;'>info@kochirent.com</a>.", 'bot');
+      addMessage("I'm having trouble connecting right now. Please <a href='https://wa.me/916282520339' target='_blank' style='color: #10b981; text-decoration: underline;'>chatting on WhatsApp</a> or emailing <a href='mailto:info@kochirent.com' style='color: #10b981; text-decoration: underline;'>info@kochirent.com</a>.", 'bot');
     }
   }
 
