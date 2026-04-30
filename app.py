@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()  # Load environment variables from .env file
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for the web widget
+# This allows kochirent.com to talk to the AI backend
+CORS(app, resources={r"/*": {"origins": "https://kochirent.com"}})  
 
 # Use GEMINI_API_KEY from environment variables
 api_key = os.environ.get("GEMINI_API_KEY")
