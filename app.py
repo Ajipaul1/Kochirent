@@ -2,6 +2,9 @@ import os
 from flask import Flask, request, jsonify
 from google import genai
 from flask_cors import CORS
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env file
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for the web widget
