@@ -254,4 +254,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Dynamic Loading of Aggregated Rentals (SEO Safe)
+    const aggregatedSection = document.getElementById('aggregatedRentalsSection');
+    const aggregatedContainer = document.getElementById('aggregatedCardsContainer');
+    
+    if (aggregatedSection && aggregatedContainer) {
+        fetch('kochinest_scraped_data.json')
+            .then(response => {
+                if (!response.ok) throw new Error('No scraped data found');
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.length > 0) {
+                    aggregatedContainer.innerHTML = ''; // Clear fallback
+                    data.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'verified-card';
+                        card.style.flex = '0 0 140px';
+                        
+                        // Default image if missing or invalid
+                        const imgSrc = item.image && item.image.startsWith('http') ? item.image : 'https://via.placeholder.com/300x200?text=Listing';
+                        
+                        card.innerHTML = `
+                            <img src="${imgSrc}" alt="${item.title}" loading="lazy">
+                            <div style="font-size: 8px; color: #fff; background: #004d40; display: inline-block; padding: 2px 5px; border-radius: 4px; margin-bottom: 4px;">FROM ${item.source.toUpperCase()}</div>
+                            <h3 style="font-size: 11px; margin: 4px 0;">${item.title.substring(0, 30)}${item.title.length > 30 ? '...' : ''}</h3>
+                            <p style="font-size: 10px; margin: 0; color: #666;"><i class="fas fa-map-marker-alt" style="font-size: 8px;"></i> ${item.location}</p>
+                            <div class="price" style="font-size: 13px; margin-top: 4px;">${item.price}</div>
+                        `;
+                        aggregatedContainer.appendChild(card);
+                    });
+                    // Only show section if we have data
+                    aggregatedSection.style.display = 'block';
+                }
+            })
+            .catch(err => {
+                console.log('Aggregated rentals not available yet:', err);
+            });
+    }
 });
