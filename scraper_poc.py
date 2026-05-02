@@ -59,12 +59,28 @@ def scrape_olx_with_selenium():
                     continue
                 
                 # Attempt to extract image
-                img_url = "https://via.placeholder.com/300x200?text=No+Image"
+                img_url = "https://via.placeholder.com/300x200?text=Listing"
                 try:
+                    # Often images in React are wrapped in picture tags or lazy loaded
                     img_elem = item.find_element(By.TAG_NAME, "img")
                     src = img_elem.get_attribute("src")
+                    
+                    # If it's a tiny placeholder or data URI, try to get srcset
+                    if not src or "data:image" in src or "svg" in src:
+                        src = img_elem.get_attribute("srcset")
+                        if src:
+                            src = src.split(',')[0].split(' ')[0]
+                            
                     if src and "http" in src:
                         img_url = src
+                except:
+                    pass
+                
+                # Attempt to extract link
+                link_url = ""
+                try:
+                    a_elem = item.find_element(By.TAG_NAME, "a")
+                    link_url = a_elem.get_attribute("href")
                 except:
                     pass
                 
@@ -90,6 +106,7 @@ def scrape_olx_with_selenium():
                         "price": price,
                         "location": location,
                         "image": img_url,
+                        "link": link_url,
                         "source": "OLX"
                     })
                     count += 1

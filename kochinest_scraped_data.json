@@ -1,58 +1,30 @@
 [
     {
-        "title": "2 BHK - 2 Bathroom - 1100 sqft",
-        "price": "₹ 5,500",
-        "location": "Kochi",
-        "image": "https://via.placeholder.com/300x200?text=No+Image",
-        "source": "OLX"
+        "title": "2 BHK Fully Furnished Flat",
+        "price": "\u20b9 22,000",
+        "location": "Edappally, Kochi",
+        "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop",
+        "source": "Simulated"
     },
     {
-        "title": "1 BHK - 1 Bathroom - 650 sqft",
-        "price": "₹ 20,026",
-        "location": "Kochi",
-        "image": "https://via.placeholder.com/300x200?text=No+Image",
-        "source": "OLX"
+        "title": "1 BHK Studio Apartment",
+        "price": "\u20b9 15,000",
+        "location": "Kakkanad, Kochi",
+        "image": "https://images.unsplash.com/photo-1502672260266-1c1e5250ad07?w=500&auto=format&fit=crop",
+        "source": "Simulated"
     },
     {
-        "title": "4 BHK - 4 Bathroom - 2500 sqft",
-        "price": "₹ 3,500",
-        "location": "Kochi",
-        "image": "https://via.placeholder.com/300x200?text=No+Image",
-        "source": "OLX"
+        "title": "Spacious 3 BHK for Family",
+        "price": "\u20b9 35,000",
+        "location": "Kadavanthra, Kochi",
+        "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500&auto=format&fit=crop",
+        "source": "Simulated"
     },
     {
-        "title": "4 BHK - 4 Bathroom - 2400 sqft",
-        "price": "₹ 30,226",
-        "location": "Kochi",
-        "image": "https://via.placeholder.com/300x200?text=No+Image",
-        "source": "OLX"
-    },
-    {
-        "title": "Flat for rent near hilite mall",
-        "price": "₹ 35,000",
-        "location": "Kochi",
-        "image": "https://via.placeholder.com/300x200?text=No+Image",
-        "source": "OLX"
-    },
-    {
-        "title": "Fully Furnished 2bhk luxury flat for sale near Tho...",
-        "price": "₹ 77,00,000",
-        "location": "Kochi",
-        "image": "https://via.placeholder.com/300x200?text=No+Image",
-        "source": "OLX"
-    },
-    {
-        "title": "New 2BHK house for Rent",
-        "price": "₹ 25,000",
-        "location": "Kochi",
-        "image": "https://via.placeholder.com/300x200?text=No+Image",
-        "source": "OLX"
-    },
-    {
-        "title": "1 BHK - 2 Bathroom - 900 sqft",
-        "price": "₹ 17,000",
-        "location": "Kochi",
-        "image": "https://via.placeholder.com/300x200?text=No+Image",
-        "source": "OLX"
+        "title": "Luxury 4 BHK Villa",
+        "price": "\u20b9 55,000",
+        "location": "Panampilly Nagar, Kochi",
+        "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&auto=format&fit=crop",
+        "source": "Simulated"
     }
 ]
