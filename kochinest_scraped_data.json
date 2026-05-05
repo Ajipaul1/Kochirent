@@ -1,30 +1,66 @@
 [
     {
-        "title": "2 BHK Fully Furnished Flat",
-        "price": "\u20b9 22,000",
-        "location": "Edappally, Kochi",
-        "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop",
-        "source": "Simulated"
+        "title": "2 BHK - 2 Bathroom - 1100 sqft",
+        "price": "₹ 5,500",
+        "location": "Kochi",
+        "image": "https://via.placeholder.com/300x200?text=Listing",
+        "link": "https://www.olx.in/item/for-rent-houses-apartments-c1723-2-bhk-apartments-1100-sq-ft-in-kozhikode-kerala-iid-1842169308",
+        "source": "OLX"
     },
     {
-        "title": "1 BHK Studio Apartment",
-        "price": "\u20b9 15,000",
-        "location": "Kakkanad, Kochi",
-        "image": "https://images.unsplash.com/photo-1502672260266-1c1e5250ad07?w=500&auto=format&fit=crop",
-        "source": "Simulated"
+        "title": "1 BHK - 1 Bathroom - 650 sqft",
+        "price": "₹ 20,026",
+        "location": "Kochi",
+        "image": "https://via.placeholder.com/300x200?text=Listing",
+        "link": "https://www.olx.in/item/for-rent-houses-apartments-c1723-1-bhk-apartments-650-sq-ft-in-asma-tower-chowk-kozhikode-iid-1841762035",
+        "source": "OLX"
     },
     {
-        "title": "Spacious 3 BHK for Family",
-        "price": "\u20b9 35,000",
-        "location": "Kadavanthra, Kochi",
-        "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500&auto=format&fit=crop",
-        "source": "Simulated"
+        "title": "4 BHK - 4 Bathroom - 2500 sqft",
+        "price": "₹ 3,500",
+        "location": "Kochi",
+        "image": "https://via.placeholder.com/300x200?text=Listing",
+        "link": "https://www.olx.in/item/for-rent-houses-apartments-c1723-4-bhk-houses-villas-2500-sq-ft-in-kozhikode-kerala-iid-1840720345",
+        "source": "OLX"
     },
     {
-        "title": "Luxury 4 BHK Villa",
-        "price": "\u20b9 55,000",
-        "location": "Panampilly Nagar, Kochi",
-        "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&auto=format&fit=crop",
-        "source": "Simulated"
+        "title": "4 BHK - 4 Bathroom - 2400 sqft",
+        "price": "₹ 30,226",
+        "location": "Kochi",
+        "image": "https://via.placeholder.com/300x200?text=Listing",
+        "link": "https://www.olx.in/item/for-rent-houses-apartments-c1723-4-bhk-houses-villas-2400-sq-ft-in-asma-tower-chowk-kozhikode-iid-1841567382",
+        "source": "OLX"
+    },
+    {
+        "title": "Flat for rent near hilite mall",
+        "price": "₹ 35,000",
+        "location": "Kochi",
+        "image": "https://via.placeholder.com/300x200?text=Listing",
+        "link": "https://www.olx.in/item/for-rent-houses-apartments-c1723-2-bhk-apartments-850-sq-ft-in-kozhikode-kerala-iid-1839983941",
+        "source": "OLX"
+    },
+    {
+        "title": "House for rent, 15000 per month and 2000 for maint...",
+        "price": "₹ 17,000",
+        "location": "Kochi",
+        "image": "https://via.placeholder.com/300x200?text=Listing",
+        "link": "https://www.olx.in/item/for-rent-houses-apartments-c1723-1-bhk-apartments-600-sq-ft-in-odumbra-olavanna-iid-1841356608",
+        "source": "OLX"
+    },
+    {
+        "title": "Rooms 4Bachelors & couples. Rent Single Room 7000 ...",
+        "price": "₹ 5,000",
+        "location": "Kochi",
+        "image": "https://via.placeholder.com/300x200?text=Listing",
+        "link": "https://www.olx.in/item/for-rent-houses-apartments-c1723-1-bhk-builder-floors-1000-sq-ft-in-kallai-kozhikode-iid-1707275998",
+        "source": "OLX"
+    },
+    {
+        "title": "Studio furnished flat for rent at Thondayad bypass",
+        "price": "₹ 21,000",
+        "location": "Kochi",
+        "image": "https://via.placeholder.com/300x200?text=Listing",
+        "link": "https://www.olx.in/item/for-rent-houses-apartments-c1723-1-bhk-apartments-511-sq-ft-in-thondayad-kozhikode-iid-1632686399",
+        "source": "OLX"
     }
 ]

@@ -16,7 +16,7 @@ if (languageToggle) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const whatsappPhoneNumber = "YOUR_PHONE_NUMBER";
+    const whatsappPhoneNumber = "916282520339";
     const defaultWhatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent("Hi KochiNest, I'm interested in your service")}`;
     const scrollMap = {
         top: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
@@ -277,11 +277,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         const imgSrc = item.image && item.image.startsWith('http') ? item.image : 'https://via.placeholder.com/300x200?text=Listing';
                         
                         card.innerHTML = `
-                            <img src="${imgSrc}" alt="${item.title}" loading="lazy">
-                            <div style="font-size: 8px; color: #fff; background: #004d40; display: inline-block; padding: 2px 5px; border-radius: 4px; margin-bottom: 4px;">FROM ${item.source.toUpperCase()}</div>
-                            <h3 style="font-size: 11px; margin: 4px 0;">${item.title.substring(0, 30)}${item.title.length > 30 ? '...' : ''}</h3>
-                            <p style="font-size: 10px; margin: 0; color: #666;"><i class="fas fa-map-marker-alt" style="font-size: 8px;"></i> ${item.location}</p>
-                            <div class="price" style="font-size: 13px; margin-top: 4px;">${item.price}</div>
+                            <a href="${item.link || '#'}" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                                <img src="${imgSrc}" alt="${item.title}" loading="lazy">
+                                <div style="font-size: 8px; color: #fff; background: #004d40; display: inline-block; padding: 2px 5px; border-radius: 4px; margin-bottom: 4px;">FROM ${item.source.toUpperCase()}</div>
+                                <h3 style="font-size: 11px; margin: 4px 0;">${item.title.substring(0, 30)}${item.title.length > 30 ? '...' : ''}</h3>
+                                <p style="font-size: 10px; margin: 0; color: #666;"><i class="fas fa-map-marker-alt" style="font-size: 8px;"></i> ${item.location}</p>
+                                <div class="price" style="font-size: 13px; margin-top: 4px;">${item.price}</div>
+                            </a>
                         `;
                         aggregatedContainer.appendChild(card);
                     });
