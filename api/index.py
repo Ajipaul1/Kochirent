@@ -7,15 +7,14 @@ from dotenv import load_dotenv
 load_dotenv()  # Load environment variables from .env file
 
 app = Flask(__name__)
-# This allows kochirent.com to talk to the AI backend
-CORS(app, resources={r"/*": {"origins": "https://kochirent.com"}})  
+# Enable CORS for all routes to make local testing and Vercel preview deployments work seamlessly
+CORS(app)  
 
 # Use GEMINI_API_KEY from environment variables
 api_key = os.environ.get("GEMINI_API_KEY")
 if api_key:
     client = genai.Client(api_key=api_key)
 else:
-    # If no key, it might use ADC but requires proper setup. We try default.
     try:
         client = genai.Client()
     except Exception as e:
@@ -91,10 +90,10 @@ def web_chat():
 
 @app.route('/health', methods=['GET'])
 def health_check():
-    """Simple health check endpoint for Cloud Run."""
+    """Simple health check endpoint."""
     return "OK", 200
 
 if __name__ == '__main__':
-    # Cloud Run expects the app to listen on port 8080 by default
+    # For local running
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port)
