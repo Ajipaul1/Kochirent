@@ -295,4 +295,269 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Aggregated rentals not available yet:', err);
             });
     }
+
+    // === AUTH & CONTACT UNLOCK LOGIC ===
+    let currentUser = null;
+    try {
+        const storedUser = localStorage.getItem('auth_user');
+        if (storedUser) {
+            currentUser = JSON.parse(storedUser);
+            updateAuthHeader();
+        }
+    } catch (e) {
+        console.error('Failed to parse stored user:', e);
+    }
+
+    function updateAuthHeader() {
+        const loginBtnDesktop = document.querySelector('.desktop-login');
+        const loginBtnMobile = document.querySelector('.drawer-location'); // Hamburger login description
+        
+        if (currentUser) {
+            const displayName = currentUser.displayName || currentUser.email || currentUser.phone || 'User';
+            if (loginBtnDesktop) {
+                loginBtnDesktop.textContent = displayName.substring(0, 10) + (displayName.length > 10 ? '..' : '');
+                loginBtnDesktop.setAttribute('title', displayName);
+            }
+            if (loginBtnMobile) {
+                loginBtnMobile.textContent = `Logged in: ${displayName}`;
+            }
+        } else {
+            if (loginBtnDesktop) loginBtnDesktop.textContent = 'Login / Sign up';
+            if (loginBtnMobile) loginBtnMobile.textContent = 'Login for Premium Features';
+        }
+    }
+
+    // OTP Auth UI handlers
+    const sendOtpBtn = document.getElementById('sendOtpBtn');
+    const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+    const resendOtpBtn = document.getElementById('resendOtpBtn');
+    const backToInputBtn = document.getElementById('backToInputBtn');
+    
+    const authIdentityInput = document.getElementById('authIdentityInput');
+    const authOtpInput = document.getElementById('authOtpInput');
+    const authInputStep = document.getElementById('authInputStep');
+    const authOtpStep = document.getElementById('authOtpStep');
+    
+    const authStatusMessage = document.getElementById('authStatusMessage');
+    const otpTimer = document.getElementById('otpTimer');
+    
+    let countdownTimerInterval = null;
+
+    function showStatus(text, type) {
+        if (!authStatusMessage) return;
+        authStatusMessage.textContent = text;
+        authStatusMessage.className = `auth-status-msg ${type}`;
+        authStatusMessage.style.display = 'block';
+    }
+
+    function clearStatus() {
+        if (authStatusMessage) {
+            authStatusMessage.textContent = '';
+            authStatusMessage.style.display = 'none';
+        }
+    }
+
+    function startOtpTimer() {
+        let count = 60;
+        if (resendOtpBtn) resendOtpBtn.style.display = 'none';
+        if (otpTimer) otpTimer.style.display = 'inline';
+        
+        clearInterval(countdownTimerInterval);
+        countdownTimerInterval = setInterval(() => {
+            count--;
+            if (otpTimer) otpTimer.textContent = `Resend in ${count}s`;
+            if (count <= 0) {
+                clearInterval(countdownTimerInterval);
+                if (otpTimer) otpTimer.style.display = 'none';
+                if (resendOtpBtn) resendOtpBtn.style.display = 'inline';
+            }
+        }, 1000);
+    }
+
+    // Call send-otp API
+    async function handleSendOtp() {
+        const identity = authIdentityInput?.value.trim();
+        if (!identity) {
+            showStatus('Please enter an email or phone number.', 'error');
+            return;
+        }
+
+        clearStatus();
+        if (sendOtpBtn) {
+            sendOtpBtn.disabled = true;
+            sendOtpBtn.textContent = 'Sending...';
+        }
+
+        try {
+            const response = await fetch('/api/auth/send-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ identity })
+            });
+            const data = await response.json();
+            if (response.ok && data.success) {
+                showStatus('OTP sent! Please check your email inbox or console log.', 'success');
+                if (authInputStep) authInputStep.style.display = 'none';
+                if (authOtpStep) authOtpStep.style.display = 'block';
+                startOtpTimer();
+            } else {
+                showStatus(data.error || 'Failed to send OTP.', 'error');
+            }
+        } catch (e) {
+            console.error('Send OTP error:', e);
+            showStatus('Connection error. Please try again.', 'error');
+        } finally {
+            if (sendOtpBtn) {
+                sendOtpBtn.disabled = false;
+                sendOtpBtn.textContent = 'Send OTP';
+            }
+        }
+    }
+
+    // Call verify-otp API
+    async function handleVerifyOtp() {
+        const identity = authIdentityInput?.value.trim();
+        const otp = authOtpInput?.value.trim();
+
+        if (!identity || !otp) {
+            showStatus('Please enter the 6-digit OTP.', 'error');
+            return;
+        }
+
+        clearStatus();
+        if (verifyOtpBtn) {
+            verifyOtpBtn.disabled = true;
+            verifyOtpBtn.textContent = 'Verifying...';
+        }
+
+        try {
+            const response = await fetch('/api/auth/verify-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ identity, otp })
+            });
+            const data = await response.json();
+            if (response.ok && data.success) {
+                currentUser = data.user;
+                localStorage.setItem('auth_user', JSON.stringify(currentUser));
+                updateAuthHeader();
+                showStatus('Successfully logged in!', 'success');
+                setTimeout(() => {
+                    closeProfileModal();
+                    // Reset modal steps
+                    if (authInputStep) authInputStep.style.display = 'block';
+                    if (authOtpStep) authOtpStep.style.display = 'none';
+                    if (authOtpInput) authOtpInput.value = '';
+                    clearStatus();
+                }, 1000);
+            } else {
+                showStatus(data.error || 'Invalid OTP. Please try again.', 'error');
+            }
+        } catch (e) {
+            console.error('Verify OTP error:', e);
+            showStatus('Connection error. Please verify code.', 'error');
+        } finally {
+            if (verifyOtpBtn) {
+                verifyOtpBtn.disabled = false;
+                verifyOtpBtn.textContent = 'Verify & Log In';
+            }
+        }
+    }
+
+    sendOtpBtn?.addEventListener('click', handleSendOtp);
+    verifyOtpBtn?.addEventListener('click', handleVerifyOtp);
+    resendOtpBtn?.addEventListener('click', handleSendOtp);
+    
+    backToInputBtn?.addEventListener('click', () => {
+        if (authInputStep) authInputStep.style.display = 'block';
+        if (authOtpStep) authOtpStep.style.display = 'none';
+        clearStatus();
+    });
+
+    // Contact Unlocking logic
+    window.handleUnlockContact = async function(listingId, rentPrice, buttonElement) {
+        if (!currentUser) {
+            openProfileModal();
+            // Show custom alert inside status
+            setTimeout(() => {
+                showStatus('Please Log In or Sign Up first to unlock contact details.', 'error');
+            }, 200);
+            return;
+        }
+
+        const confirmMsg = `Unlock Owner Contact Number?\n\nThis will simulate a ₹99 payment.\nIf the deal is not successful, you can click refund instantly.`;
+        if (!confirm(confirmMsg)) return;
+
+        const originalText = buttonElement.innerHTML;
+        buttonElement.disabled = true;
+        buttonElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+        try {
+            const response = await fetch('/api/listings/unlock', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    listing_id: listingId,
+                    user_id: currentUser.id
+                })
+            });
+            const data = await response.json();
+            if (response.ok && data.success) {
+                // Successfully unlocked! Replace button with contact details and refund action
+                buttonElement.parentNode.innerHTML = `
+                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 10px; margin-top: 12px; font-size: 13px; text-align: center; color: #166534; clear: both;">
+                        <p style="margin: 0 0 4px; font-weight: 700;"><i class="fas fa-phone-alt"></i> Contact: ${data.contact_number}</p>
+                        <button onclick="handleRequestRefund(${data.lead_id}, this)" style="background: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; margin-top: 6px;">Request ₹99 Refund</button>
+                    </div>
+                `;
+            } else {
+                alert(data.error || 'Failed to unlock listing.');
+                buttonElement.disabled = false;
+                buttonElement.innerHTML = originalText;
+            }
+        } catch (e) {
+            console.error('Unlock error:', e);
+            alert('Connection error. Please try again.');
+            buttonElement.disabled = false;
+            buttonElement.innerHTML = originalText;
+        }
+    };
+
+    // Refund logic
+    window.handleRequestRefund = async function(leadId, buttonElement) {
+        if (!confirm('Are you sure you want to request a refund of your ₹99 lead fee?\n\nThis will simulate an instant refund via Razorpay.')) return;
+
+        buttonElement.disabled = true;
+        buttonElement.textContent = 'Refunding...';
+
+        try {
+            const response = await fetch('/api/leads/refund', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    lead_id: leadId,
+                    user_id: currentUser.id
+                })
+            });
+            const data = await response.json();
+            if (response.ok && data.success) {
+                alert(data.message);
+                // Replace parent container with Refunded message
+                buttonElement.parentNode.innerHTML = `
+                    <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 10px; margin-top: 12px; font-size: 13px; text-align: center; color: #991b1b; font-weight: 700; width: 100%;">
+                        <i class="fas fa-check-circle"></i> ₹99 Refunded
+                    </div>
+                `;
+            } else {
+                alert(data.error || 'Failed to request refund.');
+                buttonElement.disabled = false;
+                buttonElement.textContent = 'Request ₹99 Refund';
+            }
+        } catch (e) {
+            console.error('Refund error:', e);
+            alert('Connection error. Please try again.');
+            buttonElement.disabled = false;
+            buttonElement.textContent = 'Request ₹99 Refund';
+        }
+    };
 });
