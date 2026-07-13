@@ -2423,3 +2423,16 @@ document.addEventListener('DOMContentLoaded', () => {
     color: #991b1b;
     border: 1px solid #fecaca;
 }
+
+
+/* Mobile Drawer Login/Logout Styles */
+.drawer-welcome {
+    transition: background 0.2s ease;
+}
+.drawer-welcome:active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
+.drawer-location {
+    font-size: 12px;
+    font-weight: 500;
+}

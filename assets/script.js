@@ -311,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateAuthHeader() {
         const loginBtnDesktop = document.querySelector('.desktop-login');
         const loginBtnMobile = document.querySelector('.drawer-location'); // Hamburger login description
+        const drawerTitle = document.querySelector('.drawer-welcome-title');
         
         if (currentUser) {
             const displayName = currentUser.displayName || currentUser.email || currentUser.phone || 'User';
@@ -318,13 +319,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 loginBtnDesktop.textContent = displayName.substring(0, 10) + (displayName.length > 10 ? '..' : '');
                 loginBtnDesktop.setAttribute('title', displayName);
             }
+            if (drawerTitle) {
+                drawerTitle.textContent = displayName.substring(0, 15) + (displayName.length > 15 ? '..' : '');
+            }
             if (loginBtnMobile) {
-                loginBtnMobile.textContent = `Logged in: ${displayName}`;
+                loginBtnMobile.textContent = 'Log Out Account';
+                loginBtnMobile.style.color = '#ef4444';
+                loginBtnMobile.style.textDecoration = 'underline';
             }
         } else {
             if (loginBtnDesktop) loginBtnDesktop.textContent = 'Login / Sign up';
-            if (loginBtnMobile) loginBtnMobile.textContent = 'Login for Premium Features';
+            if (drawerTitle) drawerTitle.textContent = 'KochiNest User';
+            if (loginBtnMobile) {
+                loginBtnMobile.textContent = 'Click to Login / Sign Up';
+                loginBtnMobile.style.color = 'rgba(255,255,255,0.7)';
+                loginBtnMobile.style.textDecoration = 'none';
+            }
         }
+    }
+
+    // Make mobile drawer profile section interactive (click to Login or Logout)
+    const drawerWelcome = document.querySelector('.drawer-welcome');
+    if (drawerWelcome) {
+        drawerWelcome.style.cursor = 'pointer';
+        drawerWelcome.addEventListener('click', () => {
+            if (!currentUser) {
+                openProfileModal();
+                const menuOverlay = document.getElementById('mobileMenuOverlay');
+                if (menuOverlay) menuOverlay.style.display = 'none';
+            } else {
+                if (confirm('Are you sure you want to log out?')) {
+                    localStorage.removeItem('auth_user');
+                    currentUser = null;
+                    updateAuthHeader();
+                    window.location.reload();
+                }
+            }
+        });
     }
 
     // OTP Auth UI handlers
