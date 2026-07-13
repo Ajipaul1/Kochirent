@@ -418,15 +418,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             // Phone Auth -> Call Firebase Auth
-            // Format phone number to international format (defaulting to +91 for India if not specified)
-            let formattedPhone = identity;
+            // Strip all spaces, dashes, parentheses
+            let formattedPhone = identity.replace(/[\s\-\(\)]/g, '');
+            // Strip all non-numeric characters except +
+            formattedPhone = formattedPhone.replace(/[^0-9+]/g, '');
+
             if (!formattedPhone.startsWith('+')) {
-                // Remove leading zero if present
-                if (formattedPhone.startsWith('0')) {
-                    formattedPhone = formattedPhone.substring(1);
+                // If they typed 12 digits starting with 91, add +
+                if (formattedPhone.length === 12 && formattedPhone.startsWith('91')) {
+                    formattedPhone = '+' + formattedPhone;
+                } else {
+                    // Remove leading zero if present
+                    if (formattedPhone.startsWith('0')) {
+                        formattedPhone = formattedPhone.substring(1);
+                    }
+                    formattedPhone = '+91' + formattedPhone;
                 }
-                formattedPhone = '+91' + formattedPhone;
             }
+            console.log("Firebase Auth Phone Number:", formattedPhone);
 
             try {
                 // Initialize reCAPTCHA verifier if not already initialized
