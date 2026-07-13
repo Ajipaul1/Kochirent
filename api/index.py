@@ -115,13 +115,14 @@ def send_otp_email(email, otp_code):
     smtp_port = int(os.environ.get('SMTP_PORT', 587))
     smtp_user = os.environ.get('SMTP_USER', 'info@kochirent.com')
     smtp_password = os.environ.get('SMTP_PASSWORD', '')
+    smtp_from = os.environ.get('SMTP_FROM') or smtp_user
 
     if not smtp_password:
         print(f"\n[DEV FALLBACK] SMTP_PASSWORD is not configured. OTP for {email} is: {otp_code}\n")
         return True
 
     msg = MIMEMultipart()
-    msg['From'] = smtp_user
+    msg['From'] = smtp_from
     msg['To'] = email
     msg['Subject'] = f"{otp_code} is your KochiNest Verification Code"
 
@@ -141,7 +142,7 @@ def send_otp_email(email, otp_code):
         server = smtplib.SMTP(smtp_server, smtp_port)
         server.starttls()
         server.login(smtp_user, smtp_password)
-        server.sendmail(smtp_user, email, msg.as_string())
+        server.sendmail(smtp_from, email, msg.as_string())
         server.close()
         return True
     except Exception as e:
