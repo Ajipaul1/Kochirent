@@ -254,6 +254,48 @@ def verify_otp():
         print(f"DB error verifying OTP: {e}")
         return jsonify({'error': 'Authentication failed due to database error'}), 500
 
+# 2b. Firebase login verification (registers user in Postgres DB if they verified via Firebase)
+@app.route('/api/auth/firebase-login', methods=['POST'])
+def firebase_login():
+    data = request.get_json() or {}
+    phone = (data.get('phone') or '').strip()
+    
+    if not phone:
+        return jsonify({'error': 'Phone number is required'}), 400
+        
+    conn = get_db_connection()
+    if not conn:
+         return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        
+        # Check if user already exists
+        cursor.execute("SELECT id, email, phone FROM users WHERE phone = %s;", (phone,))
+        user = cursor.fetchone()
+        
+        if not user:
+            # Create a new user with this verified phone number
+            cursor.execute("INSERT INTO users (phone) VALUES (%s) RETURNING id, email, phone;", (phone,))
+            user = cursor.fetchone()
+            print(f"Registered new Firebase user: {phone}")
+            
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'user': {
+                'id': user[0],
+                'email': user[1] or '',
+                'phone': user[2] or '',
+                'displayName': user[1] or user[2] or 'User'
+            }
+        })
+    except Exception as e:
+        print(f"DB error in firebase_login: {e}")
+        return jsonify({'error': 'Database error occurred during login'}), 500
+
 # 3. Unlock contact endpoint (simulates ₹99 fee)
 @app.route('/api/listings/unlock', methods=['POST'])
 def unlock_contact():

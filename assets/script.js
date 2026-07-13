@@ -388,28 +388,69 @@ document.addEventListener('DOMContentLoaded', () => {
             sendOtpBtn.textContent = 'Sending...';
         }
 
-        try {
-            const response = await fetch('/api/auth/send-otp', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ identity })
-            });
-            const data = await response.json();
-            if (response.ok && data.success) {
-                showStatus('OTP sent! Please check your email inbox or console log.', 'success');
+        const isEmail = identity.includes('@');
+
+        if (isEmail) {
+            // Email Auth -> Call SMTP backend API
+            try {
+                const response = await fetch('/api/auth/send-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ identity })
+                });
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    showStatus('OTP sent! Please check your email inbox.', 'success');
+                    if (authInputStep) authInputStep.style.display = 'none';
+                    if (authOtpStep) authOtpStep.style.display = 'block';
+                    startOtpTimer();
+                } else {
+                    showStatus(data.error || 'Failed to send OTP.', 'error');
+                }
+            } catch (e) {
+                console.error('Send OTP error:', e);
+                showStatus('Connection error. Please try again.', 'error');
+            } finally {
+                if (sendOtpBtn) {
+                    sendOtpBtn.disabled = false;
+                    sendOtpBtn.textContent = 'Send OTP';
+                }
+            }
+        } else {
+            // Phone Auth -> Call Firebase Auth
+            // Format phone number to international format (defaulting to +91 for India if not specified)
+            let formattedPhone = identity;
+            if (!formattedPhone.startsWith('+')) {
+                // Remove leading zero if present
+                if (formattedPhone.startsWith('0')) {
+                    formattedPhone = formattedPhone.substring(1);
+                }
+                formattedPhone = '+91' + formattedPhone;
+            }
+
+            try {
+                // Initialize reCAPTCHA verifier if not already initialized
+                if (!window.recaptchaVerifier) {
+                    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+                        'size': 'invisible'
+                    });
+                }
+
+                const confirmationResult = await window.firebaseAuth.signInWithPhoneNumber(formattedPhone, window.recaptchaVerifier);
+                window.confirmationResult = confirmationResult;
+                
+                showStatus('SMS OTP sent! Please check your mobile phone.', 'success');
                 if (authInputStep) authInputStep.style.display = 'none';
                 if (authOtpStep) authOtpStep.style.display = 'block';
                 startOtpTimer();
-            } else {
-                showStatus(data.error || 'Failed to send OTP.', 'error');
-            }
-        } catch (e) {
-            console.error('Send OTP error:', e);
-            showStatus('Connection error. Please try again.', 'error');
-        } finally {
-            if (sendOtpBtn) {
-                sendOtpBtn.disabled = false;
-                sendOtpBtn.textContent = 'Send OTP';
+            } catch (e) {
+                console.error('Firebase SMS send error:', e);
+                showStatus('Failed to send SMS OTP: ' + (e.message || 'Check phone number format.'), 'error');
+            } finally {
+                if (sendOtpBtn) {
+                    sendOtpBtn.disabled = false;
+                    sendOtpBtn.textContent = 'Send OTP';
+                }
             }
         }
     }
@@ -430,36 +471,90 @@ document.addEventListener('DOMContentLoaded', () => {
             verifyOtpBtn.textContent = 'Verifying...';
         }
 
-        try {
-            const response = await fetch('/api/auth/verify-otp', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ identity, otp })
-            });
-            const data = await response.json();
-            if (response.ok && data.success) {
-                currentUser = data.user;
-                localStorage.setItem('auth_user', JSON.stringify(currentUser));
-                updateAuthHeader();
-                showStatus('Successfully logged in!', 'success');
-                setTimeout(() => {
-                    closeProfileModal();
-                    // Reset modal steps
-                    if (authInputStep) authInputStep.style.display = 'block';
-                    if (authOtpStep) authOtpStep.style.display = 'none';
-                    if (authOtpInput) authOtpInput.value = '';
-                    clearStatus();
-                }, 1000);
-            } else {
-                showStatus(data.error || 'Invalid OTP. Please try again.', 'error');
+        const isEmail = identity.includes('@');
+
+        if (isEmail) {
+            // Verify Email OTP -> Backend API
+            try {
+                const response = await fetch('/api/auth/verify-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ identity, otp })
+                });
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    currentUser = data.user;
+                    localStorage.setItem('auth_user', JSON.stringify(currentUser));
+                    updateAuthHeader();
+                    showStatus('Successfully logged in!', 'success');
+                    setTimeout(() => {
+                        closeProfileModal();
+                        // Reset modal steps
+                        if (authInputStep) authInputStep.style.display = 'block';
+                        if (authOtpStep) authOtpStep.style.display = 'none';
+                        if (authOtpInput) authOtpInput.value = '';
+                        clearStatus();
+                    }, 1000);
+                } else {
+                    showStatus(data.error || 'Invalid OTP. Please try again.', 'error');
+                }
+            } catch (e) {
+                console.error('Verify OTP error:', e);
+                showStatus('Connection error. Please verify code.', 'error');
+            } finally {
+                if (verifyOtpBtn) {
+                    verifyOtpBtn.disabled = false;
+                    verifyOtpBtn.textContent = 'Verify & Log In';
+                }
             }
-        } catch (e) {
-            console.error('Verify OTP error:', e);
-            showStatus('Connection error. Please verify code.', 'error');
-        } finally {
-            if (verifyOtpBtn) {
-                verifyOtpBtn.disabled = false;
-                verifyOtpBtn.textContent = 'Verify & Log In';
+        } else {
+            // Verify Phone OTP -> Firebase Auth confirmation
+            if (!window.confirmationResult) {
+                showStatus('No active OTP session. Please request OTP again.', 'error');
+                if (verifyOtpBtn) {
+                    verifyOtpBtn.disabled = false;
+                    verifyOtpBtn.textContent = 'Verify & Log In';
+                }
+                return;
+            }
+
+            try {
+                const result = await window.confirmationResult.confirm(otp);
+                // Firebase authenticated successfully. Now log in to Postgres DB!
+                const firebaseUser = result.user;
+                const phone = firebaseUser.phoneNumber;
+
+                const response = await fetch('/api/auth/firebase-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone })
+                });
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    currentUser = data.user;
+                    localStorage.setItem('auth_user', JSON.stringify(currentUser));
+                    updateAuthHeader();
+                    showStatus('Successfully logged in with Phone!', 'success');
+                    setTimeout(() => {
+                        closeProfileModal();
+                        // Reset modal steps
+                        if (authInputStep) authInputStep.style.display = 'block';
+                        if (authOtpStep) authOtpStep.style.display = 'none';
+                        if (authOtpInput) authOtpInput.value = '';
+                        clearStatus();
+                    }, 1000);
+                } else {
+                    showStatus('Postgres DB registration failed.', 'error');
+                }
+            } catch (e) {
+                console.error('Firebase verification error:', e);
+                showStatus('Invalid SMS OTP. Please try again.', 'error');
+            } finally {
+                if (verifyOtpBtn) {
+                    verifyOtpBtn.disabled = false;
+                    verifyOtpBtn.textContent = 'Verify & Log In';
+                }
             }
         }
     }

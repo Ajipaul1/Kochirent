@@ -901,7 +901,28 @@
                 <span>Profile</span>
             </a>
         </footer>
+        <!-- Invisible Recaptcha container for Firebase Phone Auth -->
+        <div id="recaptcha-container"></div>
     </div>
+    
+    <!-- Firebase Compat SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script>
+      // Initialize Firebase globally
+      const firebaseConfig = {
+        apiKey: "AIzaSyAXrALpaxd7Ax3wNHoCp0rpzpT8P_sdbsU",
+        authDomain: "kochirent-ad2d6.firebaseapp.com",
+        projectId: "kochirent-ad2d6",
+        storageBucket: "kochirent-ad2d6.firebasestorage.app",
+        messagingSenderId: "746364153757",
+        appId: "1:746364153757:web:3e40c7b19c55f60e6ac974",
+        measurementId: "G-H1VYC0MQFK"
+      };
+      firebase.initializeApp(firebaseConfig);
+      window.firebaseAuth = firebase.auth();
+    </script>
+
     <script src="assets/script.js?v=2"></script>
     <script src="assets/searchManager.js?v=2"></script>
     <script>
