@@ -17,6 +17,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 
 load_dotenv()  # Load environment variables from .env file
+load_dotenv('.env.local')  # Load environment variables from Vercel's .env.local if present
 
 app = Flask(__name__)
 # Enable CORS for all routes to make local testing and Vercel preview deployments work seamlessly
