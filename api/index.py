@@ -378,23 +378,92 @@ def register_details():
     try:
         cursor = conn.cursor()
         
-        # Build update query dynamically
-        query = "UPDATE users SET name = %s, purpose = %s"
-        params = [name, purpose]
-        
+        # 1. Check if email is already in use by ANOTHER user
+        existing_email_user = None
         if email:
-            query += ", email = %s"
-            params.append(email)
-        if phone:
-            query += ", phone = %s"
-            params.append(phone)
+            cursor.execute("SELECT id, email, phone, name, purpose, tokens FROM users WHERE email = %s AND id != %s;", (email, user_id))
+            existing_email_user = cursor.fetchone()
             
-        query += " WHERE id = %s RETURNING id, email, phone, name, purpose, tokens;"
-        params.append(user_id)
-        
-        cursor.execute(query, tuple(params))
-        user = cursor.fetchone()
-        conn.commit()
+        # 2. Check if phone is already in use by ANOTHER user
+        existing_phone_user = None
+        if phone:
+            cursor.execute("SELECT id, email, phone, name, purpose, tokens FROM users WHERE phone = %s AND id != %s;", (phone, user_id))
+            existing_phone_user = cursor.fetchone()
+            
+        if existing_email_user and existing_phone_user and existing_email_user[0] == existing_phone_user[0]:
+            # Both email and phone belong to the same other user!
+            other_user_id = existing_email_user[0]
+            cursor.execute("SELECT tokens FROM users WHERE id = %s;", (user_id,))
+            current_tokens = cursor.fetchone()[0] or 0
+            
+            cursor.execute("UPDATE users SET tokens = tokens + %s, name = %s, purpose = %s WHERE id = %s RETURNING id, email, phone, name, purpose, tokens;",
+                           (current_tokens, name, purpose, other_user_id))
+            merged_user = cursor.fetchone()
+            
+            # Re-associate any listings and leads
+            cursor.execute("UPDATE listings SET owner_id = %s WHERE owner_id = %s;", (other_user_id, user_id))
+            cursor.execute("UPDATE leads SET user_id = %s WHERE user_id = %s;", (other_user_id, user_id))
+            
+            # Delete duplicate current user
+            cursor.execute("DELETE FROM users WHERE id = %s;", (user_id,))
+            conn.commit()
+            user = merged_user
+            
+        elif existing_email_user:
+            # Email belongs to another user, phone belongs to current user
+            other_user_id = existing_email_user[0]
+            cursor.execute("SELECT tokens FROM users WHERE id = %s;", (user_id,))
+            current_tokens = cursor.fetchone()[0] or 0
+            
+            cursor.execute("UPDATE users SET phone = %s, tokens = tokens + %s, name = %s, purpose = %s WHERE id = %s RETURNING id, email, phone, name, purpose, tokens;",
+                           (phone, current_tokens, name, purpose, other_user_id))
+            merged_user = cursor.fetchone()
+            
+            # Re-associate any listings and leads
+            cursor.execute("UPDATE listings SET owner_id = %s WHERE owner_id = %s;", (other_user_id, user_id))
+            cursor.execute("UPDATE leads SET user_id = %s WHERE user_id = %s;", (other_user_id, user_id))
+            
+            # Delete duplicate current user
+            cursor.execute("DELETE FROM users WHERE id = %s;", (user_id,))
+            conn.commit()
+            user = merged_user
+            
+        elif existing_phone_user:
+            # Phone belongs to another user, email belongs to current user
+            other_user_id = existing_phone_user[0]
+            cursor.execute("SELECT tokens FROM users WHERE id = %s;", (user_id,))
+            current_tokens = cursor.fetchone()[0] or 0
+            
+            cursor.execute("UPDATE users SET email = %s, tokens = tokens + %s, name = %s, purpose = %s WHERE id = %s RETURNING id, email, phone, name, purpose, tokens;",
+                           (email, current_tokens, name, purpose, other_user_id))
+            merged_user = cursor.fetchone()
+            
+            # Re-associate listings and leads
+            cursor.execute("UPDATE listings SET owner_id = %s WHERE owner_id = %s;", (other_user_id, user_id))
+            cursor.execute("UPDATE leads SET user_id = %s WHERE user_id = %s;", (other_user_id, user_id))
+            
+            # Delete duplicate current user
+            cursor.execute("DELETE FROM users WHERE id = %s;", (user_id,))
+            conn.commit()
+            user = merged_user
+            
+        else:
+            # Normal update (no conflict)
+            query = "UPDATE users SET name = %s, purpose = %s"
+            params = [name, purpose]
+            if email:
+                query += ", email = %s"
+                params.append(email)
+            if phone:
+                query += ", phone = %s"
+                params.append(phone)
+            query += " WHERE id = %s RETURNING id, email, phone, name, purpose, tokens;"
+            params.append(user_id)
+            
+            cursor.execute(query, tuple(params))
+            user = cursor.fetchone()
+            conn.commit()
+            
         cursor.close()
         conn.close()
         
