@@ -6,7 +6,12 @@ import random
 import psycopg2
 from datetime import datetime, timedelta
 import re
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
+from io import BytesIO
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib import colors
 from google import genai
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -296,7 +301,266 @@ def firebase_login():
         print(f"DB error in firebase_login: {e}")
         return jsonify({'error': 'Database error occurred during login'}), 500
 
-# 3. Unlock contact endpoint (simulates ₹99 fee)
+# 3. Get all available listings
+@app.route('/api/listings', methods=['GET'])
+def get_listings():
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT id, title, rent_price, location, contact_number, photo_urls, rent_deposit, sqft, floor_number, facilities, views_count, deal_status, owner_id
+            FROM listings
+            WHERE deal_status = 'available'
+            ORDER BY id DESC;
+        """)
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        
+        listings_list = []
+        for r in rows:
+            listings_list.append({
+                'id': r[0],
+                'title': r[1],
+                'rent_price': float(r[2]),
+                'location': r[3],
+                'contact_number': r[4],
+                'photo_urls': r[5] or '',
+                'rent_deposit': float(r[6] or 0),
+                'sqft': r[7] or 0,
+                'floor_number': r[8] or 0,
+                'facilities': r[9] or '',
+                'views_count': r[10] or 0,
+                'deal_status': r[11] or 'available',
+                'owner_id': r[12]
+            })
+        return jsonify(listings_list)
+    except Exception as e:
+        print(f"Error fetching listings: {e}")
+        return jsonify({'error': 'Failed to fetch listings'}), 500
+
+# 4. Increment listing view
+@app.route('/api/listings/<int:listing_id>/view', methods=['POST'])
+def increment_view(listing_id):
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        cursor.execute("UPDATE listings SET views_count = views_count + 1 WHERE id = %s;", (listing_id,))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return jsonify({'success': True})
+    except Exception as e:
+        print(f"Error incrementing view: {e}")
+        return jsonify({'error': 'Failed to record view'}), 500
+
+# 5. Register additional user details (Name, Purpose, alternate contact info)
+@app.route('/api/auth/register-details', methods=['POST'])
+def register_details():
+    data = request.get_json() or {}
+    user_id = data.get('user_id')
+    name = (data.get('name') or '').strip()
+    purpose = (data.get('purpose') or '').strip()
+    email = (data.get('email') or '').strip()
+    phone = (data.get('phone') or '').strip()
+    
+    if not user_id or not name or not purpose:
+        return jsonify({'error': 'User ID, name, and purpose are required'}), 400
+        
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        
+        # Build update query dynamically
+        query = "UPDATE users SET name = %s, purpose = %s"
+        params = [name, purpose]
+        
+        if email:
+            query += ", email = %s"
+            params.append(email)
+        if phone:
+            query += ", phone = %s"
+            params.append(phone)
+            
+        query += " WHERE id = %s RETURNING id, email, phone, name, purpose, tokens;"
+        params.append(user_id)
+        
+        cursor.execute(query, tuple(params))
+        user = cursor.fetchone()
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+            
+        return jsonify({
+            'success': True,
+            'user': {
+                'id': user[0],
+                'email': user[1] or '',
+                'phone': user[2] or '',
+                'name': user[3] or '',
+                'purpose': user[4] or '',
+                'tokens': user[5] or 0,
+                'displayName': user[3] or user[1] or user[2] or 'User'
+            }
+        })
+    except Exception as e:
+        print(f"Error updating user registration details: {e}")
+        return jsonify({'error': 'Failed to save details'}), 500
+
+# 6. Buy tokens endpoint (Rs. 100 for 3 contact unlocks)
+@app.route('/api/payments/buy-tokens', methods=['POST'])
+def buy_tokens():
+    data = request.get_json() or {}
+    user_id = data.get('user_id')
+    
+    if not user_id:
+        return jsonify({'error': 'User ID is required'}), 400
+        
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        # Add 3 tokens to user account (Rs. 100 mock purchase)
+        cursor.execute("UPDATE users SET tokens = COALESCE(tokens, 0) + 3 WHERE id = %s RETURNING tokens;", (user_id,))
+        tokens = cursor.fetchone()[0]
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'tokens': tokens,
+            'message': 'Successfully purchased 3 unlocks for Rs. 100!'
+        })
+    except Exception as e:
+        print(f"Error buying tokens: {e}")
+        return jsonify({'error': 'Payment simulation failed'}), 500
+
+# 7. Create new property listing
+@app.route('/api/listings/create', methods=['POST'])
+def create_listing():
+    data = request.get_json() or {}
+    owner_id = data.get('owner_id')
+    title = (data.get('title') or '').strip()
+    rent_price = data.get('rent_price')
+    rent_deposit = data.get('rent_deposit', 0.00)
+    location = (data.get('location') or '').strip()
+    contact_number = (data.get('contact_number') or '').strip()
+    photo_urls = (data.get('photo_urls') or '').strip()
+    sqft = data.get('sqft', 0)
+    floor_number = data.get('floor_number', 0)
+    facilities = (data.get('facilities') or '').strip()
+    
+    if not owner_id or not title or not rent_price or not location or not contact_number:
+        return jsonify({'error': 'Required listing details are missing'}), 400
+        
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO listings (owner_id, title, rent_price, rent_deposit, location, contact_number, photo_urls, sqft, floor_number, facilities)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING id;
+        """, (owner_id, title, rent_price, rent_deposit, location, contact_number, photo_urls, sqft, floor_number, facilities))
+        listing_id = cursor.fetchone()[0]
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'listing_id': listing_id,
+            'message': 'Listing posted successfully!'
+        })
+    except Exception as e:
+        print(f"Error creating listing: {e}")
+        return jsonify({'error': 'Failed to post listing'}), 500
+
+# 8. Get listings created by user (owner dashboard)
+@app.route('/api/listings/user/<int:user_id>', methods=['GET'])
+def get_user_listings(user_id):
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT l.id, l.title, l.rent_price, l.location, l.photo_urls, l.views_count, l.deal_status,
+                   (SELECT COUNT(*) FROM leads WHERE listing_id = l.id) AS unlocks_count
+            FROM listings l
+            WHERE l.owner_id = %s
+            ORDER BY l.id DESC;
+        """, (user_id,))
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        
+        user_listings = []
+        for r in rows:
+            user_listings.append({
+                'id': r[0],
+                'title': r[1],
+                'rent_price': float(r[2]),
+                'location': r[3],
+                'photo_urls': r[4] or '',
+                'views_count': r[5] or 0,
+                'deal_status': r[6] or 'available',
+                'unlocks_count': r[7] or 0
+            })
+        return jsonify(user_listings)
+    except Exception as e:
+        print(f"Error fetching user listings: {e}")
+        return jsonify({'error': 'Failed to load user listings'}), 500
+
+# 9. Get listings unlocked by user (tenant dashboard)
+@app.route('/api/leads/user/<int:user_id>', methods=['GET'])
+def get_user_leads(user_id):
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT l.id, l.title, l.rent_price, l.location, l.photo_urls, l.contact_number, ld.id, ld.refund_requested, ld.refunded
+            FROM leads ld
+            JOIN listings l ON ld.listing_id = l.id
+            WHERE ld.user_id = %s
+            ORDER BY ld.id DESC;
+        """, (user_id,))
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        
+        unlocked_contacts = []
+        for r in rows:
+            unlocked_contacts.append({
+                'listing_id': r[0],
+                'title': r[1],
+                'rent_price': float(r[2]),
+                'location': r[3],
+                'photo_urls': r[4] or '',
+                'contact_number': r[5],
+                'lead_id': r[6],
+                'refund_requested': r[7],
+                'refunded': r[8]
+            })
+        return jsonify(unlocked_contacts)
+    except Exception as e:
+        print(f"Error fetching user leads: {e}")
+        return jsonify({'error': 'Failed to load unlocked contacts'}), 500
+
+# 10. Unlock contact endpoint (uses 1 token check)
 @app.route('/api/listings/unlock', methods=['POST'])
 def unlock_contact():
     data = request.get_json() or {}
@@ -312,6 +576,23 @@ def unlock_contact():
     try:
         cursor = conn.cursor()
         
+        # Check user tokens
+        cursor.execute("SELECT tokens FROM users WHERE id = %s;", (user_id,))
+        user_row = cursor.fetchone()
+        if not user_row:
+            cursor.close()
+            conn.close()
+            return jsonify({'error': 'User not found'}), 404
+            
+        tokens = user_row[0] or 0
+        if tokens < 1:
+            cursor.close()
+            conn.close()
+            return jsonify({
+                'error': 'insufficient_tokens',
+                'message': "No unlocks remaining. Please buy unlocks (3 contact unlocks for Rs. 100)."
+            }), 402
+            
         # Verify listing exists
         cursor.execute("SELECT contact_number, title FROM listings WHERE id = %s;", (listing_id,))
         listing = cursor.fetchone()
@@ -321,6 +602,10 @@ def unlock_contact():
             return jsonify({'error': 'Listing not found'}), 404
             
         contact_number = listing[0]
+        
+        # Deduct 1 token
+        cursor.execute("UPDATE users SET tokens = tokens - 1 WHERE id = %s RETURNING tokens;", (user_id,))
+        new_tokens = cursor.fetchone()[0]
         
         # Save lead as paid & unlocked
         cursor.execute(
@@ -337,13 +622,14 @@ def unlock_contact():
             'success': True,
             'contact_number': contact_number,
             'lead_id': lead_id,
+            'new_tokens': new_tokens,
             'message': 'Listing unlocked successfully'
         })
     except Exception as e:
         print(f"Error unlocking contact: {e}")
         return jsonify({'error': 'Failed to unlock contact'}), 500
 
-# 4. Refund lead endpoint
+# 11. Refund lead endpoint
 @app.route('/api/leads/refund', methods=['POST'])
 def refund_lead():
     data = request.get_json() or {}
@@ -359,8 +645,9 @@ def refund_lead():
     try:
         cursor = conn.cursor()
         # Verify lead
-        cursor.execute("SELECT id FROM leads WHERE id = %s AND user_id = %s;", (lead_id, user_id))
-        if not cursor.fetchone():
+        cursor.execute("SELECT id, listing_id FROM leads WHERE id = %s AND user_id = %s;", (lead_id, user_id))
+        lead_row = cursor.fetchone()
+        if not lead_row:
             cursor.close()
             conn.close()
             return jsonify({'error': 'Inquiry record not found'}), 404
@@ -370,17 +657,355 @@ def refund_lead():
             "UPDATE leads SET refund_requested = TRUE, refunded = TRUE WHERE id = %s AND user_id = %s;",
             (lead_id, user_id)
         )
+        
+        # Give back 1 token as refund for failed deal
+        cursor.execute("UPDATE users SET tokens = COALESCE(tokens, 0) + 1 WHERE id = %s;", (user_id,))
+        
         conn.commit()
         cursor.close()
         conn.close()
         
         return jsonify({
             'success': True,
-            'message': 'Refund initiated successfully. It will reflect in your UPI/Card shortly.'
+            'message': 'Deal marked as failed. 1 unlock token has been refunded to your dashboard account!'
         })
     except Exception as e:
         print(f"Error executing refund: {e}")
         return jsonify({'error': 'Failed to request refund'}), 500
+
+# 12. Create rental agreement
+@app.route('/api/agreements/create', methods=['POST'])
+def create_agreement():
+    data = request.get_json() or {}
+    listing_id = data.get('listing_id')
+    tenant_name = (data.get('tenant_name') or '').strip()
+    tenant_email = (data.get('tenant_email') or '').strip()
+    tenant_phone = (data.get('tenant_phone') or '').strip()
+    rent_amount = data.get('rent_amount')
+    deposit_amount = data.get('deposit_amount')
+    duration_months = data.get('duration_months')
+    start_date = data.get('start_date')
+    
+    if not listing_id or not tenant_name or not tenant_phone or not rent_amount or not deposit_amount or not duration_months or not start_date:
+        return jsonify({'error': 'All agreement details are required'}), 400
+        
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        
+        # Fetch listing owner details
+        cursor.execute("""
+            SELECT l.owner_id, u.name, u.email, u.phone 
+            FROM listings l 
+            JOIN users u ON l.owner_id = u.id 
+            WHERE l.id = %s;
+        """, (listing_id,))
+        owner_row = cursor.fetchone()
+        
+        if not owner_row:
+            cursor.close()
+            conn.close()
+            return jsonify({'error': 'Listing owner details not found. Make sure owner is registered.'}), 404
+            
+        owner_id = owner_row[0]
+        owner_name = owner_row[1] or 'Owner'
+        owner_email = owner_row[2] or 'info@kochirent.com'
+        owner_phone = owner_row[3] or '+916282520339'
+        
+        # Look up tenant_id in DB if they exist (based on phone/email)
+        cursor.execute("SELECT id FROM users WHERE phone = %s OR email = %s;", (tenant_phone, tenant_email))
+        tenant_row = cursor.fetchone()
+        tenant_id = tenant_row[0] if tenant_row else None
+        
+        cursor.execute("""
+            INSERT INTO agreements (listing_id, owner_id, tenant_id, tenant_name, tenant_email, tenant_phone, owner_name, owner_email, owner_phone, rent_amount, deposit_amount, duration_months, start_date)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING id;
+        """, (listing_id, owner_id, tenant_id, tenant_name, tenant_email, tenant_phone, owner_name, owner_email, owner_phone, rent_amount, deposit_amount, duration_months, start_date))
+        agreement_id = cursor.fetchone()[0]
+        
+        # Set listing deal_status as closed
+        cursor.execute("UPDATE listings SET deal_status = 'closed' WHERE id = %s;", (listing_id,))
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'agreement_id': agreement_id,
+            'message': 'Agreement record created and deal closed!'
+        })
+    except Exception as e:
+        print(f"Error creating agreement: {e}")
+        return jsonify({'error': 'Failed to generate agreement'}), 500
+
+# 13. Pay 1/6th rent success brokerage fee
+@app.route('/api/agreements/pay-brokerage', methods=['POST'])
+def pay_brokerage():
+    data = request.get_json() or {}
+    agreement_id = data.get('agreement_id')
+    role = data.get('role') # 'owner' or 'tenant'
+    
+    if not agreement_id or role not in ['owner', 'tenant']:
+        return jsonify({'error': 'Agreement ID and valid role are required'}), 400
+        
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        
+        if role == 'owner':
+            cursor.execute("UPDATE agreements SET owner_paid_brokerage = TRUE WHERE id = %s;", (agreement_id,))
+        else:
+            cursor.execute("UPDATE agreements SET tenant_paid_brokerage = TRUE WHERE id = %s;", (agreement_id,))
+            
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return jsonify({'success': True, 'message': f'Brokerage payment recorded for {role}'})
+    except Exception as e:
+        print(f"Error paying brokerage: {e}")
+        return jsonify({'error': 'Payment simulation failed'}), 500
+
+# 14. Get active agreements for user
+@app.route('/api/agreements/user/<int:user_id>', methods=['GET'])
+def get_user_agreements(user_id):
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        
+        # Get user details to match phone/email
+        cursor.execute("SELECT email, phone FROM users WHERE id = %s;", (user_id,))
+        user_row = cursor.fetchone()
+        email = user_row[0] if user_row else ''
+        phone = user_row[1] if user_row else ''
+        
+        cursor.execute("""
+            SELECT a.id, a.tenant_name, a.tenant_phone, a.owner_name, a.owner_phone, a.rent_amount, a.deposit_amount, a.duration_months, a.start_date,
+                   a.owner_paid_brokerage, a.tenant_paid_brokerage, l.title, a.owner_id, a.tenant_id
+            FROM agreements a
+            JOIN listings l ON a.listing_id = l.id
+            WHERE a.owner_id = %s OR a.tenant_id = %s OR a.tenant_phone = %s OR a.tenant_email = %s
+            ORDER BY a.id DESC;
+        """, (user_id, user_id, phone, email))
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        
+        agreements_list = []
+        for r in rows:
+            agreements_list.append({
+                'id': r[0],
+                'tenant_name': r[1],
+                'tenant_phone': r[2],
+                'owner_name': r[3],
+                'owner_phone': r[4],
+                'rent_amount': float(r[5]),
+                'deposit_amount': float(r[6]),
+                'duration_months': r[7],
+                'start_date': str(r[8]),
+                'owner_paid_brokerage': r[9],
+                'tenant_paid_brokerage': r[10],
+                'listing_title': r[11],
+                'is_owner': r[12] == user_id,
+                'both_paid': r[9] and r[10]
+            })
+        return jsonify(agreements_list)
+    except Exception as e:
+        print(f"Error fetching agreements: {e}")
+        return jsonify({'error': 'Failed to load agreements'}), 500
+
+# Helper function to compile the PDF using ReportLab
+def generate_pdf(agreement):
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter,
+                            rightMargin=54, leftMargin=54,
+                            topMargin=54, bottomMargin=54)
+    story = []
+    styles = getSampleStyleSheet()
+    
+    # Custom styles
+    title_style = ParagraphStyle(
+        'DocTitle',
+        parent=styles['Heading1'],
+        fontName='Helvetica-Bold',
+        fontSize=20,
+        textColor=colors.HexColor('#0f172a'),
+        alignment=1, # Center
+        spaceAfter=15
+    )
+    
+    subtitle_style = ParagraphStyle(
+        'DocSubTitle',
+        parent=styles['Normal'],
+        fontName='Helvetica-Bold',
+        fontSize=10,
+        textColor=colors.HexColor('#0ea5e9'),
+        alignment=1,
+        spaceAfter=20
+    )
+    
+    heading_style = ParagraphStyle(
+        'SectionHeading',
+        parent=styles['Heading2'],
+        fontName='Helvetica-Bold',
+        fontSize=12,
+        textColor=colors.HexColor('#1e293b'),
+        spaceBefore=10,
+        spaceAfter=6
+    )
+    
+    body_style = ParagraphStyle(
+        'BodyText',
+        parent=styles['Normal'],
+        fontName='Helvetica',
+        fontSize=9.5,
+        leading=14,
+        textColor=colors.HexColor('#334155'),
+        spaceAfter=8
+    )
+
+    bold_body_style = ParagraphStyle(
+        'BoldBodyText',
+        parent=body_style,
+        fontName='Helvetica-Bold'
+    )
+    
+    # Header Logo/Title
+    story.append(Paragraph("KOCHI NEST RENTAL AGREEMENT", title_style))
+    story.append(Paragraph("Verified Stay Agreement &bull; Kochi Local Hub", subtitle_style))
+    story.append(Spacer(1, 10))
+    
+    # Party details
+    story.append(Paragraph("1. THE PARTIES", heading_style))
+    parties_text = (
+        f"This Lease Agreement is entered into on <strong>{agreement['start_date']}</strong> by and between:<br/><br/>"
+        f"<strong>LANDLORD:</strong> {agreement['owner_name']} (Phone: {agreement['owner_phone']}, Email: {agreement['owner_email'] or 'N/A'})<br/>"
+        f"<strong>TENANT:</strong> {agreement['tenant_name']} (Phone: {agreement['tenant_phone']}, Email: {agreement['tenant_email'] or 'N/A'})"
+    )
+    story.append(Paragraph(parties_text, body_style))
+    
+    # Property Details
+    story.append(Paragraph("2. THE PROPERTY", heading_style))
+    property_text = (
+        f"The Landlord leases to the Tenant the property located at:<br/>"
+        f"<strong>Location:</strong> {agreement['listing_title']}, {agreement['listing_location']}<br/>"
+        f"<strong>Property Specs:</strong> {agreement.get('sqft', 'N/A')} sqft, Floor: {agreement.get('floor_number', 'N/A')}<br/>"
+        f"<strong>Amenities included:</strong> {agreement.get('facilities', 'None')}"
+    )
+    story.append(Paragraph(property_text, body_style))
+    
+    # Terms
+    story.append(Paragraph("3. RENTAL TERMS & FEES", heading_style))
+    terms_text = (
+        f"<strong>Rent Amount:</strong> Rs. {agreement['rent_amount']:.2f} per month, payable in advance on or before the 5th of each calendar month.<br/>"
+        f"<strong>Security Deposit:</strong> Rs. {agreement['deposit_amount']:.2f}, refundable to the Tenant at the termination of the lease, subject to normal wear and tear deductions.<br/>"
+        f"<strong>Lease Duration:</strong> {agreement['duration_months']} months, starting from <strong>{agreement['start_date']}</strong>.<br/>"
+        f"<strong>Success Brokerage Fee:</strong> A commission of one-sixth (1/6) of the total monthly rent (Rs. {agreement['rent_amount']/6:.2f}) is paid to KochiNest platform by both parties upon deal finalization."
+    )
+    story.append(Paragraph(terms_text, body_style))
+    
+    # Standard Covenants
+    story.append(Paragraph("4. COVENANTS & RULES", heading_style))
+    covenants_text = (
+        "1. The Tenant shall maintain the property in a clean and sanitary condition.<br/>"
+        "2. Subletting of the premises is strictly prohibited without the prior written consent of the Landlord.<br/>"
+        "3. Any major structural modifications are not allowed without Landlord authorization."
+    )
+    story.append(Paragraph(covenants_text, body_style))
+    story.append(Spacer(1, 15))
+    
+    # Signatures Table
+    sig_data = [
+        [Paragraph("<strong>LANDLORD SIGNATURE</strong>", body_style), Paragraph("<strong>TENANT SIGNATURE</strong>", body_style)],
+        [Paragraph(f"<font color='#0ea5e9'>Digitally Signed By</font><br/><strong>{agreement['owner_name']}</strong>", bold_body_style),
+         Paragraph(f"<font color='#0ea5e9'>Digitally Signed By</font><br/><strong>{agreement['tenant_name']}</strong>", bold_body_style)],
+        [Paragraph(f"Date: {datetime.utcnow().strftime('%Y-%m-%d')}", body_style), Paragraph(f"Date: {datetime.utcnow().strftime('%Y-%m-%d')}", body_style)]
+    ]
+    sig_table = Table(sig_data, colWidths=[220, 220])
+    sig_table.setStyle(TableStyle([
+        ('LINEBELOW', (0,0), (-1,0), 1, colors.HexColor('#cbd5e1')),
+        ('TOPPADDING', (0,1), (-1,1), 8),
+        ('BOTTOMPADDING', (0,2), (-1,2), 8),
+    ]))
+    story.append(sig_table)
+    
+    doc.build(story)
+    buffer.seek(0)
+    return buffer
+
+# 15. Download rental agreement PDF
+@app.route('/api/agreements/download/<int:agreement_id>', methods=['GET'])
+def download_agreement(agreement_id):
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection error'}), 500
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT a.tenant_name, a.tenant_phone, a.tenant_email, a.owner_name, a.owner_phone, a.owner_email,
+                   a.rent_amount, a.deposit_amount, a.duration_months, a.start_date,
+                   a.owner_paid_brokerage, a.tenant_paid_brokerage, l.title, l.location, l.sqft, l.floor_number, l.facilities
+            FROM agreements a
+            JOIN listings l ON a.listing_id = l.id
+            WHERE a.id = %s;
+        """, (agreement_id,))
+        row = cursor.fetchone()
+        
+        if not row:
+            cursor.close()
+            conn.close()
+            return jsonify({'error': 'Agreement not found'}), 404
+            
+        owner_paid = row[10]
+        tenant_paid = row[11]
+        
+        if not (owner_paid and tenant_paid):
+            cursor.close()
+            conn.close()
+            return jsonify({
+                'error': 'download_locked',
+                'message': 'Agreement download is locked until 1/6th rent success brokerage is paid by both parties.'
+            }), 403
+            
+        agreement_data = {
+            'tenant_name': row[0],
+            'tenant_phone': row[1],
+            'tenant_email': row[2],
+            'owner_name': row[3],
+            'owner_phone': row[4],
+            'owner_email': row[5],
+            'rent_amount': float(row[6]),
+            'deposit_amount': float(row[7]),
+            'duration_months': row[8],
+            'start_date': str(row[9]),
+            'listing_title': row[12],
+            'listing_location': row[13],
+            'sqft': row[14] or 0,
+            'floor_number': row[15] or 0,
+            'facilities': row[16] or ''
+        }
+        
+        cursor.close()
+        conn.close()
+        
+        # Generate the PDF in-memory
+        pdf_buffer = generate_pdf(agreement_data)
+        
+        return send_file(
+            pdf_buffer,
+            mimetype='application/pdf',
+            as_attachment=True,
+            download_name=f"KochiNest_Lease_Agreement_{agreement_id}.pdf"
+        )
+    except Exception as e:
+        print(f"Error downloading agreement PDF: {e}")
+        return jsonify({'error': 'Failed to generate PDF agreement'}), 500
 
 if __name__ == '__main__':
     # For local running

@@ -28,16 +28,13 @@
                 <span class="desktop-location desktop-only">Kochi, Kerala</span>
             </div>
             <nav class="desktop-nav desktop-only" aria-label="Primary">
-                <a href="#">Homes</a>
-                <a href="#">Rides</a>
-                <a href="#">Shifting</a>
-                <a href="#">Repairs</a>
-                <a href="#">Rentals</a>
-                <a href="#">More</a>
+                <a href="#" onclick="showHomeView()">Home</a>
+                <a href="#" onclick="showDashboardView()" id="desktopDashboardLink" style="display: none; font-weight: bold; color: #0ea5e9;">My Dashboard</a>
+                <a href="#" onclick="showHomeView(); window.scrollTo({top: document.getElementById('verifiedSection').offsetTop - 70, behavior: 'smooth'});">Verified Properties</a>
             </nav>
             <div class="desktop-header-actions desktop-only">
                 <button class="desktop-lang">EN <i class="fas fa-chevron-down"></i></button>
-                <button class="desktop-login" data-nav-action="profile">Login / Sign up</button>
+                <button class="desktop-login" id="desktopLoginBtn" data-nav-action="profile">Login / Sign up</button>
             </div>
             <div class="header-right mobile-only">
                 <i class="fas fa-bell" id="notificationToggle"></i>
@@ -50,7 +47,7 @@
 
         <main class="main-content">
             <h1 class="sr-only">The Kochi Local Hub: Rentals, Home Repairs & Shifting Services</h1>
-            <section class="hero-section-mobile">
+            <section id="heroSection" class="hero-section-mobile">
                 <div class="hero-background">
                     <img src="assets/kochinest-hero.jpeg" alt="Hero Background">
                     <div class="hero-overlay-dark"></div>
@@ -175,7 +172,7 @@
             </section>
 
             <!-- KochiNest Zero Brokerage / Refundable Lead Info Section -->
-            <section class="pricing-model-section">
+            <section id="pricingSection" class="pricing-model-section">
                 <div class="pricing-header">
                     <span class="pricing-badge">New Way to Rent in Kochi</span>
                     <h2>Zero Brokerage. Zero Risk.</h2>
@@ -218,7 +215,7 @@
                 </div>
             </section>
 
-            <section class="kochinest-verified">
+            <section id="verifiedSection" class="kochinest-verified">
                 <div class="section-header">
                     <h2>KochiNest Verified <i class="fas fa-check-circle"></i></h2>
                     <a href="/flats-for-rent-in-kochi">View all flats for rent in Kochi <i class="fas fa-chevron-right"></i></a>
@@ -701,6 +698,128 @@
                 </div>
             </section>
 
+            <!-- LinkedIn-Style User Dashboard Section -->
+            <section id="dashboardSection" class="dashboard-section" style="display: none; margin: 40px auto; max-width: 1200px; padding: 0 20px;">
+                <div class="dashboard-grid">
+                    <!-- Left Sidebar (LinkedIn Profile Card style) -->
+                    <div class="dashboard-left-sidebar">
+                        <div class="linkedin-profile-card">
+                            <div class="profile-card-banner"></div>
+                            <div class="profile-card-avatar" id="dashProfileAvatar"></div>
+                            <div class="profile-card-info">
+                                <h3 id="dashProfileName">User Name</h3>
+                                <p id="dashProfilePurpose" class="profile-purpose">Renting / Services</p>
+                                <p id="dashProfileContact" class="profile-contact">Email/Phone</p>
+                            </div>
+                            <div class="profile-card-stats">
+                                <div class="stat-row">
+                                    <span>Unlocks Remaining:</span>
+                                    <strong id="dashProfileTokens">0</strong>
+                                </div>
+                                <button id="buyTokensBtn" class="buy-tokens-btn"><i class="fas fa-coins"></i> Buy 3 Unlocks (₹100)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Center & Right Panel (Content area) -->
+                    <div class="dashboard-main-content">
+                        <!-- Navigation tabs inside dashboard -->
+                        <div class="dashboard-tabs">
+                            <button class="dash-tab-btn active" data-dash-tab="my-listings"><i class="fas fa-list"></i> My Listings</button>
+                            <button class="dash-tab-btn" data-dash-tab="my-leads"><i class="fas fa-key"></i> Unlocked Contacts</button>
+                            <button class="dash-tab-btn" data-dash-tab="my-agreements"><i class="fas fa-file-signature"></i> Rental Agreements</button>
+                            <button class="dash-tab-btn" data-dash-tab="post-deal" id="postDealDashTab"><i class="fas fa-plus-circle"></i> Post Your Deal</button>
+                        </div>
+
+                        <!-- Tab 1: My Listings -->
+                        <div class="dash-tab-content active" id="dash-my-listings">
+                            <h3>Manage Your Listings & Metrics</h3>
+                            <div id="userListingsContainer" class="dashboard-listings-grid">
+                                <!-- Dynamically loaded user listings -->
+                                <p class="empty-state-text">You haven't posted any listings yet. Click "Post Your Deal" to get started!</p>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: My Leads -->
+                        <div class="dash-tab-content" id="dash-my-leads" style="display: none;">
+                            <h3>Unlocked Properties & Contact Details</h3>
+                            <div id="userLeadsContainer" class="dashboard-leads-grid">
+                                <!-- Dynamically loaded unlocked contacts -->
+                                <p class="empty-state-text">You haven't unlocked any contacts yet.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: My Agreements -->
+                        <div class="dash-tab-content" id="dash-my-agreements" style="display: none;">
+                            <h3>Rental Agreements & Brokerage Payments</h3>
+                            <div id="userAgreementsContainer" class="dashboard-agreements-grid">
+                                <!-- Dynamically loaded agreements -->
+                                <p class="empty-state-text">No active agreements found.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tab 4: Post Your Deal -->
+                        <div class="dash-tab-content" id="dash-post-deal" style="display: none;">
+                            <h3>Post Your Rental Property / Deal</h3>
+                            <form id="createListingForm" class="post-deal-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="listingTitle">Property Name / Title *</label>
+                                        <input type="text" id="listingTitle" placeholder="e.g. 2BHK Luxury Apartment, Kakkanad" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="listingCategory">Category *</label>
+                                        <select id="listingCategory" required>
+                                            <option value="stay">Stay (Flats/Apartments)</option>
+                                            <option value="move">Move (Bikes/Cars)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="listingRent">Monthly Rent / Daily Price (in ₹) *</label>
+                                        <input type="number" id="listingRent" placeholder="e.g. 15000" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="listingDeposit">Security Deposit (in ₹) *</label>
+                                        <input type="number" id="listingDeposit" placeholder="e.g. 30000" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="listingLocation">Location in Kochi *</label>
+                                        <input type="text" id="listingLocation" placeholder="e.g. Kakkanad, near Infopark" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="listingContact">Contact Number *</label>
+                                        <input type="tel" id="listingContact" placeholder="e.g. +91 6282520339" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="listingSqft">Square Footage (Sq. Ft.)</label>
+                                        <input type="number" id="listingSqft" placeholder="e.g. 950">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="listingFloor">Floor Number</label>
+                                        <input type="number" id="listingFloor" placeholder="e.g. 4">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="listingPhoto">Property Photo URL *</label>
+                                    <input type="url" id="listingPhoto" placeholder="e.g. https://images.unsplash.com/..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="listingFacilities">Amenities / Facilities (comma separated)</label>
+                                    <input type="text" id="listingFacilities" placeholder="e.g. 24x7 Security, Car Parking, Power Backup, Gym">
+                                </div>
+                                <button type="submit" class="post-deal-submit-btn">Publish Listing</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- New Footer Section -->
             <footer class="site-footer" style="background-color: var(--primary-blue); color: var(--white); padding: 30px 15px 15px; border-radius: 20px 20px 0 0; margin-top: 20px;">
                 <div style="display: flex; flex-direction: column; gap: 25px; margin-bottom: 25px;">
@@ -835,6 +954,93 @@
                     <button type="submit" class="lead-submit-btn" style="margin-bottom: 8px;">Send to WhatsApp</button>
                     <button type="button" id="closePostModal" style="padding: 8px 10px;">Close</button>
                 </form>
+            </div>
+        </div>
+
+        <!-- Registration Details Modal Overlay -->
+        <div id="registerDetailsModal" class="auth-modal-overlay" style="display: none; z-index: 2000;">
+            <div class="auth-modal-card">
+                <div class="auth-modal-header">
+                    <h3>Complete Profile</h3>
+                </div>
+                <div class="auth-modal-body">
+                    <p class="auth-desc">Tell us a bit about yourself to unlock personalized dashboard metrics.</p>
+                    <form id="registerDetailsForm">
+                        <div class="auth-input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="regName" placeholder="Full Name" required>
+                        </div>
+                        <div class="auth-input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="regEmail" placeholder="Email Address">
+                        </div>
+                        <div class="auth-input-group">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="regPhone" placeholder="Alternate Phone Number">
+                        </div>
+                        <div class="auth-input-group" style="margin-bottom: 20px;">
+                            <i class="fas fa-question-circle"></i>
+                            <select id="regPurpose" required style="width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(15,23,42,0.8); color: white; outline: none; font-size: 14px;">
+                                <option value="" disabled selected>Purpose of Visit</option>
+                                <option value="renting">I want to rent a Flat/Home/Vehicle</option>
+                                <option value="posting">I am an Owner/Host looking to Rent Out</option>
+                                <option value="repairing">I need Repair or Shifting Services</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="auth-primary-btn">Save Profile Details</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Close Deal & Generate Rental Agreement Modal Overlay -->
+        <div id="generateAgreementModal" class="auth-modal-overlay" style="display: none; z-index: 2000;">
+            <div class="auth-modal-card" style="max-width: 480px;">
+                <div class="auth-modal-header">
+                    <h3>Generate Rental Agreement</h3>
+                    <button class="auth-close-btn" onclick="document.getElementById('generateAgreementModal').style.display='none'">&times;</button>
+                </div>
+                <div class="auth-modal-body">
+                    <p class="auth-desc" style="margin-bottom: 15px;">Enter the Tenant details to generate the lease agreement and close the deal.</p>
+                    <form id="generateAgreementForm">
+                        <input type="hidden" id="agreeListingId">
+                        <div class="auth-input-group">
+                            <i class="fas fa-user-tag"></i>
+                            <input type="text" id="agreeTenantName" placeholder="Tenant Full Name" required>
+                        </div>
+                        <div class="auth-input-group">
+                            <i class="fas fa-phone-alt"></i>
+                            <input type="tel" id="agreeTenantPhone" placeholder="Tenant Phone (e.g. +919999999999)" required>
+                        </div>
+                        <div class="auth-input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="agreeTenantEmail" placeholder="Tenant Email Address">
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+                            <div class="auth-input-group" style="margin-bottom: 0;">
+                                <i class="fas fa-calendar-alt"></i>
+                                <input type="date" id="agreeStartDate" required style="padding: 10px; font-size: 13px;">
+                            </div>
+                            <div class="auth-input-group" style="margin-bottom: 0;">
+                                <i class="fas fa-hourglass-half"></i>
+                                <input type="number" id="agreeDuration" placeholder="Duration (Months)" required style="padding: 10px; font-size: 13px;">
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                            <div class="auth-input-group" style="margin-bottom: 0;">
+                                <i class="fas fa-indian-rupee-sign"></i>
+                                <input type="number" id="agreeRent" placeholder="Monthly Rent" required style="padding: 10px; font-size: 13px;">
+                            </div>
+                            <div class="auth-input-group" style="margin-bottom: 0;">
+                                <i class="fas fa-shield-alt"></i>
+                                <input type="number" id="agreeDeposit" placeholder="Deposit Amount" required style="padding: 10px; font-size: 13px;">
+                            </div>
+                        </div>
+                        <button type="submit" class="auth-primary-btn">Generate & Close Deal</button>
+                    </form>
+                </div>
             </div>
         </div>
 
