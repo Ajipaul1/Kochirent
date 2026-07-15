@@ -123,12 +123,46 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-nav-action]').forEach(item => {
         item.addEventListener('click', (event) => {
             event.preventDefault();
+            
+            // Set active state on bottom nav items if clicked
+            const parentNav = item.closest('.bottom-navigation');
+            if (parentNav) {
+                parentNav.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            }
+
             const action = item.dataset.navAction;
-            if (action === 'home') doScroll('top');
-            if (action === 'search') doScroll('hero');
-            if (action === 'post') openPostModal();
+            if (action === 'home') {
+                showHomeView();
+                doScroll('top');
+            }
+            if (action === 'search') {
+                showHomeView();
+                doScroll('hero');
+            }
+            if (action === 'post') {
+                if (!currentUser) {
+                    openProfileModal();
+                    setTimeout(() => showStatus('Please log in first to post listings.', 'error'), 200);
+                } else {
+                    showDashboardView();
+                    // Activate Post Deal tab
+                    document.querySelectorAll('.dash-tab-btn').forEach(b => b.classList.remove('active'));
+                    const tab = document.getElementById('postDealDashTab');
+                    if (tab) tab.classList.add('active');
+                    document.querySelectorAll('.dash-tab-content').forEach(c => c.style.display = 'none');
+                    const postContent = document.getElementById('dash-post-deal');
+                    if (postContent) postContent.style.display = 'block';
+                }
+            }
             if (action === 'messages') openWhatsapp();
-            if (action === 'profile') openProfileModal();
+            if (action === 'profile') {
+                if (!currentUser) {
+                    openProfileModal();
+                } else {
+                    showDashboardView();
+                }
+            }
         });
     });
 
@@ -1174,52 +1208,7 @@ This will trigger a mock credit card/UPI verification.`)) return;
         });
     });
 
-    // Connect top links for Desktop
-    const desktopLoginBtn = document.getElementById('desktopLoginBtn');
-    desktopLoginBtn?.addEventListener('click', () => {
-        if (!currentUser) {
-            openProfileModal();
-        } else {
-            showDashboardView();
-        }
-    });
 
-    // Bottom nav actions mapping
-    const navItems = document.querySelectorAll('.bottom-navigation .nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('click', (event) => {
-            event.preventDefault();
-            navItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-            const action = item.getAttribute('data-nav-action');
-            if (action === 'home') showHomeView();
-            if (action === 'search') {
-                showHomeView();
-                window.scrollTo({top: document.getElementById('stay-location').offsetTop - 100, behavior: 'smooth'});
-            }
-            if (action === 'post') {
-                if (!currentUser) {
-                    openProfileModal();
-                    setTimeout(() => showStatus('Please log in first to post listings.', 'error'), 200);
-                } else {
-                    showDashboardView();
-                    // Activate Post Deal tab
-                    document.querySelectorAll('.dash-tab-btn').forEach(b => b.classList.remove('active'));
-                    document.getElementById('postDealDashTab').classList.add('active');
-                    document.querySelectorAll('.dash-tab-content').forEach(c => c.style.display = 'none');
-                    document.getElementById('dash-post-deal').style.display = 'block';
-                }
-            }
-            if (action === 'messages') openWhatsapp();
-            if (action === 'profile') {
-                if (!currentUser) {
-                    openProfileModal();
-                } else {
-                    showDashboardView();
-                }
-            }
-        });
-    });
 
     // Initial load: Fetch listings from Postgres
     loadPublicListings();
