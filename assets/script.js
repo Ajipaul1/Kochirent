@@ -837,6 +837,23 @@ This will refund 1 unlock token back to your KochiNest dashboard instantly.`)) r
         }
     };
 
+    // Trigger Post Rental flow when clicking empty-state button
+    window.triggerPostRentalFlow = function() {
+        if (!currentUser) {
+            openProfileModal();
+            setTimeout(() => showStatus('Please log in or sign up first to post your rental property.', 'error'), 200);
+        } else {
+            showDashboardView();
+            // Switch to Post Your Deal tab
+            document.querySelectorAll('.dash-tab-btn').forEach(b => b.classList.remove('active'));
+            const tab = document.getElementById('postDealDashTab');
+            if (tab) tab.classList.add('active');
+            document.querySelectorAll('.dash-tab-content').forEach(c => c.style.display = 'none');
+            const postContent = document.getElementById('dash-post-deal');
+            if (postContent) postContent.style.display = 'block';
+        }
+    };
+
     // Load Public Listings on Home Page from Postgres
     async function loadPublicListings() {
         const container = document.querySelector('.verified-cards-container');
@@ -861,21 +878,40 @@ This will refund 1 unlock token back to your KochiNest dashboard instantly.`)) r
                     }, { once: true });
                     
                     const rentText = listing.title.toLowerCase().includes('bike') || listing.title.toLowerCase().includes('car') ? '/day' : '/month';
+                    const isAvailable = listing.deal_status === 'available';
                     
                     card.innerHTML = `
-                        <img src="${listing.photo_urls || 'https://via.placeholder.com/300x200?text=Listing'}" alt="${listing.title}" loading="lazy" style="height: 140px; object-fit: cover;">
-                        <div class="verified-badge">KOCHINEST VERIFIED</div>
+                        <div style="position: relative; overflow: hidden; height: 140px;">
+                            <img src="${listing.photo_urls || 'https://via.placeholder.com/300x200?text=Listing'}" alt="${listing.title}" loading="lazy" style="height: 140px; width: 100%; object-fit: cover; filter: ${isAvailable ? 'none' : 'grayscale(100%) brightness(0.6)'};">
+                            ${isAvailable ? '<div class="verified-badge">KOCHINEST VERIFIED</div>' : '<div style="position: absolute; top: 12px; left: 12px; background: #ef4444; color: #fff; font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">RENTED OUT / SOLD OUT</div>'}
+                        </div>
                         <h3>${title}</h3>
                         <p><i class="fas fa-map-marker-alt" style="font-size: 11px;"></i> ${listing.location}</p>
                         <div class="price">₹${parseInt(listing.rent_price).toLocaleString()} <span>${rentText}</span></div>
                         <div class="unlock-container">
-                            <button class="unlock-number-btn" onclick="handleUnlockContact(${listing.id}, ${listing.rent_price}, this)">
-                                <i class="fas fa-phone-alt"></i> Get Contact (Unlock)
-                            </button>
+                            ${isAvailable ? `
+                                <button class="unlock-number-btn" onclick="handleUnlockContact(${listing.id}, ${listing.rent_price}, this)">
+                                    <i class="fas fa-phone-alt"></i> Get Contact (Unlock)
+                                </button>
+                            ` : `
+                                <button class="unlock-number-btn" disabled style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); cursor: not-allowed; text-decoration: line-through;">
+                                    <i class="fas fa-ban"></i> Unavailable (Deal Closed)
+                                </button>
+                            `}
                         </div>
                     `;
                     container.appendChild(card);
                 });
+            } else {
+                // Beautiful Empty State Prompts User to Post their Rental for Free
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: rgba(15, 23, 42, 0.45); border: 1px dashed rgba(255,255,255,0.15); border-radius: 16px; margin: 20px 0;">
+                        <i class="fas fa-house" style="font-size: 40px; color: #0ea5e9; margin-bottom: 12px;"></i>
+                        <h3 style="color: #fff; font-size: 18px; margin-bottom: 6px;">No Active Stays Currently</h3>
+                        <p style="color: rgba(255,255,255,0.6); max-width: 450px; margin: 0 auto 16px auto; font-size: 13px;">Be the first to list your stay, flat, or vehicle on Kochi's direct rental network completely for free!</p>
+                        <button onclick="triggerPostRentalFlow()" style="background: #0ea5e9; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: all 0.2s;"><i class="fas fa-plus"></i> Post Your Stay for Free</button>
+                    </div>
+                `;
             }
         } catch (e) {
             console.error('Error loading public listings:', e);
@@ -1004,7 +1040,7 @@ This will refund 1 unlock token back to your KochiNest dashboard instantly.`)) r
                             </div>
                             
                             ${!isSelfPaid ? 
-                              `<button class="dash-card-action-btn" onclick="payBrokerageFee(${agree.id}, '${role}')"><i class="fas fa-credit-card"></i> Pay Brokerage (₹${brokerageVal.toLocaleString()})</button>` : 
+                              `<button class="dash-card-action-btn" onclick="payBrokerageFee(${agree.id}, '${role}', ${agree.rent_amount})"><i class="fas fa-credit-card"></i> Pay Brokerage (₹${brokerageVal.toLocaleString()})</button>` : 
                               `<div style="color:#10b981; font-weight:700; text-align:center; padding: 6px; background:#ecfdf5; border-radius:6px; font-size:11px; margin-bottom:5px;"><i class="fas fa-check-circle"></i> Your Brokerage Paid</div>`
                             }
                             
@@ -1024,34 +1060,11 @@ This will refund 1 unlock token back to your KochiNest dashboard instantly.`)) r
         }
     }
 
-    // Buy Tokens Payment simulation (Rs. 100)
+    // Buy Tokens -> Trigger Free UPI Payment Modal (Rs. 100)
     const buyTokensBtn = document.getElementById('buyTokensBtn');
-    buyTokensBtn?.addEventListener('click', async () => {
+    buyTokensBtn?.addEventListener('click', () => {
         if (!currentUser) return;
-        
-        if (!confirm(`Pay Rs. 100 to purchase 3 contact unlocks?
-
-This will trigger a mock UPI payment simulation.`)) return;
-        
-        try {
-            const response = await fetch('/api/payments/buy-tokens', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_id: currentUser.id })
-            });
-            const data = await response.json();
-            if (response.ok && data.success) {
-                currentUser.tokens = data.tokens;
-                localStorage.setItem('auth_user', JSON.stringify(currentUser));
-                alert(data.message);
-                loadDashboardData();
-            } else {
-                alert(data.error || 'Payment failed.');
-            }
-        } catch (err) {
-            console.error('Buy tokens error:', err);
-            alert('Connection error. Please try again.');
-        }
+        openUpiPaymentModal('Unlocks', currentUser.id, 100);
     });
 
     // Create property listing submit
@@ -1104,32 +1117,10 @@ This will trigger a mock UPI payment simulation.`)) return;
         }
     });
 
-    // Pay 1/6th rent brokerage simulated payment
-    window.payBrokerageFee = async function(agreementId, role) {
-        if (!confirm(`Simulate payment of 1/6th rent brokerage fee as ${role}?
-
-This will trigger a mock credit card/UPI verification.`)) return;
-
-        try {
-            const response = await fetch('/api/agreements/pay-brokerage', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    agreement_id: agreementId,
-                    role: role
-                })
-            });
-            const data = await response.json();
-            if (response.ok && data.success) {
-                alert('Brokerage payment received successfully! PDF download is unlocked when both parties pay.');
-                loadDashboardData();
-            } else {
-                alert(data.error || 'Brokerage payment failed.');
-            }
-        } catch (err) {
-            console.error('Brokerage payment error:', err);
-            alert('Connection error. Please try again.');
-        }
+    // Pay 1/6th rent brokerage success commission -> Trigger Free UPI Payment Modal
+    window.payBrokerageFee = async function(agreementId, role, rentAmount) {
+        const brokerage = parseFloat(rentAmount) / 6;
+        openUpiPaymentModal('Brokerage', agreementId, brokerage.toFixed(0), role);
     };
 
     // Open Close Deal Agreement modal
@@ -1209,6 +1200,118 @@ This will trigger a mock credit card/UPI verification.`)) return;
     });
 
 
+
+    // State variables for UPI payment verification
+    let activePaymentType = null;
+    let activePaymentId = null;
+    let activePaymentRole = null;
+    let activePaymentAmount = 0;
+
+    window.openUpiPaymentModal = function(type, id, amount, role = null) {
+        activePaymentType = type; // 'Unlocks' or 'Brokerage'
+        activePaymentId = id;      // user_id or agreement_id
+        activePaymentRole = role;  // 'owner' or 'tenant' (for brokerage only)
+        activePaymentAmount = amount;
+
+        // Set title and details
+        document.getElementById('upiModalTitle').textContent = type === 'Unlocks' ? 'Buy 3 Contact Unlocks' : 'Success Brokerage Payment';
+        document.getElementById('upiModalDesc').innerHTML = `Pay <strong>Rs. ${amount}</strong> directly to KochiNest using UPI. Scan the QR code or click pay below:`;
+        document.getElementById('upiUtrInput').value = '';
+
+        // Generate UPI URL
+        // pa: Payee address, pn: Payee Name, am: Amount, cu: Currency, tn: Transaction Note
+        const upiId = 'ajipan575@okicici';
+        const payeeName = 'Aji Paul';
+        const note = type === 'Unlocks' ? 'KochiNest 3 Unlocks' : `KochiNest Brokerage ID ${id}`;
+        
+        const upiUri = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR&am=${amount}&tn=${encodeURIComponent(note)}`;
+        
+        // Generate QR code URL using free API
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUri)}`;
+        document.getElementById('upiQrCode').src = qrUrl;
+
+        // Display deep link button on mobile devices
+        const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+        const mobileContainer = document.getElementById('upiMobileLinkContainer');
+        if (isMobile && mobileContainer) {
+            mobileContainer.style.display = 'block';
+            document.getElementById('upiMobileBtn').href = upiUri;
+        } else if (mobileContainer) {
+            mobileContainer.style.display = 'none';
+        }
+
+        // Show modal overlay
+        document.getElementById('upiPaymentModal').style.display = 'flex';
+    };
+
+    window.closeUpiPaymentModal = function() {
+        document.getElementById('upiPaymentModal').style.display = 'none';
+    };
+
+    // Form submit verification for UPI modal
+    const upiSubmitForm = document.getElementById('upiSubmitForm');
+    upiSubmitForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const utr = document.getElementById('upiUtrInput').value.trim();
+        if (utr.length !== 12 || !/^\d{12}$/.test(utr)) {
+            alert('Please enter a valid 12-digit UPI Transaction Ref / UTR.');
+            return;
+        }
+
+        const confirmBtn = document.getElementById('upiConfirmBtn');
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = 'Verifying Transfer...';
+
+        try {
+            if (activePaymentType === 'Unlocks') {
+                // Post to buy-tokens
+                const response = await fetch('/api/payments/buy-tokens', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: activePaymentId,
+                        utr: utr
+                    })
+                });
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    alert('UPI transaction details submitted! 3 unlocks credited.');
+                    currentUser.tokens = data.tokens;
+                    localStorage.setItem('auth_user', JSON.stringify(currentUser));
+                    closeUpiPaymentModal();
+                    loadDashboardData();
+                } else {
+                    alert(data.error || 'Payment verification failed.');
+                }
+            } else if (activePaymentType === 'Brokerage') {
+                // Post to pay-brokerage
+                const response = await fetch('/api/agreements/pay-brokerage', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        agreement_id: activePaymentId,
+                        role: activePaymentRole,
+                        user_id: currentUser.id,
+                        utr: utr
+                    })
+                });
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    alert('UPI brokerage payment details received! Verification is pending bank statement check.');
+                    closeUpiPaymentModal();
+                    loadDashboardData();
+                } else {
+                    alert(data.error || 'Payment verification failed.');
+                }
+            }
+        } catch (err) {
+            console.error('Payment submission error:', err);
+            alert('Connection error. Please try again.');
+        } finally {
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = 'Verify & Confirm Payment';
+        }
+    });
 
     // Initial load: Fetch listings from Postgres
     loadPublicListings();

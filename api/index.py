@@ -155,6 +155,60 @@ def send_otp_email(email, otp_code):
         print(f"SMTP error: {e}")
         return False
 
+# Helper to send admin payment verification notifications
+def send_payment_notification(user_id, utr, amount):
+    smtp_server = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
+    smtp_port = int(os.environ.get('SMTP_PORT', 587))
+    smtp_user = os.environ.get('SMTP_USER', 'info@kochirent.com')
+    smtp_password = os.environ.get('SMTP_PASSWORD', '')
+    smtp_from = os.environ.get('SMTP_FROM') or smtp_user
+    
+    if not smtp_password:
+        print(f"[PAYMENT NOTIFICATION] User ID: {user_id} paid Rs. {amount}. UTR: {utr}")
+        return
+        
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT name, phone, email FROM users WHERE id = %s;", (user_id,))
+        user = cur.fetchone()
+        cur.close()
+        conn.close()
+        
+        name = user[0] or 'Unknown User' if user else 'Unknown User'
+        phone = user[1] or 'No Phone' if user else 'No Phone'
+        email = user[2] or 'No Email' if user else 'No Email'
+        
+        msg = MIMEMultipart()
+        msg['From'] = smtp_from
+        msg['To'] = 'ajipaul96@gmail.com'
+        msg['Subject'] = f"🔔 New KochiNest UPI Payment: Rs. {amount}"
+        
+        body = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+            <h2 style="color: #0ea5e9; border-bottom: 1px solid #ddd; padding-bottom: 8px;">KochiNest Payment Received</h2>
+            <p><strong>User:</strong> {name} (ID: {user_id})</p>
+            <p><strong>Phone:</strong> {phone}</p>
+            <p><strong>Email:</strong> {email}</p>
+            <p><strong>Amount:</strong> Rs. {amount}</p>
+            <p><strong>UPI Ref / UTR:</strong> <span style="font-size: 16px; font-weight: bold; background: #f0fdf4; padding: 4px 8px; border-radius: 4px; color: #166534;">{utr}</span></p>
+            <br>
+            <p style="font-size: 12px; color: #666;">Please check your ICICI bank account for UTR <strong>{utr}</strong> to verify this payment.</p>
+        </body>
+        </html>
+        """
+        msg.attach(MIMEText(body, 'html'))
+        
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        server.login(smtp_user, smtp_password)
+        server.sendmail(smtp_from, 'ajipaul96@gmail.com', msg.as_string())
+        server.quit()
+        print("Payment notification email sent successfully!")
+    except Exception as e:
+        print(f"Error sending payment notification email: {e}")
+
 # 1. Send OTP endpoint
 @app.route('/api/auth/send-otp', methods=['POST'])
 def send_otp():
@@ -313,7 +367,6 @@ def get_listings():
         cursor.execute("""
             SELECT id, title, rent_price, location, contact_number, photo_urls, rent_deposit, sqft, floor_number, facilities, views_count, deal_status, owner_id
             FROM listings
-            WHERE deal_status = 'available'
             ORDER BY id DESC;
         """)
         rows = cursor.fetchall()
@@ -491,30 +544,34 @@ def register_details():
 def buy_tokens():
     data = request.get_json() or {}
     user_id = data.get('user_id')
+    utr = (data.get('utr') or '').strip()
     
-    if not user_id:
-        return jsonify({'error': 'User ID is required'}), 400
+    if not user_id or not utr:
+        return jsonify({'error': 'User ID and 12-digit UPI UTR are required'}), 400
         
     conn = get_db_connection()
     if not conn:
         return jsonify({'error': 'Database connection error'}), 500
     try:
         cursor = conn.cursor()
-        # Add 3 tokens to user account (Rs. 100 mock purchase)
+        # Add 3 tokens to user account
         cursor.execute("UPDATE users SET tokens = COALESCE(tokens, 0) + 3 WHERE id = %s RETURNING tokens;", (user_id,))
         tokens = cursor.fetchone()[0]
         conn.commit()
         cursor.close()
         conn.close()
         
+        # Trigger email notification to admin
+        send_payment_notification(user_id, utr, "100.00 (3 Unlocks)")
+        
         return jsonify({
             'success': True,
             'tokens': tokens,
-            'message': 'Successfully purchased 3 unlocks for Rs. 100!'
+            'message': 'UPI payment submitted! 3 unlocks credited to your dashboard.'
         })
     except Exception as e:
         print(f"Error buying tokens: {e}")
-        return jsonify({'error': 'Payment simulation failed'}), 500
+        return jsonify({'error': 'Payment verification failed'}), 500
 
 # 7. Create new property listing
 @app.route('/api/listings/create', methods=['POST'])
@@ -817,15 +874,28 @@ def pay_brokerage():
     data = request.get_json() or {}
     agreement_id = data.get('agreement_id')
     role = data.get('role') # 'owner' or 'tenant'
+    user_id = data.get('user_id')
+    utr = (data.get('utr') or '').strip()
     
-    if not agreement_id or role not in ['owner', 'tenant']:
-        return jsonify({'error': 'Agreement ID and valid role are required'}), 400
+    if not agreement_id or role not in ['owner', 'tenant'] or not user_id or not utr:
+        return jsonify({'error': 'Agreement ID, valid role, User ID, and UTR are required'}), 400
         
     conn = get_db_connection()
     if not conn:
         return jsonify({'error': 'Database connection error'}), 500
     try:
         cursor = conn.cursor()
+        
+        # Get rent amount to calculate brokerage
+        cursor.execute("SELECT rent_amount FROM agreements WHERE id = %s;", (agreement_id,))
+        rent_row = cursor.fetchone()
+        if not rent_row:
+            cursor.close()
+            conn.close()
+            return jsonify({'error': 'Agreement not found'}), 404
+            
+        rent_amount = float(rent_row[0])
+        brokerage = rent_amount / 6
         
         if role == 'owner':
             cursor.execute("UPDATE agreements SET owner_paid_brokerage = TRUE WHERE id = %s;", (agreement_id,))
@@ -835,10 +905,14 @@ def pay_brokerage():
         conn.commit()
         cursor.close()
         conn.close()
+        
+        # Trigger email notification to admin
+        send_payment_notification(user_id, utr, f"{brokerage:.2f} (Success Brokerage for Agreement ID: {agreement_id}, Role: {role})")
+        
         return jsonify({'success': True, 'message': f'Brokerage payment recorded for {role}'})
     except Exception as e:
         print(f"Error paying brokerage: {e}")
-        return jsonify({'error': 'Payment simulation failed'}), 500
+        return jsonify({'error': 'Payment verification failed'}), 500
 
 # 14. Get active agreements for user
 @app.route('/api/agreements/user/<int:user_id>', methods=['GET'])
