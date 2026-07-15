@@ -795,9 +795,9 @@ This will use 1 unlock token from your account.`;
 
     // Refund logic
     window.handleRequestRefund = async function(leadId, buttonElement) {
-        if (!confirm('Are you sure you want to mark this deal as failed?
+        if (!confirm(`Are you sure you want to mark this deal as failed?
 
-This will refund 1 unlock token back to your KochiNest dashboard instantly.')) return;
+This will refund 1 unlock token back to your KochiNest dashboard instantly.`)) return;
 
         buttonElement.disabled = true;
         buttonElement.textContent = 'Processing...';
@@ -927,7 +927,7 @@ This will refund 1 unlock token back to your KochiNest dashboard instantly.')) r
                     userListingsContainer.appendChild(card);
                 });
             } else {
-                userListingsContainer.innerHTML = '<p class="empty-state-text">You haven't posted any listings yet. Click "Post Your Deal" to get started!</p>';
+                userListingsContainer.innerHTML = `<p class="empty-state-text">You haven't posted any listings yet. Click "Post Your Deal" to get started!</p>`;
             }
         } catch (err) {
             console.error('Error fetching dashboard listings:', err);
@@ -967,7 +967,7 @@ This will refund 1 unlock token back to your KochiNest dashboard instantly.')) r
                     userLeadsContainer.appendChild(card);
                 });
             } else {
-                userLeadsContainer.innerHTML = '<p class="empty-state-text">You haven't unlocked any contacts yet.</p>';
+                userLeadsContainer.innerHTML = `<p class="empty-state-text">You haven't unlocked any contacts yet.</p>`;
             }
         } catch (err) {
             console.error('Error fetching dashboard leads:', err);
@@ -1029,9 +1029,9 @@ This will refund 1 unlock token back to your KochiNest dashboard instantly.')) r
     buyTokensBtn?.addEventListener('click', async () => {
         if (!currentUser) return;
         
-        if (!confirm('Pay Rs. 100 to purchase 3 contact unlocks?
+        if (!confirm(`Pay Rs. 100 to purchase 3 contact unlocks?
 
-This will trigger a mock UPI payment simulation.')) return;
+This will trigger a mock UPI payment simulation.`)) return;
         
         try {
             const response = await fetch('/api/payments/buy-tokens', {
